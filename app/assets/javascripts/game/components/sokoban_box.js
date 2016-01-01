@@ -4,9 +4,9 @@ var SokobanCell = require('./sokoban_cell');
 module.exports = React.createClass({
   render: function() {
     if (this.props.goal) {
-      return <SokobanCell image="assets/img/box_goal.jpg"/>;
+      return <SokobanCell image={gon['game_box_goal']}/>;
     } else {
-      return <SokobanCell image="assets/img/box.jpg"/>;
+      return <SokobanCell image={gon['game_box']}/>;
     }
   }
 });

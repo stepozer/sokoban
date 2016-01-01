@@ -4,13 +4,13 @@ var SokobanCell = require('./sokoban_cell');
 module.exports = React.createClass({
   render: function() {
     if (this.props.direction == 'left') {
-      return <SokobanCell image="assets/img/hero_left.jpg"/>;
+      return <SokobanCell image={gon['game_hero_left']}/>;
     } else if (this.props.direction == 'right') {
-      return <SokobanCell image="assets/img/hero_right.jpg"/>;
+      return <SokobanCell image={gon['game_hero_right']}/>;
     } else if (this.props.direction == 'down') {
-      return <SokobanCell image="assets/img/hero_down.jpg"/>;
+      return <SokobanCell image={gon['game_hero_down']}/>;
     } else {
-      return <SokobanCell image="assets/img/hero_up.jpg"/>;
+      return <SokobanCell image={gon['game_hero_up']}/>;
     }
   }
 })
