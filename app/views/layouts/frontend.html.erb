@@ -11,9 +11,15 @@
     <div class="header clearfix">
       <nav>
         <ul class="nav nav-pills pull-right">
-          <li role="presentation" class="active"><a href="#">Home</a></li>
-          <li role="presentation"><a href="#">Play</a></li>
-          <li role="presentation"><a href="#">Help</a></li>
+          <li role="presentation" class="<%= 'active' if params[:action] == 'home' %>">
+            <%= link_to 'Home', root_path %>
+          </li>
+          <li role="presentation" class="<%= 'active' if params[:action] == 'play' %>">
+            <%= link_to 'Play', pages_play_path %>
+          </li>
+          <li role="presentation" class="<%= 'active' if params[:action] == 'help' %>">
+            <%= link_to 'Help', pages_help_path %>
+          </li>
         </ul>
       </nav>
       <h3 class="text-muted">

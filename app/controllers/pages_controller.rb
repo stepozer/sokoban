@@ -4,4 +4,7 @@ class PagesController < ApplicationController
 
   def play
   end
+
+  def help
+  end
 end
