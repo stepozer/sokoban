@@ -15,6 +15,31 @@ module.exports = React.createClass({
   componentDidMount: function() {
     window.addEventListener("keydown", this.handleKeyDown);
     SokobanMapStore.addChangeListener(this.onMapChange);
+
+    React.getDOMNode(this).appendChild(this.props.canvas);
+
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    ctx.fillStyle = "#FF0000";
+    ctx.fillRect(0,0,150,75);
+
+    var drawCanvasImage = function(ctx,grid,row,col,x,y) {
+        return function() {
+            ctx.drawImage(grid[row][col], x, y);
+        }
+    }
+
+
+    var grid = [];
+    for (var row = 0; row < totalRows; row++) {
+        for (var col = 0; col < totalCols; col++) {
+            grid[row][col] = new Image();
+            var x = col * pieceWidth;
+            var y = row * pieceHeight;
+            grid[row][col].onload = drawCanvasImage(ctx,grid,row,col,x,y);
+            grid[row][col].src = "oldimagename" +  ((row * totalRows) + col) + ".png";
+        }
+    }
   },
   componentWillUnmount: function() {
     window.removeEventListener("keydown", this.handleKeyDown);
@@ -72,23 +97,20 @@ module.exports = React.createClass({
       return <div key={i}>{map_row}</div>;
     });
 
-    var solved;
-
     if (this.state.mapStore.solved) {
-      solved = (
+      return (
         <div className="sokoban-solved">
           <div className="alert alert-info">
-            You win!
+            Congratulations!
           </div>
         </div>
       );
+    } else {
+      return (
+        <div style={style}>
+          <div className="sokoban-cells">{cells}</div>
+        </div>
+      );
     }
-
-    return (
-      <div style={style}>
-        {solved}
-        <div className="sokoban-cells">{cells}</div>
-      </div>
-    );
   }
 });
