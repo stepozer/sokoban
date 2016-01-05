@@ -19,7 +19,6 @@ function SokobanMapStore() {
     'classic'         : classicLevels,
     'alberto_borella' : albertoBorellaLevels
   };
-  console.log(this.levels)
 
   this.addChangeListener = function(callback) {
     this.onChangeCallback = callback;
@@ -116,7 +115,7 @@ function SokobanMapStore() {
       this.hero = this.cells[to_y][to_x];
       this.hero.options.direction = direction;
       this.checkSolved();
-      this.onChangeCallback();
+      this.onChangeCallback([[x,y], [to_x, to_y]]);
       return
     }
 
@@ -134,7 +133,7 @@ function SokobanMapStore() {
       this.hero = this.cells[to_y][to_x];
       this.hero.options.direction = direction;
       this.checkSolved();
-      this.onChangeCallback();
+      this.onChangeCallback([[x,y], [to_x, to_y], [to_x_next, to_y_next]]);
       return
     }
   }
