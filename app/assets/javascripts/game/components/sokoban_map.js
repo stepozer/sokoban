@@ -1,4 +1,5 @@
 var React                = require('react');
+var ReactDOM             = require('react-dom');
 var Dispatcher           = require('../dispatcher/app_dispatcher');
 var SokobanMapStore      = require('../stores/sokoban_map_store');
 var SokobanUrlStore      = require('../stores/sokoban_url_store');
@@ -15,31 +16,7 @@ module.exports = React.createClass({
   componentDidMount: function() {
     window.addEventListener("keydown", this.handleKeyDown);
     SokobanMapStore.addChangeListener(this.onMapChange);
-
-    React.getDOMNode(this).appendChild(this.props.canvas);
-
-    var c = document.getElementById("myCanvas");
-    var ctx = c.getContext("2d");
-    ctx.fillStyle = "#FF0000";
-    ctx.fillRect(0,0,150,75);
-
-    var drawCanvasImage = function(ctx,grid,row,col,x,y) {
-        return function() {
-            ctx.drawImage(grid[row][col], x, y);
-        }
-    }
-
-
-    var grid = [];
-    for (var row = 0; row < totalRows; row++) {
-        for (var col = 0; col < totalCols; col++) {
-            grid[row][col] = new Image();
-            var x = col * pieceWidth;
-            var y = row * pieceHeight;
-            grid[row][col].onload = drawCanvasImage(ctx,grid,row,col,x,y);
-            grid[row][col].src = "oldimagename" +  ((row * totalRows) + col) + ".png";
-        }
-    }
+    this.canvasRender();
   },
   componentWillUnmount: function() {
     window.removeEventListener("keydown", this.handleKeyDown);
@@ -63,7 +40,42 @@ module.exports = React.createClass({
     }
   },
   onMapChange : function() {
+    // this.state.mapStore = SokobanMapStore;
     this.setState({ mapStore: SokobanMapStore });
+    this.canvasRender()
+  },
+  canvasRender: function() {
+    var c =ReactDOM.findDOMNode(this).getElementsByTagName("canvas")[0]
+    // var c = document.createElement('canvas');
+    c.width = 1000
+    c.height = 1000
+    var ctx = c.getContext("2d");
+
+    for (y in this.state.mapStore.cells) {
+      for (x in this.state.mapStore.cells[y]) {
+        var visibleObject = this.state.mapStore.cells[y][x].visibleObject();
+        if (visibleObject == SokobanCellType.WALL) {
+          ctx.fillStyle = "red";
+          ctx.fillRect(x*32,y*32,32,32);
+        }
+        else if (visibleObject == SokobanCellType.BOX) {
+          ctx.fillStyle = "blue";
+          ctx.fillRect(x*32,y*32,32,32);
+        }
+        else if (visibleObject == SokobanCellType.GOAL) {
+          ctx.fillStyle = "green";
+          ctx.fillRect(x*32,y*32,32,32);
+        }
+        else if (visibleObject == SokobanCellType.HERO) {
+          ctx.fillStyle = "orange";
+          ctx.fillRect(x*32,y*32,32,32);
+        }
+        else  {
+          // do nothing for ground
+        }
+      }
+    }
+    // ReactDOM.findDOMNode(this).appendChild(c);
   },
   getInitialState: function(){
     var levelPackage = SokobanUrlStore.queryParam('package') || 'classic';
@@ -74,28 +86,28 @@ module.exports = React.createClass({
     };
   },
   render: function() {
-    var style = { height: this.state.mapStore.cells.length * 30 };
-    var cells = this.state.mapStore.cells.map(function (item, i) {
-      var map_row = item.map(function (cell, j) {
-        var visibleObject = cell.visibleObject();
-        if (visibleObject == SokobanCellType.WALL) {
-          return <SokobanWall key={j} />;
-        }
-        else if (visibleObject == SokobanCellType.BOX) {
-          return <SokobanBox key={j} goal={cell.ground == SokobanCellType.GOAL}/>;
-        }
-        else if (visibleObject == SokobanCellType.GOAL) {
-          return <SokobanGoal key={j}/>;
-        }
-        else if (visibleObject == SokobanCellType.HERO) {
-          return <SokobanHero key={j} direction={cell.options.direction}/>;
-        }
-        else  {
-          return <SokobanGround key={j}/>;
-        }
-      });
-      return <div key={i}>{map_row}</div>;
-    });
+    // var style = { height: this.state.mapStore.cells.length * 30 };
+    // var cells = this.state.mapStore.cells.map(function (item, i) {
+    //   var map_row = item.map(function (cell, j) {
+    //     var visibleObject = cell.visibleObject();
+    //     if (visibleObject == SokobanCellType.WALL) {
+    //       return <SokobanWall key={j} />;
+    //     }
+    //     else if (visibleObject == SokobanCellType.BOX) {
+    //       return <SokobanBox key={j} goal={cell.ground == SokobanCellType.GOAL}/>;
+    //     }
+    //     else if (visibleObject == SokobanCellType.GOAL) {
+    //       return <SokobanGoal key={j}/>;
+    //     }
+    //     else if (visibleObject == SokobanCellType.HERO) {
+    //       return <SokobanHero key={j} direction={cell.options.direction}/>;
+    //     }
+    //     else  {
+    //       return <SokobanGround key={j}/>;
+    //     }
+    //   });
+    //   return <div key={i}>{map_row}</div>;
+    // });
 
     if (this.state.mapStore.solved) {
       return (
@@ -107,8 +119,8 @@ module.exports = React.createClass({
       );
     } else {
       return (
-        <div style={style}>
-          <div className="sokoban-cells">{cells}</div>
+        <div>
+          <canvas></canvas>
         </div>
       );
     }
