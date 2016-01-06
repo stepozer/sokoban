@@ -2,4 +2,4 @@
 
 A version of the classical Sokoban game (http://en.wikipedia.org/wiki/Sokoban).
 
-Site located here: sokoban.code-bit.com
+Site located here: http://sokoban.code-bit.com
