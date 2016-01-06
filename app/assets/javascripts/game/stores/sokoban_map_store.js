@@ -14,6 +14,8 @@ function SokobanMapStore() {
   this.cells   = [];
   this.hero    = null;
   this.solved  = false;
+  this.cols    = 0;
+  this.rows    = 0;
   this.levels  = {
     'tutorials'       : [],
     'classic'         : classicLevels,
@@ -58,7 +60,9 @@ function SokobanMapStore() {
       }
       real_y = real_y + 1;
       this.cells.push(line);
+      this.cols = Math.max(this.cols, line.length);
     }
+    this.rows = this.cells.length;
   }
 
   this.parseLine = function(cell, x, y) {

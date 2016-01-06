@@ -76,8 +76,8 @@ module.exports = React.createClass({
   },
   canvasRender: function() {
     var c    = ReactDOM.findDOMNode(this).getElementsByTagName("canvas")[0]
-    c.width  = 1000
-    c.height = 1000
+    c.width  = this.state.mapStore.cols*30;
+    c.height = this.state.mapStore.rows*30;
 
     for (y in this.state.mapStore.cells) {
       for (x in this.state.mapStore.cells[y]) {
@@ -104,7 +104,7 @@ module.exports = React.createClass({
       );
     } else {
       return (
-        <div>
+        <div className="sokoban-map">
           <canvas></canvas>
         </div>
       );
