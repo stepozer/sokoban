@@ -1,16 +1,17 @@
-var React       = require('react');
-var SokobanCell = require('./sokoban_cell');
+var SokobanCellImages = require('../stores/sokoban_cell_images_store');
 
-module.exports = React.createClass({
-  render: function() {
-    if (this.props.direction == 'left') {
-      return <SokobanCell image={gon['game_hero_left']}/>;
-    } else if (this.props.direction == 'right') {
-      return <SokobanCell image={gon['game_hero_right']}/>;
-    } else if (this.props.direction == 'down') {
-      return <SokobanCell image={gon['game_hero_down']}/>;
+module.exports = {
+  draw: function(ctx, x, y, cell_size, direction) {
+    var img = new Image();
+    if (direction == 'left') {
+      img.src = SokobanCellImages.hero_left;
+    } else if (direction == 'right') {
+      img.src = SokobanCellImages.hero_right;
+    } else if (direction == 'down') {
+      img.src = SokobanCellImages.hero_down;
     } else {
-      return <SokobanCell image={gon['game_hero_up']}/>;
+      img.src = SokobanCellImages.hero_up;
     }
+    ctx.drawImage(img, x*cell_size,y*cell_size);
   }
-})
+};

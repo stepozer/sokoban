@@ -1,8 +1,9 @@
-var React       = require('react');
-var SokobanCell = require('./sokoban_cell');
+var SokobanCellImages = require('../stores/sokoban_cell_images_store');
 
-module.exports = React.createClass({
-  render: function() {
-    return <SokobanCell image={gon['game_wall']}/>;
+module.exports = {
+  draw: function(ctx, x, y, cell_size) {
+    var img = new Image();
+    img.src = SokobanCellImages.wall;
+    ctx.drawImage(img, x*cell_size,y*cell_size);
   }
-});
+};
