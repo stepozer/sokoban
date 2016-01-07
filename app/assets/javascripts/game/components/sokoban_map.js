@@ -44,8 +44,12 @@ module.exports = React.createClass({
   },
   onMapChange : function(cells) {
     this.setState({ mapStore: SokobanMapStore });
-    for (var i in cells) {
-      this.canvasRenderCell(cells[i][0], cells[i][1]);
+    if (cells) {
+      for (var i in cells) {
+        this.canvasRenderCell(cells[i][0], cells[i][1]);
+      }
+    } else {
+      this.canvasRender();
     }
   },
   canvasRenderCell: function(x, y) {
