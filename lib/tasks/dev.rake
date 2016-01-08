@@ -15,4 +15,21 @@ namespace :dev do
     "
     File.open("#{assets_path}/javascripts/game/stores/sokoban_cell_images_store.js", 'w') { |f| f.write(images) }
   end
+
+  task :import_levels => :environment do
+    ['alberto-borella', 'thinking-rabbit-original'].each do |pack|
+      path = "#{Rails.root}/db/levels/#{pack}"
+      meta = YAML.load_file("#{path}/meta.yml")
+
+      level_pack = LevelPack.find_or_create_by(name: meta['name'], author: meta['author']) do |lp|
+        lp.description = meta['description']
+      end
+
+      files = Dir["#{path}/*.txt"]
+      files.sort.each_with_index do |level, number|
+        level = File.open(level, "r").read
+        Level.find_or_create_by(level: level, level_pack: level_pack)
+      end
+    end
+  end
 end
