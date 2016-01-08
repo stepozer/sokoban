@@ -7,9 +7,7 @@
         <% @level_packs.each do |level_pack| %>
           <tr>
             <td>
-              <%= link_to play_show_pack_path(pack: level_pack.id) do %>
-                <%=level_pack.author%> - <%=level_pack.name%>
-              <% end %>
+              <%= link_to level_pack.name, play_show_pack_path(pack: level_pack.slug)  %>
             </td>
           </tr>
         <% end %>

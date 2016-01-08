@@ -17,18 +17,22 @@ namespace :dev do
   end
 
   task :import_levels => :environment do
-    ['alberto-borella', 'thinking-rabbit-original'].each do |pack|
+    ['tutorials', 'alberto-borella', 'thinking-rabbit-original'].each_with_index do |pack, seqnum|
       path = "#{Rails.root}/db/levels/#{pack}"
       meta = YAML.load_file("#{path}/meta.yml")
 
-      level_pack = LevelPack.find_or_create_by(name: meta['name'], author: meta['author']) do |lp|
+      level_pack = LevelPack.find_or_create_by(slug: meta['slug']) do |lp|
+        lp.seqnum      = seqnum
+        lp.name        = meta['name']
         lp.description = meta['description']
       end
 
       files = Dir["#{path}/*.txt"]
-      files.sort.each_with_index do |level, number|
-        level = File.open(level, "r").read.gsub("\r", '').gsub("\n", '!')
-        Level.find_or_create_by(level: level, level_pack: level_pack)
+      files.sort.each_with_index do |level_file, number|
+        level = File.open(level_file, "r").read.gsub("\r", '').gsub("\n", '!')
+        Level.find_or_create_by(name: File.basename(level_file, '.txt'), level_pack: level_pack) do |l|
+          l.level = level
+        end
       end
     end
   end
