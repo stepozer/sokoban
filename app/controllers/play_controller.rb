@@ -1,8 +1,8 @@
-class PagesController < ApplicationController
+class PlayController < ApplicationController
   def index
   end
 
   def show
-    gon.push(level: Level.find(params[:id]))
+    gon.push(sokoban_level: Level.find(params[:id]).level)
   end
 end

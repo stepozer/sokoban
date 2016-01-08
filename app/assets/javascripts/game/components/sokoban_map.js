@@ -86,9 +86,7 @@ module.exports = React.createClass({
     }
   },
   getInitialState: function(){
-    var levelPackage = SokobanUrlStore.queryParam('package') || 'classic';
-    var levelNumber  = SokobanUrlStore.queryParam('number')  || '1';
-    SokobanMapStore.parse(levelPackage, levelNumber);
+    SokobanMapStore.parse(gon.sokoban_level);
     return {
       mapStore: SokobanMapStore
     };

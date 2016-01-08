@@ -16,6 +16,7 @@ function SokobanMapStore() {
   this.solved  = false;
   this.cols    = 0;
   this.rows    = 0;
+  this.steps   = 0;
   this.levels  = {
     'tutorials'       : [],
     'classic'         : classicLevels,
@@ -38,11 +39,11 @@ function SokobanMapStore() {
     });
   }
 
-  this.parse = function(level_prefix, level_number) {
+  this.parse = function(level) {
+    level       = level.split("!");
     this.solved = false;
     var history = [];
     var line    = null;
-    var level   = this.levels[level_prefix][level_number].split("\n");
     var y       = null;
     var x       = null;
     var real_x  = 0;
@@ -113,6 +114,7 @@ function SokobanMapStore() {
       this.cells[to_y][to_x].visibleObject() == SokobanCellType.GROUND ||
       this.cells[to_y][to_x].visibleObject() == SokobanCellType.GOAL
     ) {
+      this.steps += 1;
       this.saveHistory();
       this.cells[y][x].entity       = SokobanCellType.GROUND;
       this.cells[to_y][to_x].entity = SokobanCellType.HERO;
@@ -130,6 +132,7 @@ function SokobanMapStore() {
         this.cells[to_y_next][to_x_next].visibleObject() == SokobanCellType.GOAL
       )
     ) {
+      this.steps += 1;
       this.saveHistory();
       this.cells[y][x].entity                 = SokobanCellType.GROUND;
       this.cells[to_y][to_x].entity           = SokobanCellType.HERO;
@@ -147,8 +150,9 @@ function SokobanMapStore() {
       return;
     }
     var historyMap = this.history.pop();
-    this.cells = historyMap.cells;
-    this.hero  = this.cells[historyMap.heroY][historyMap.heroX];
+    this.cells  = historyMap.cells;
+    this.hero   = this.cells[historyMap.heroY][historyMap.heroX];
+    this.steps -= 1;
     this.onChangeCallback();
   }
 

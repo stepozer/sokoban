@@ -27,7 +27,7 @@ namespace :dev do
 
       files = Dir["#{path}/*.txt"]
       files.sort.each_with_index do |level, number|
-        level = File.open(level, "r").read
+        level = File.open(level, "r").read.gsub("\r", '').gsub("\n", '!')
         Level.find_or_create_by(level: level, level_pack: level_pack)
       end
     end
