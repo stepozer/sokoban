@@ -1,15 +1,16 @@
 class PlayController < ApplicationController
   def index
-    @level_packs = LevelPack.order(author: :asc, name: :asc)
+    @level_packs = LevelPack.order(seqnum: :asc)
   end
 
   def pack
-    @level_pack = LevelPack.find(params[:pack])
+    @level_pack = LevelPack.find_by!(slug: params[:pack])
     @levels = Level.where(level_pack: @level_pack).order(id: :asc)
   end
 
   def show
-    @level = Level.find(params[:level])
+    @level_pack = LevelPack.find_by!(slug: params[:pack])
+    @level      = Level.find_by!(level_pack: @level_pack, name: params[:level])
     gon.push(sokoban_level: @level.level)
   end
 end
