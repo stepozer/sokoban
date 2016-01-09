@@ -4,6 +4,8 @@ module.exports = {
   draw: function(ctx, x, y, cell_size) {
     var img = new Image();
     img.src = SokobanCellImages.wall;
-    ctx.drawImage(img, x*cell_size,y*cell_size);
+    img.onload = function(){
+      ctx.drawImage(img, x*cell_size,y*cell_size);
+    }
   }
 };

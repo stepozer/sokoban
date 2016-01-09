@@ -12,6 +12,8 @@ module.exports = {
     } else {
       img.src = SokobanCellImages.hero_up;
     }
-    ctx.drawImage(img, x*cell_size,y*cell_size);
+    img.onload = function(){
+      ctx.drawImage(img, x*cell_size,y*cell_size, cell_size, cell_size);
+    }
   }
 };

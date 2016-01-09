@@ -7,15 +7,29 @@
   <div class="col-lg-12">
     <h4><%= @level_pack.name %></h4>
     <hr/>
-    <div class="row">
-      <% @levels.each do |level| %>
-        <div class="col-md-4">
-          <%= level_preview_img(level) %>
-          <%= link_to play_show_path(pack: level.level_pack.slug, level: level.name) do %>
-            <%=level.name%>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
+    <% @levels.each_slice(3) do |chunk| %>
+      <div class="row">
+        <% chunk.each do |level| %>
+          <div class="col-md-4" style="margin-bottom:25px;">
+            <div class="row">
+              <div class="col-md-7">
+                <div  style="border:1px solid #f5f5f5; padding:2px;text-align:center;">
+                <%= link_to play_show_path(pack: level.level_pack.slug, level: level.name) do %>
+                  <%= level_preview_img(level) %>
+                <% end %>
+                </div>
+              </div>
+              <div class="col-md-5">
+                <%= link_to play_show_path(pack: level.level_pack.slug, level: level.name) do %>
+                  <h4>#<%=level.name%></h4>
+                <% end %>
+                <p><small><strong>0</strong> played</small></p>
+                <p><small><strong>0</strong> solved</small></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>

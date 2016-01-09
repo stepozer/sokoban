@@ -42,15 +42,16 @@ namespace :dev do
   task :generate_level_avatars => :environment do
     driver = Selenium::WebDriver.for :firefox
 
-    levels = Level.order(id: :asc).first
-    [levels].each do |level|
+    levels = Level.order(id: :asc)
+    levels.each do |level|
       img_path = "#{Rails.root}/app/assets/images/levels/#{level.level_pack.slug}/#{level.name}.png"
       driver.navigate.to(Rails.application.routes.url_helpers.dev_level_preview_url(level))
+      sleep(1)
       driver.save_screenshot(img_path)
 
       img = Magick::Image.read(img_path).first
       img.trim!
-      img.resize_to_fit!(nil, 100)
+      img.resize_to_fit!(100, 80)
       img.write(img_path)
     end
 

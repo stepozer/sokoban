@@ -8,6 +8,8 @@ module.exports = {
     } else {
       img.src = img.src = SokobanCellImages.box;
     }
-    ctx.drawImage(img, x*cell_size,y*cell_size);
+    img.onload = function(){
+      ctx.drawImage(img, x*cell_size,y*cell_size);
+    }
   }
 };
