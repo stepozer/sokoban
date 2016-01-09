@@ -1,4 +1,6 @@
 require 'base64'
+require 'rmagick'
+require 'selenium-webdriver'
 
 namespace :dev do
   task :prepare_game_images => :environment do
@@ -30,10 +32,28 @@ namespace :dev do
       files = Dir["#{path}/*.txt"]
       files.sort.each_with_index do |level_file, number|
         level = File.open(level_file, "r").read.gsub("\r", '').gsub("\n", '!')
-        Level.find_or_create_by(name: File.basename(level_file, '.txt'), level_pack: level_pack) do |l|
+        Level.find_or_create_by(name: (number + 1).to_s, level_pack: level_pack) do |l|
           l.level = level
         end
       end
     end
+  end
+
+  task :generate_level_avatars => :environment do
+    driver = Selenium::WebDriver.for :firefox
+
+    levels = Level.order(id: :asc).first
+    [levels].each do |level|
+      img_path = "#{Rails.root}/app/assets/images/levels/#{level.level_pack.slug}/#{level.name}.png"
+      driver.navigate.to(Rails.application.routes.url_helpers.dev_level_preview_url(level))
+      driver.save_screenshot(img_path)
+
+      img = Magick::Image.read(img_path).first
+      img.trim!
+      img.resize_to_fit!(nil, 100)
+      img.write(img_path)
+    end
+
+    driver.quit
   end
 end

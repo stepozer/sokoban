@@ -14,6 +14,8 @@ gem 'font-awesome-rails'
 gem 'gon'
 
 group :development, :test do
+  gem 'rmagick'
+  gem 'selenium-webdriver'
   gem 'byebug'
 end
 
