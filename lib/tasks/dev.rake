@@ -23,11 +23,11 @@ namespace :dev do
       path = "#{Rails.root}/db/levels/#{pack}"
       meta = YAML.load_file("#{path}/meta.yml")
 
-      level_pack = LevelPack.find_or_create_by(slug: meta['slug']) do |lp|
-        lp.seqnum      = seqnum
-        lp.name        = meta['name']
-        lp.description = meta['description']
-      end
+      level_pack = LevelPack.find_or_initialize_by(slug: meta['slug'])
+      level_pack.seqnum      = seqnum
+      level_pack.name        = meta['name']
+      level_pack.description = meta['description']
+      level_pack.save
 
       files = Dir["#{path}/*.txt"]
       files.sort.each_with_index do |level_file, number|
