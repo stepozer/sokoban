@@ -4,6 +4,7 @@ class AddLevels < ActiveRecord::Migration
       t.string        :name,         null: false
       t.string        :slug,         null: false
       t.integer       :seqnum,       null: false
+      t.integer       :levels_count, null: false
       t.string        :description
       t.timestamps                   null: false
     end

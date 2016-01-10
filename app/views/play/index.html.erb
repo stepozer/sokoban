@@ -7,14 +7,16 @@
         <% @level_packs.each do |level_pack| %>
           <tr>
             <td width="1">
-              <%= level_pack_img(level_pack) %>
+              <%= link_to play_show_pack_path(pack: level_pack.slug) do %>
+                <%= level_pack_img(level_pack) %>
+              <% end %>
             </td>
             <td>
               <h4>
-                <%= link_to level_pack.name, play_show_pack_path(pack: level_pack.slug)  %>
+                <%= link_to level_pack.name, play_show_pack_path(pack: level_pack.slug) %>
               </h4>
               <p>
-                <strong>50</strong> puzzles
+                <strong><%= level_pack.levels_count %></strong> <%= 'puzzle'.pluralize(level_pack.levels_count) %>
               </p>
               <p>
                 <%= level_pack.description %>
