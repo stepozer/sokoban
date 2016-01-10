@@ -13,6 +13,7 @@ class AddLevels < ActiveRecord::Migration
       t.string        :name,         null: false
       t.string        :level,        null: false
       t.references    :level_pack,   null: false
+      t.timestamps                   null: false
     end
     add_foreign_key :levels, :level_packs
   end
