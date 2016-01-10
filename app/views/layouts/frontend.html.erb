@@ -11,20 +11,23 @@
   <div class="container">
     <div class="header clearfix">
       <nav>
+        <% active_menu = content_for?(:site_menu) ? (yield :site_menu) : 'home' %>
         <ul class="nav nav-pills pull-right">
-          <li role="presentation" class="<%= 'active' if params[:action] == 'home' %>">
+          <li role="presentation" class="<%= 'active' if active_menu == 'home' %>">
             <%= link_to 'Home', root_path %>
           </li>
-          <li role="presentation" class="<%= 'active' if params[:action] == 'play' %>">
+          <li role="presentation" class="<%= 'active' if active_menu == 'play' %>">
             <%= link_to 'Play', play_index_path %>
           </li>
-          <li role="presentation" class="<%= 'active' if params[:action] == 'help' %>">
+          <li role="presentation" class="<%= 'active' if active_menu == 'help' %>">
             <%= link_to 'Help', pages_help_path %>
           </li>
         </ul>
       </nav>
       <h3 class="text-muted">
-        <%= image_tag("logo.png") %>
+        <%= link_to root_path do %>
+          <%= image_tag("logo.png") %>
+        <% end %>
      </h3>
     </div>
     <div class="content">

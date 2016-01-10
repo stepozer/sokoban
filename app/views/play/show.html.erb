@@ -1,3 +1,5 @@
+<% site_menu 'play' %>
+
 <ol class="breadcrumb">
   <li><%= link_to 'Play', play_index_path %></li>
   <li><%= link_to @level_pack.name, play_show_pack_path(pack: @level_pack.slug) %></li>
