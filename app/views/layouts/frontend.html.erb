@@ -22,6 +22,18 @@
           <li role="presentation" class="<%= 'active' if active_menu == 'help' %>">
             <%= link_to 'Help', pages_help_path %>
           </li>
+          <% if user_signed_in? %>
+            <li role="presentation">
+              <%= link_to "Logout", destroy_user_session_path %>
+            </li>
+          <% else %>
+            <li role="presentation" class="<%= 'active' if active_menu == 'login' %>">
+              <%= link_to "Login", new_user_session_path %>
+            </li>
+            <li role="presentation" class="<%= 'active' if active_menu == 'registration' %>">
+              <%= link_to "Registration", new_user_registration_path %>
+            </li>
+          <% end %>
         </ul>
       </nav>
       <h3 class="text-muted">
