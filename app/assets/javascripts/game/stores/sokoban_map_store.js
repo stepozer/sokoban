@@ -169,7 +169,7 @@ function SokobanMapStore() {
       }
     }
 
-    if (true || gon.api_key && this.solved) {
+    if (gon.api_key && this.solved) {
       $.ajax({
         type: 'post',
         url: '/api/v1/level_solutions/',
