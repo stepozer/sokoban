@@ -24,7 +24,7 @@
           </li>
           <% if user_signed_in? %>
             <li role="presentation">
-              <%= link_to "Logout", destroy_user_session_path %>
+              <%= link_to "(#{current_user.email}) Logout", destroy_user_session_path, :method => 'delete' %>
             </li>
           <% else %>
             <li role="presentation" class="<%= 'active' if active_menu == 'login' %>">
@@ -43,6 +43,7 @@
      </h3>
     </div>
     <div class="content">
+      <%= render 'layouts/flash_messages' %>
       <%= yield %>
     </div>
     <footer class="footer">
