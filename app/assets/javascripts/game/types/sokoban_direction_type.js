@@ -1,8 +1,8 @@
 var SokobanDirectionType = {
-  LEFT  : 'left',
-  RIGHT : 'right',
-  UP    : 'up',
-  DOWN  : 'down'
+  LEFT  : 'L',
+  RIGHT : 'R',
+  UP    : 'U',
+  DOWN  : 'D'
 };
 
 module.exports = SokobanDirectionType;

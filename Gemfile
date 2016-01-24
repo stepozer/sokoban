@@ -12,6 +12,11 @@ gem 'jbuilder', '~> 2.0'
 gem 'dotenv-rails'
 gem 'font-awesome-rails'
 gem 'gon'
+gem 'grape'
+gem 'grape-entity'
+gem 'grape-swagger'
+gem 'grape-swagger-rails', :git => 'https://github.com/ruby-grape/grape-swagger-rails.git'  # Option doc_expansion
+gem 'devise'
 
 group :development, :test do
   gem 'rmagick'

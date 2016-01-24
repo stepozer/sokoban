@@ -5,12 +5,11 @@ var SokobanCellStore     = require('../stores/sokoban_cell_store');
 var SokobanRawCellType   = require('../types/sokoban_raw_cell_type');
 var SokobanCellType      = require('../types/sokoban_cell_type');
 var SokobanDirectionType = require('../types/sokoban_direction_type');
-var SokobanEventType     = require('../types/sokoban_event_type');
 var Dispatcher           = require('../dispatcher/app_dispatcher');
 
 function SokobanMapStore() {
   this.onChangeCallback = null;
-  this.history = [];
+  this.history = { solution: "", positions: [] };
   this.cells   = [];
   this.hero    = null;
   this.solved  = false;
@@ -27,28 +26,17 @@ function SokobanMapStore() {
     this.onChangeCallback = callback;
   }
 
-  this.addEventListener = function() {
-    var self = this;
-    Dispatcher.register(function(e) {
-      switch(e.eventName) {
-        case SokobanEventType.LEVEL_LOAD:
-          self.parse(e.package, e.level);
-          self.onChangeCallback();
-          return true;
-      }
-    });
-  }
-
-  this.parse = function(level) {
-    level       = level.split("!");
-    this.solved = false;
-    var history = [];
-    var line    = null;
-    var y       = null;
-    var x       = null;
-    var real_x  = 0;
-    var real_y  = 0;
-    this.cells  = [];
+  this.parse = function(level, level_id) {
+    level         = level.split("!");
+    this.solved   = false;
+    var history   = [];
+    var line      = null;
+    var y         = null;
+    var x         = null;
+    var real_x    = 0;
+    var real_y    = 0;
+    this.cells    = [];
+    this.level_id = level_id;
     for (y in level) {
       if (level[y] == '') {
         continue;
@@ -115,7 +103,7 @@ function SokobanMapStore() {
       this.cells[to_y][to_x].visibleObject() == SokobanCellType.GOAL
     ) {
       this.steps += 1;
-      this.saveHistory();
+      this.saveHistory(direction);
       this.cells[y][x].entity       = SokobanCellType.GROUND;
       this.cells[to_y][to_x].entity = SokobanCellType.HERO;
       this.hero = this.cells[to_y][to_x];
@@ -133,7 +121,7 @@ function SokobanMapStore() {
       )
     ) {
       this.steps += 1;
-      this.saveHistory();
+      this.saveHistory(direction);
       this.cells[y][x].entity                 = SokobanCellType.GROUND;
       this.cells[to_y][to_x].entity           = SokobanCellType.HERO;
       this.cells[to_y_next][to_x_next].entity = SokobanCellType.BOX
@@ -146,17 +134,17 @@ function SokobanMapStore() {
   }
 
   this.rollback = function() {
-    if (this.solved || this.history.length <= 0) {
+    if (this.solved || this.history.positions.length <= 0) {
       return;
     }
-    var historyMap = this.history.pop();
+    var historyMap = this.history.positions.pop();
     this.cells  = historyMap.cells;
     this.hero   = this.cells[historyMap.heroY][historyMap.heroX];
     this.steps -= 1;
     this.onChangeCallback();
   }
 
-  this.saveHistory = function() {
+  this.saveHistory = function(direction) {
     var historyMap = [];
     var line       = [];
     for (var y in this.cells) {
@@ -166,7 +154,8 @@ function SokobanMapStore() {
       }
       historyMap.push(line);
     }
-    this.history.push({cells: historyMap, heroX: this.hero.x, heroY: this.hero.y});
+    this.history.solution += direction;
+    this.history.positions.push({cells: historyMap, heroX: this.hero.x, heroY: this.hero.y});
   }
 
   this.checkSolved = function() {
@@ -179,10 +168,17 @@ function SokobanMapStore() {
         }
       }
     }
+
+    if (true ||gon.api_key && this.solved) {
+      var ajax_data = {api_key: gon.api_key, level_id: this.level_id, solution : this.history.solution };
+      $.ajax({
+        type: 'post',
+        url: '/api/v1/level_solutions/',
+        data: ajax_data
+      });
+    }
   }
 }
 
 var mapStore = new SokobanMapStore()
-mapStore.addEventListener();
-
 module.exports = mapStore;

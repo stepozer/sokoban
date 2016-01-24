@@ -53,6 +53,9 @@ module.exports = React.createClass({
     }
   },
   canvasRenderCell: function(x, y) {
+    if (this.state.mapStore.solved) {
+      return;
+    }
     var c         = ReactDOM.findDOMNode(this).getElementsByTagName("canvas")[0]
     var ctx       = c.getContext("2d");
     var cell_size = this.constructor.CELL_SIZE;
@@ -75,6 +78,9 @@ module.exports = React.createClass({
     }
   },
   canvasRender: function() {
+    if (this.state.mapStore.solved) {
+      return;
+    }
     var c    = ReactDOM.findDOMNode(this).getElementsByTagName("canvas")[0]
     c.width  = this.state.mapStore.cols*30;
     c.height = this.state.mapStore.rows*30;
@@ -86,7 +92,7 @@ module.exports = React.createClass({
     }
   },
   getInitialState: function(){
-    SokobanMapStore.parse(gon.sokoban_level);
+    SokobanMapStore.parse(gon.sokoban_level, gon.sokoban_level_id);
     return {
       mapStore: SokobanMapStore
     };
