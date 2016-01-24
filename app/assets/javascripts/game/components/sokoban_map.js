@@ -104,7 +104,6 @@ module.exports = React.createClass({
           <div className="alert alert-info">
             Congratulations! Puzzle Solved!
           </div>
-          <p>Your score was not saved because you're not logged in.</p>
           <p>Would you like to login or sign up?</p>
           <a className="btn btn-primary" href={gon['sokoban_next_level_url']}>Play Next Puzzle</a>
         </div>

@@ -169,12 +169,12 @@ function SokobanMapStore() {
       }
     }
 
-    if (true ||gon.api_key && this.solved) {
-      var ajax_data = {api_key: gon.api_key, level_id: this.level_id, solution : this.history.solution };
+    if (true || gon.api_key && this.solved) {
       $.ajax({
         type: 'post',
         url: '/api/v1/level_solutions/',
-        data: ajax_data
+        headers: { 'Authorization': gon.api_key },
+        data: {level_id: this.level_id, solution : this.history.solution }
       });
     }
   }
