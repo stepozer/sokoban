@@ -19,7 +19,6 @@ gem 'grape-swagger-rails', :git => 'https://github.com/ruby-grape/grape-swagger-
 gem 'devise'
 
 group :development, :test do
-  gem 'rmagick'
   gem 'selenium-webdriver'
   gem 'byebug'
 end
