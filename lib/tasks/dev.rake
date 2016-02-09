@@ -1,6 +1,6 @@
 require 'base64'
 # require 'rmagick'
-require 'selenium-webdriver'
+# require 'selenium-webdriver'
 
 namespace :dev do
   task :prepare_game_images => :environment do
