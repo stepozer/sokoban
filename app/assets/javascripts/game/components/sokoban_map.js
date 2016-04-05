@@ -2,7 +2,7 @@ var React                = require('react');
 var ReactDOM             = require('react-dom');
 var Dispatcher           = require('../dispatcher/app_dispatcher');
 var SokobanMapStore      = require('../stores/sokoban_map_store');
-var SokobanUrlStore      = require('../stores/sokoban_url_store');
+var SokobanCanvasStore   = require('../stores/sokoban_canvas_store');
 var SokobanDirectionType = require('../types/sokoban_direction_type');
 var SokobanKeyboardType  = require('../types/sokoban_keyboard_type');
 var SokobanCellType      = require('../types/sokoban_cell_type');
@@ -13,9 +13,6 @@ var SokobanBox           = require('../components/sokoban_box');
 var SokobanGoal          = require('../components/sokoban_goal');
 
 module.exports = React.createClass({
-  statics: {
-    CELL_SIZE: 30
-  },
   componentDidMount: function() {
     window.addEventListener("keydown", this.handleKeyDown);
     SokobanMapStore.addChangeListener(this.onMapChange);
@@ -43,6 +40,7 @@ module.exports = React.createClass({
     }
   },
   onMapChange : function(cells) {
+    this.constructor.DRAWING = true;
     this.setState({ mapStore: SokobanMapStore });
     if (cells) {
       for (var i in cells) {
@@ -56,25 +54,25 @@ module.exports = React.createClass({
     if (this.state.mapStore.solved) {
       return;
     }
-    var c         = ReactDOM.findDOMNode(this).getElementsByTagName("canvas")[0]
-    var ctx       = c.getContext("2d");
-    var cell_size = this.constructor.CELL_SIZE;
+    var c   = ReactDOM.findDOMNode(this).getElementsByTagName("canvas")[0]
+    var ctx = c.getContext("2d");
+    SokobanCanvasStore.setCanvas(ctx);
 
     var visibleObject = this.state.mapStore.cells[y][x].visibleObject();
     if (visibleObject == SokobanCellType.WALL) {
-      SokobanWall.draw(ctx, x, y, cell_size);
+      SokobanWall.draw(SokobanCanvasStore, x, y);
     }
     else if (visibleObject == SokobanCellType.BOX) {
-      SokobanBox.draw(ctx, x, y, cell_size, this.state.mapStore.cells[y][x].ground == SokobanCellType.GOAL);
+      SokobanBox.draw(SokobanCanvasStore, x, y, this.state.mapStore.cells[y][x].ground == SokobanCellType.GOAL);
     }
     else if (visibleObject == SokobanCellType.GOAL) {
-      SokobanGoal.draw(ctx, x, y, cell_size);
+      SokobanGoal.draw(SokobanCanvasStore, x, y);
     }
     else if (visibleObject == SokobanCellType.HERO) {
-      SokobanHero.draw(ctx, x, y, cell_size, this.state.mapStore.cells[y][x].options.direction);
+      SokobanHero.draw(SokobanCanvasStore, x, y, this.state.mapStore.cells[y][x].options.direction);
     }
     else  {
-      SokobanGround.draw(ctx, x, y, cell_size);
+      SokobanGround.draw(SokobanCanvasStore, x, y);
     }
   },
   canvasRender: function() {

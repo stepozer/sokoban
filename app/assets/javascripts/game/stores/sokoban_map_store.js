@@ -1,6 +1,5 @@
 var classicLevels        = require('../levels/classic.js');
 var albertoBorellaLevels = require('../levels/alberto_borella.js');
-var SokobanUrlStore      = require('../stores/sokoban_url_store');
 var SokobanCellStore     = require('../stores/sokoban_cell_store');
 var SokobanRawCellType   = require('../types/sokoban_raw_cell_type');
 var SokobanCellType      = require('../types/sokoban_cell_type');

@@ -1,19 +1,15 @@
 var SokobanCellImages = require('../stores/sokoban_cell_images_store');
 
 module.exports = {
-  draw: function(ctx, x, y, cell_size, direction) {
-    var img = new Image();
+  draw: function(canvas, x, y, direction) {
     if (direction == 'left') {
-      img.src = SokobanCellImages.hero_left;
+      canvas.drawImage(SokobanCellImages.hero_left, x, y);
     } else if (direction == 'right') {
-      img.src = SokobanCellImages.hero_right;
+      canvas.drawImage(SokobanCellImages.hero_right, x, y);
     } else if (direction == 'down') {
-      img.src = SokobanCellImages.hero_down;
+      canvas.drawImage(SokobanCellImages.hero_down, x, y);
     } else {
-      img.src = SokobanCellImages.hero_up;
-    }
-    img.onload = function(){
-      ctx.drawImage(img, x*cell_size,y*cell_size, cell_size, cell_size);
+      canvas.drawImage(SokobanCellImages.hero_up, x, y);
     }
   }
 };
