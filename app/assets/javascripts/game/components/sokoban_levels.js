@@ -1,5 +1,5 @@
 var React        = require('react');
-var SokobanLevel = require('./sokoban_level');
+// var SokobanLevel = require('./sokoban_level');
 
 module.exports = React.createClass({
   render: function() {
