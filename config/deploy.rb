@@ -14,7 +14,7 @@ set :deploy_to, ->{ fetch(:app_dir) }
 set :scm, :git
 
 # Shared directories
-set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets public/assets}
+set :linked_dirs, %w{log node_modules tmp/pids tmp/cache tmp/sockets public/assets}
 
 # Count stored releases
 set :keep_releases, 5
