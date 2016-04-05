@@ -1,7 +1,7 @@
 var React                = require('react');
 var ReactDOM             = require('react-dom');
 var SokobanMap           = require('./components/sokoban_map');
-var SokobanLevelPackages = require('./components/sokoban_level_packages');
+// var SokobanLevelPackages = require('./components/sokoban_level_packages');
 var SokobanLevels        = require('./components/sokoban_levels');
 
 document.addEventListener("DOMContentLoaded", function() {
