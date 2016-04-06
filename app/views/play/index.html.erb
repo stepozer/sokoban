@@ -12,13 +12,15 @@
               <%= link_to play_show_pack_path(pack: level_pack.slug) do %>
                 <%= level_pack_img(level_pack) %>
               <% end %>
-              <% solution = LevelPackSolution.find_by(level_pack: level_pack, user_id: 1) %>
-              <% solution_progress = solution ? solution.progress : 0 %>
-              <div class="progress" style="margin-top:10px;height:10px;margin-bottom:5px;">
-                <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: <%=solution_progress%>%">
-                  <span class="sr-only"><%=solution_progress%>% Complete</span>
+              <% if current_user %>
+                <% solution = LevelPackSolution.find_by(level_pack: level_pack, user: current_user) %>
+                <% solution_progress = solution ? solution.progress : 0 %>
+                <div class="progress" style="margin-top:10px;height:10px;margin-bottom:5px;">
+                  <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: <%=solution_progress%>%">
+                    <span class="sr-only"><%=solution_progress%>% Complete</span>
+                  </div>
                 </div>
-              </div>
+              <% end %>
             </td>
             <td>
               <h4>

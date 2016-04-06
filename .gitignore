@@ -18,3 +18,4 @@
 .env
 /node_modules/*
 db/schema.rb
+*.byebug_history
