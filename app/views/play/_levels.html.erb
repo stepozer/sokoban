@@ -14,7 +14,12 @@
             <%= link_to play_show_path(pack: level.level_pack.slug, level: level.name) do %>
               <h4>#<%=level.name%></h4>
             <% end %>
-            <p><small><strong><%=level.solutions_count%></strong> solved</small></p>
+            <p>
+              <small><strong><%=level.solutions_count%></strong> solved</small>
+              <% if current_user && LevelSolution.where(level: level, user: current_user).count > 0 %>
+                <small><strong class="label label-success">SOLVED</strong></small><br/>
+              <% end %>
+            </p>
           </div>
         </div>
       </div>
