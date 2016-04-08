@@ -170,10 +170,10 @@ function SokobanMapStore() {
 
     if (gon.api_key && this.solved) {
       $.ajax({
-        type: 'post',
-        url: '/api/v1/level_solutions/',
+        type:    'post',
+        url:     '/api/v1/level_solutions/',
         headers: { 'Authorization': gon.api_key },
-        data: {level_id: this.level_id, solution : this.history.solution }
+        data:    { level_id: this.level_id, solution : this.history.solution }
       });
     }
   }
