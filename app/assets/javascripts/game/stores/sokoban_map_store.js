@@ -64,7 +64,7 @@ function SokobanMapStore() {
       this.hero = new SokobanCellStore(SokobanCellType.GROUND, SokobanCellType.HERO, x, y);
       return this.hero;
     } else if (cell == SokobanRawCellType.HERO_ON_GOAL) {
-      this.hero = new SokobanCellStore(SokobanCellType.GROUND, SokobanCellType.HERO, x, y);
+      this.hero = new SokobanCellStore(SokobanCellType.GOAL, SokobanCellType.HERO, x, y);
       return this.hero;
     } else if (cell == SokobanRawCellType.BOX_ON_GOAL) {
       return new SokobanCellStore(SokobanCellType.GOAL, SokobanCellType.BOX, x, y);

@@ -17,7 +17,7 @@
             <p>
               <small><strong><%=level.solutions_count%></strong> solved</small>
               <% if current_user && LevelSolution.where(level: level, user: current_user).count > 0 %>
-                <small><strong class="label label-success">SOLVED</strong></small><br/>
+                <small><strong class="label label-danger">SOLVED</strong></small><br/>
               <% end %>
             </p>
           </div>
