@@ -5,7 +5,7 @@ class PlayController < ApplicationController
 
   def pack
     @level_pack = LevelPack.find_by!(slug: params[:pack])
-    @levels = Level.where(level_pack: @level_pack).order(id: :asc)
+    @levels = Level.where(level_pack: @level_pack).order(id: :asc).page(params[:page]).per(30)
   end
 
   def show

@@ -17,6 +17,7 @@ gem 'grape-entity'
 gem 'grape-swagger'
 gem 'grape-swagger-rails', :git => 'https://github.com/ruby-grape/grape-swagger-rails.git'  # Option doc_expansion
 gem 'devise'
+gem 'kaminari'
 
 group :development, :test do
   gem 'selenium-webdriver'

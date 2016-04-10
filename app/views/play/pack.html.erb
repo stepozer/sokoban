@@ -10,5 +10,8 @@
     <h4><%= @level_pack.name %></h4>
     <hr/>
     <%= render 'levels' %>
+    <div class="paginator">
+      <%= paginate @levels %>
+    </div>
   </div>
 </div>
