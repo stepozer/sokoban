@@ -34,9 +34,8 @@ namespace :dev do
 
       files.sort.each_with_index do |level_file, number|
         level = File.open(level_file, "r").read.gsub("\r", '').gsub("\n", '!')
-        Level.find_or_create_by(name: (number + 1).to_s, level_pack: level_pack) do |l|
-          l.level = level
-        end
+        l = Level.find_or_create_by(name: (number + 1).to_s, level_pack: level_pack)
+        l.update(level: level)
       end
     end
   end
