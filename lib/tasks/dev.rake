@@ -19,7 +19,7 @@ namespace :dev do
   end
 
   task :import_levels => :environment do
-    ['tutorials', 'alberto-borella', 'thinking-rabbit-original'].each_with_index do |pack, seqnum|
+    ['tutorials', 'alberto-borella', 'thinking-rabbit-original', 'thinking-rabbit-extra'].each_with_index do |pack, seqnum|
       path = "#{Rails.root}/db/levels/#{pack}"
       meta = YAML.load_file("#{path}/meta.yml")
 
@@ -34,7 +34,7 @@ namespace :dev do
 
       files.sort.each_with_index do |level_file, number|
         level = File.open(level_file, "r").read.gsub("\r", '').gsub("\n", '!')
-        l = Level.find_or_create_by(name: (number + 1).to_s, level_pack: level_pack)
+        l = Level.find_or_initialize_by(name: (number + 1).to_s, level_pack: level_pack)
         l.update(level: level)
       end
     end
