@@ -58,4 +58,8 @@ namespace :dev do
 
     driver.quit
   end
+
+  task :update_users_progress => :environment do
+    LevelPackSolution.all.each(&:update_progress)
+  end
 end

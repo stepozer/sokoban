@@ -13,8 +13,6 @@ class LevelSolution < ActiveRecord::Base
 
   def update_level_solutions_count
     level.update(solutions_count: level.level_solutions.select(:user_id).distinct.count)
-
-    level_pack_solution = LevelPackSolution.find_or_initialize_by(level_pack: level.level_pack, user: user)
-    level_pack_solution.update(progress: level.level_solutions.select(:level_id).where(user: user).distinct.count * 100 / level.level_pack.levels_count)
+    LevelPackSolution.find_or_initialize_by(level_pack: level.level_pack, user: user).update_progress
   end
 end
