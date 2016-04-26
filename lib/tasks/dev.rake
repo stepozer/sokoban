@@ -19,7 +19,13 @@ namespace :dev do
   end
 
   task :import_levels => :environment do
-    ['tutorials', 'alberto-borella', 'thinking-rabbit-original', 'thinking-rabbit-extra'].each_with_index do |pack, seqnum|
+    [
+      'alberto-borella',
+      'alberto-garcia-1-1',
+      'thinking-rabbit-extra',
+      'thinking-rabbit-original',
+      'tutorials',
+    ].each_with_index do |pack, seqnum|
       path = "#{Rails.root}/db/levels/#{pack}"
       meta = YAML.load_file("#{path}/meta.yml")
 
