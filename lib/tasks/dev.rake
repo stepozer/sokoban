@@ -22,6 +22,7 @@ namespace :dev do
     [
       'alberto-borella',
       'alberto-garcia-1-1',
+      'andrej-cerjak-diamonds',
       'thinking-rabbit-extra',
       'thinking-rabbit-original',
       'tutorials',
@@ -50,7 +51,7 @@ namespace :dev do
     driver = Selenium::WebDriver.for :firefox
 
     levels = Level.order(id: :asc)
-    levels.each do |level|
+    levels.where('id >= 233').each do |level|
       img_path = "#{Rails.root}/app/assets/images/levels/#{level.level_pack.slug}/#{level.name}.png"
       driver.navigate.to(Rails.application.routes.url_helpers.dev_level_preview_url(level))
       sleep(1)
