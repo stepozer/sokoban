@@ -20,12 +20,14 @@ namespace :dev do
 
   task :import_levels => :environment do
     [
+      'tutorials',
       'alberto-borella',
       'alberto-garcia-1-1',
       'andrej-cerjak-diamonds',
+      'andrej-cerjak-easy',
+      'andrej-cerjak-selected',
       'thinking-rabbit-extra',
       'thinking-rabbit-original',
-      'tutorials',
     ].each_with_index do |pack, seqnum|
       path = "#{Rails.root}/db/levels/#{pack}"
       meta = YAML.load_file("#{path}/meta.yml")
@@ -51,7 +53,7 @@ namespace :dev do
     driver = Selenium::WebDriver.for :firefox
 
     levels = Level.order(id: :asc)
-    levels.where('id >= 233').each do |level|
+    levels.where('id >= 254').each do |level|
       img_path = "#{Rails.root}/app/assets/images/levels/#{level.level_pack.slug}/#{level.name}.png"
       driver.navigate.to(Rails.application.routes.url_helpers.dev_level_preview_url(level))
       sleep(1)
