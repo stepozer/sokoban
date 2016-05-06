@@ -155,6 +155,10 @@ function SokobanMapStore() {
     }
     this.history.solution += direction;
     this.history.positions.push({cells: historyMap, heroX: this.hero.x, heroY: this.hero.y});
+
+    if (this.history.positions.length > 100) {
+      this.history.positions.shift();
+    }
   }
 
   this.checkSolved = function() {
