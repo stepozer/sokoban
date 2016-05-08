@@ -1,5 +1,5 @@
 require 'base64'
-require 'rmagick'
+# require 'rmagick'
 # require 'selenium-webdriver'
 
 namespace :dev do
