@@ -1,5 +1,5 @@
 require 'base64'
-# require 'rmagick'
+require 'rmagick'
 # require 'selenium-webdriver'
 
 namespace :dev do
@@ -26,6 +26,7 @@ namespace :dev do
       'andrej-cerjak-diamonds',
       'andrej-cerjak-easy',
       'andrej-cerjak-selected',
+      'aymeric-du-peloux-cosmonotes',
       'thinking-rabbit-extra',
       'thinking-rabbit-original',
     ].each_with_index do |pack, seqnum|
@@ -53,7 +54,7 @@ namespace :dev do
     driver = Selenium::WebDriver.for :firefox
 
     levels = Level.order(id: :asc)
-    levels.where('id >= 254').each do |level|
+    levels.where('id >= 320').each do |level|
       img_path = "#{Rails.root}/app/assets/images/levels/#{level.level_pack.slug}/#{level.name}.png"
       driver.navigate.to(Rails.application.routes.url_helpers.dev_level_preview_url(level))
       sleep(1)
