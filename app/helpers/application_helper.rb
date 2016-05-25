@@ -8,6 +8,6 @@ module ApplicationHelper
   end
 
   def level_pack_img(level_pack)
-    image_tag("level_packs/#{level_pack.slug}.jpg")
+    image_tag("level_packs/#{level_pack.slug}.jpg", style: 'width:100px')
   end
 end

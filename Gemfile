@@ -22,6 +22,7 @@ gem 'kaminari'
 
 group :development, :test do
   gem 'selenium-webdriver'
+  gem 'rmagick'
   gem 'byebug'
 end
 
