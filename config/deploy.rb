@@ -15,6 +15,7 @@ set :scm, :git
 
 # Shared directories
 set :linked_dirs, %w{log node_modules tmp/pids tmp/cache tmp/sockets public/assets}
+set :linked_files, %w(.env)
 
 # Count stored releases
 set :keep_releases, 5
