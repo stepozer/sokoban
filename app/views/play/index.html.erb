@@ -4,6 +4,17 @@
   <div class="col-lg-12">
     <h4>Official Puzzle Packs</h4>
     <hr/>
+    <% if current_user %>
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="<%= 'active' if params[:not_solved].blank? %>">
+          <%= link_to 'All levels', play_index_path %>
+        </li>
+        <li class="<%= 'active' unless params[:not_solved].blank? %>">
+          <%= link_to 'Not solved', play_index_path(not_solved: true) %>
+        </li>
+      </ul>
+      </br>
+    <% end %>
     <table class="table table-striped table-hover table-borderless">
       <tbody>
         <% @level_packs.each do |level_pack| %>

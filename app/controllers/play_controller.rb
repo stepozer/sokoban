@@ -1,6 +1,10 @@
 class PlayController < ApplicationController
   def index
     @level_packs = LevelPack.order(seqnum: :asc)
+    if current_user && !params[:not_solved].blank?
+      ids = LevelPackSolution.where(user: current_user, progress: 100).pluck(:level_pack_id)
+      @level_packs = @level_packs.where.not(id: ids)
+    end
   end
 
   def pack

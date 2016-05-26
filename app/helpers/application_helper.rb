@@ -10,4 +10,12 @@ module ApplicationHelper
   def level_pack_img(level_pack)
     image_tag("level_packs/#{level_pack.slug}.jpg", style: 'width:100px')
   end
+
+  def play_index_smart_path
+    if current_user
+      play_index_path(not_solved: true)
+    else
+      play_index_path
+    end
+  end
 end
