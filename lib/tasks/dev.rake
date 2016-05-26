@@ -28,6 +28,7 @@ namespace :dev do
       'andrej-cerjak-selected',
       'aymeric-du-peloux-cosmonotes',
       'aymeric-du-peloux-cosmopoly',
+      'aymeric-du-peloux-loma',
       'thinking-rabbit-extra',
       'thinking-rabbit-original',
     ].each_with_index do |pack, seqnum|
@@ -55,7 +56,7 @@ namespace :dev do
     driver = Selenium::WebDriver.for :firefox
 
     levels = Level.order(id: :asc)
-    levels.where('id >= 329').each do |level|
+    levels.where('id >= 351').each do |level|
       img_path = "#{Rails.root}/app/assets/images/levels/#{level.level_pack.slug}/#{level.name}.png"
       driver.navigate.to(Rails.application.routes.url_helpers.dev_level_preview_url(level))
       sleep(1)
