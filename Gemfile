@@ -16,9 +16,11 @@ gem 'gon'
 gem 'grape'
 gem 'grape-entity'
 gem 'grape-swagger'
-gem 'grape-swagger-rails', :git => 'https://github.com/ruby-grape/grape-swagger-rails.git'  # Option doc_expansion
+gem 'grape-swagger-rails'
 gem 'devise'
 gem 'kaminari'
+gem 'react-rails'
+gem 'react-router-rails'
 
 group :development, :test do
   gem 'selenium-webdriver'

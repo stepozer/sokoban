@@ -3,52 +3,22 @@
 <head>
   <title>Sokoban</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
   <%= include_gon %>
   <div class="container">
-    <div class="header clearfix">
-      <nav>
-        <% active_menu = content_for?(:site_menu) ? (yield :site_menu) : 'home' %>
-        <ul class="nav nav-pills pull-right">
-          <li role="presentation" class="<%= 'active' if active_menu == 'home' %>">
-            <%= link_to 'Home', root_path %>
-          </li>
-          <li role="presentation" class="<%= 'active' if active_menu == 'play' %>">
-            <%= link_to 'Play', play_index_smart_path %>
-          </li>
-          <li role="presentation" class="<%= 'active' if active_menu == 'help' %>">
-            <%= link_to 'Help', pages_help_path %>
-          </li>
-          <% if user_signed_in? %>
-            <li role="presentation">
-              <%= link_to "(#{current_user.email}) Logout", destroy_user_session_path, :method => 'delete' %>
-            </li>
-          <% else %>
-            <li role="presentation" class="<%= 'active' if active_menu == 'login' %>">
-              <%= link_to "Login", new_user_session_path %>
-            </li>
-            <li role="presentation" class="<%= 'active' if active_menu == 'registration' %>">
-              <%= link_to "Registration", new_user_registration_path %>
-            </li>
-          <% end %>
-        </ul>
-      </nav>
-      <h3 class="text-muted">
-        <%= link_to root_path do %>
-          <%= image_tag("logo.png") %>
-        <% end %>
-     </h3>
-    </div>
     <div class="content">
-      <%= render 'layouts/flash_messages' %>
       <%= yield %>
     </div>
     <footer class="footer">
       <p>&copy; <%= Time.now.year %> Play Sokoban Online.</p>
     </footer>
   </div>
+
+  <script src="https://npmcdn.com/react@15.3.0/dist/react.js"></script>
+  <script src="https://npmcdn.com/react-dom@15.3.0/dist/react-dom.js"></script>
+  <script src="https://npmcdn.com/react-router/umd/ReactRouter.min.js"></script>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </body>
 </html>
