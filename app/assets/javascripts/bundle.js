@@ -1,0 +1,1 @@
+/var/www/private/sokoban/frontend/app/bundle.js

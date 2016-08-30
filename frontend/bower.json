@@ -1,0 +1,8 @@
+{
+  "name": "sokoban-frontend",
+  "description": "",
+  "dependencies": {
+    "react": "^15.3.1",
+    "react-router": "https://npmcdn.com/react-router@2.7.0/umd/ReactRouter.js"
+  }
+}

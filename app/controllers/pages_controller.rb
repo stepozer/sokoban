@@ -7,5 +7,6 @@ class PagesController < ApplicationController
   end
 
   def single_page_application
+    gon.push(level_packs: LevelPack.order(seqnum: :asc))
   end
 end

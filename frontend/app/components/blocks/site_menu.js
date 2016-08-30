@@ -1,7 +1,9 @@
-var Link     = ReactRouter.Link
-var SiteMenu = React.createClass({
+import React from 'react'
+import { Link } from 'react-router'
+
+module.exports = React.createClass({
   render: function() {
-    active_menu = this.props.active;
+    var active_menu = this.props.active;
     return (
       <div>
         <div className="header clearfix">
@@ -10,7 +12,7 @@ var SiteMenu = React.createClass({
               <li role="presentation" className={active_menu == 'site_index' ? 'active' : ''}>
                 <Link to="/">Home</Link>
               </li>
-              <li role="presentation" className={active_menu == 'game_play' ? 'active' : ''}>
+              <li role="presentation" className={active_menu == 'game_play_index' ? 'active' : ''}>
                 <Link to="/play">Play</Link>
               </li>
               <li role="presentation" className={active_menu == 'site_help' ? 'active' : ''}>

@@ -1,3 +1,1 @@
-//= require jquery
-//= require bootstrap
-//= require components
+//= require bundle.js

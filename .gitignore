@@ -17,5 +17,7 @@
 /tmp
 .env
 /node_modules/*
+/frontend/node_modules/*
+/frontend/bower_components/*
 db/schema.rb
 *.byebug_history
