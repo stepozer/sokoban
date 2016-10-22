@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router'
 import SiteMenu from '../blocks/site_menu'
 
 module.exports = React.createClass({
@@ -12,7 +13,7 @@ module.exports = React.createClass({
              On this site you can play to the classic puzzle game, Sokoban.
           </p>
           <p>
-            <a href="/play" className="btn btn-lg btn-success">Play Sokoban</a>
+            <Link to="/play" className="btn btn-lg btn-success">Play Sokoban</Link>
           </p>
         </div>
         <div className="row">

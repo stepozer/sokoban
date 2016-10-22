@@ -18,7 +18,7 @@ module.exports = React.createClass({
       return (
         <tr key={index}>
           <td width="1">
-
+            <img src={level_pack.image} alt="" />
           </td>
           <td>
             <h4>

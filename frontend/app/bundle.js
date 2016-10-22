@@ -26397,6 +26397,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouter = __webpack_require__(3);
+
 	var _site_menu = __webpack_require__(5);
 
 	var _site_menu2 = _interopRequireDefault(_site_menu);
@@ -26428,8 +26430,8 @@
 	          'p',
 	          null,
 	          _react2.default.createElement(
-	            'a',
-	            { href: '/play', className: 'btn btn-lg btn-success' },
+	            _reactRouter.Link,
+	            { to: '/play', className: 'btn btn-lg btn-success' },
 	            'Play Sokoban'
 	          )
 	        )
@@ -26744,7 +26746,11 @@
 	      return _react2.default.createElement(
 	        'tr',
 	        { key: index },
-	        _react2.default.createElement('td', { width: '1' }),
+	        _react2.default.createElement(
+	          'td',
+	          { width: '1' },
+	          _react2.default.createElement('img', { src: level_pack.image, alt: '' })
+	        ),
 	        _react2.default.createElement(
 	          'td',
 	          null,

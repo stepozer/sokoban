@@ -14,5 +14,5 @@ document.addEventListener("DOMContentLoaded", function() {
       <Route path="/play" component={GamePlayIndexPage}/>
       <Route path="*"     component={SiteNotFoundPage} />
     </Router>
-  ),document.getElementById('root'));
+  ), document.getElementById('root'));
 });
