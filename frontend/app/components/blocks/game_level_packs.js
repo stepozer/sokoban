@@ -1,20 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router'
+import { connect } from 'react-redux'
 
-module.exports = React.createClass({
-  componentDidMount: function() {
-    $.get('http://localhost:3000/api/v1/level_packs', function (result) {
-      this.setState({
-        level_packs: result,
-      });
-      console.log(this.state.level_packs)
-    }.bind(this));
-  },
+var GameLevelPack = React.createClass({
   render: function() {
-    if (! this.state) {
+    if (! this.props.level_packs) {
       return null;
     }
-    var levelPacksTemplate  = this.state.level_packs.map(function(level_pack, index)  {
+
+    var levelPacksTemplate = this.props.level_packs.map(function(level_pack, index)  {
       return (
         <tr key={index}>
           <td width="1">
@@ -44,3 +38,11 @@ module.exports = React.createClass({
     );
   }
 });
+
+function  mapStateToProps (state) {
+  return  {
+    level_packs: state.level_packs
+  }
+}
+
+module.exports = connect(mapStateToProps)( GameLevelPack)

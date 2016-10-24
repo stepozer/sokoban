@@ -1,2 +1,0 @@
-var GET_LEVEL_PACKS = 'GET_LEVEL_PACKS';
-var GET_LEVEL       = 'GET_LEVEL';
