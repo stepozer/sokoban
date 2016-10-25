@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
 
-var GameLevelPack = React.createClass({
+var LevelPacks = React.createClass({
   render: function() {
     if (! this.props.level_packs) {
       return null;
@@ -39,10 +39,10 @@ var GameLevelPack = React.createClass({
   }
 });
 
-function  mapStateToProps (state) {
+function mapStateToProps (state) {
   return  {
-    level_packs: state.level_packs
+    level_packs: state.level_packs.all
   }
 }
 
-module.exports = connect(mapStateToProps)( GameLevelPack)
+module.exports = connect(mapStateToProps)(LevelPacks)

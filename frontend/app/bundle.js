@@ -70,11 +70,15 @@
 
 	var _site_not_found_page2 = _interopRequireDefault(_site_not_found_page);
 
-	var _game_play_index_page = __webpack_require__(10);
+	var _level_packs_page = __webpack_require__(10);
 
-	var _game_play_index_page2 = _interopRequireDefault(_game_play_index_page);
+	var _level_packs_page2 = _interopRequireDefault(_level_packs_page);
 
-	var _configure_store = __webpack_require__(14);
+	var _level_pack_page = __webpack_require__(14);
+
+	var _level_pack_page2 = _interopRequireDefault(_level_pack_page);
+
+	var _configure_store = __webpack_require__(16);
 
 	var _configure_store2 = _interopRequireDefault(_configure_store);
 
@@ -91,7 +95,8 @@
 	      { history: _reactRouter.hashHistory },
 	      _react2.default.createElement(_reactRouter.Route, { path: '/', component: _site_index_page2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/help', component: _site_help_page2.default }),
-	      _react2.default.createElement(_reactRouter.Route, { path: '/play', component: _game_play_index_page2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/play', component: _level_packs_page2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/play/:slug', component: _level_pack_page2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '*', component: _site_not_found_page2.default })
 	    )
 	  ), document.getElementById('root'));
@@ -28404,7 +28409,7 @@
 	            ),
 	            _react2.default.createElement(
 	              'li',
-	              { role: 'presentation', className: active_menu == 'game_play_index' ? 'active' : '' },
+	              { role: 'presentation', className: active_menu == 'site_play' ? 'active' : '' },
 	              _react2.default.createElement(
 	                _reactRouter.Link,
 	                { to: '/play' },
@@ -28546,16 +28551,16 @@
 
 	var _site_menu2 = _interopRequireDefault(_site_menu);
 
-	var _game_level_packs = __webpack_require__(11);
+	var _level_packs = __webpack_require__(11);
 
-	var _game_level_packs2 = _interopRequireDefault(_game_level_packs);
+	var _level_packs2 = _interopRequireDefault(_level_packs);
 
 	var _level_pack = __webpack_require__(12);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var GamePlayIndexPage = _react2.default.createClass({
-	  displayName: 'GamePlayIndexPage',
+	var LevelPacksPage = _react2.default.createClass({
+	  displayName: 'LevelPacksPage',
 
 	  componentDidMount: function componentDidMount() {
 	    var dispatch = this.props.dispatch;
@@ -28566,7 +28571,7 @@
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      _react2.default.createElement(_site_menu2.default, { active: 'game_play_index' }),
+	      _react2.default.createElement(_site_menu2.default, { active: 'site_play' }),
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'row' },
@@ -28579,7 +28584,7 @@
 	            'Official Puzzle Packs'
 	          ),
 	          _react2.default.createElement('hr', null),
-	          _react2.default.createElement(_game_level_packs2.default, { level_packs: this.props.level_packs })
+	          _react2.default.createElement(_level_packs2.default, { level_packs: this.props.level_packs })
 	        )
 	      )
 	    );
@@ -28588,11 +28593,11 @@
 
 	function mapStateToProps(state) {
 	  return {
-	    level_packs: state.level_packs
+	    level_packs: state.level_packs.all
 	  };
 	}
 
-	exports.default = (0, _reactRedux.connect)(mapStateToProps)(GamePlayIndexPage);
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(LevelPacksPage);
 
 /***/ },
 /* 11 */
@@ -28610,8 +28615,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var GameLevelPack = _react2.default.createClass({
-	  displayName: 'GameLevelPack',
+	var LevelPacks = _react2.default.createClass({
+	  displayName: 'LevelPacks',
 
 	  render: function render() {
 	    if (!this.props.level_packs) {
@@ -28672,11 +28677,11 @@
 
 	function mapStateToProps(state) {
 	  return {
-	    level_packs: state.level_packs
+	    level_packs: state.level_packs.all
 	  };
 	}
 
-	module.exports = (0, _reactRedux.connect)(mapStateToProps)(GameLevelPack);
+	module.exports = (0, _reactRedux.connect)(mapStateToProps)(LevelPacks);
 
 /***/ },
 /* 12 */
@@ -28687,11 +28692,25 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.fetchLevelPack = fetchLevelPack;
 	exports.fetchLevelPacks = fetchLevelPacks;
 
 	var _action_types = __webpack_require__(13);
 
 	var _reactRedux = __webpack_require__(3);
+
+	function fetchLevelPack(id) {
+	  var page = arguments.length <= 1 || arguments[1] === undefined ? 1 : arguments[1];
+
+	  return function (dispatch) {
+	    $.get('http://localhost:3000/api/v1/level_packs/' + id, function (result) {
+	      dispatch({
+	        type: 'SET_LEVEL_PACK',
+	        payload: result
+	      });
+	    });
+	  };
+	}
 
 	function fetchLevelPacks() {
 	  return function (dispatch) {
@@ -28714,6 +28733,7 @@
 	  value: true
 	});
 	var GET_LEVEL_PACKS = exports.GET_LEVEL_PACKS = 'GET_LEVEL_PACKS';
+	var GET_LEVEL_PACK = exports.GET_LEVEL_PACK = 'GET_LEVEL_PACK';
 	var GET_LEVEL = exports.GET_LEVEL = 'GET_LEVEL';
 
 /***/ },
@@ -28725,15 +28745,166 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(3);
+
+	var _site_menu = __webpack_require__(7);
+
+	var _site_menu2 = _interopRequireDefault(_site_menu);
+
+	var _level_pack = __webpack_require__(15);
+
+	var _level_pack2 = _interopRequireDefault(_level_pack);
+
+	var _level_pack3 = __webpack_require__(12);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var LevelPackPage = _react2.default.createClass({
+	  displayName: 'LevelPackPage',
+
+	  componentDidMount: function componentDidMount() {
+	    var dispatch = this.props.dispatch;
+
+	    dispatch((0, _level_pack3.fetchLevelPack)());
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(_site_menu2.default, { active: '_play_index' }),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'row' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-lg-12' },
+	          _react2.default.createElement(
+	            'h4',
+	            null,
+	            level_pack.name
+	          ),
+	          _react2.default.createElement('hr', null)
+	        )
+	      )
+	    );
+	  }
+	});
+
+	function mapStateToProps(state) {
+	  return {
+	    level_pack: state.level_pack
+	  };
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(LevelPackPage);
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(5);
+
+	var _reactRedux = __webpack_require__(3);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var LevelPack = _react2.default.createClass({
+	  displayName: 'LevelPack',
+
+	  render: function render() {
+	    if (!this.props.level_pack) {
+	      return null;
+	    }
+
+	    var levelPacksTemplate = this.props.level_packs.map(function (level_pack, index) {
+	      return _react2.default.createElement(
+	        'tr',
+	        { key: index },
+	        _react2.default.createElement(
+	          'td',
+	          { width: '1' },
+	          _react2.default.createElement('img', { src: level_pack.image, alt: '' })
+	        ),
+	        _react2.default.createElement(
+	          'td',
+	          null,
+	          _react2.default.createElement(
+	            'h4',
+	            null,
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: { pathname: '/play/' + level_pack.slug } },
+	              level_pack.name
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            _react2.default.createElement(
+	              'strong',
+	              null,
+	              level_pack.levels_count
+	            ),
+	            ' puzzle'
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            level_pack.description
+	          )
+	        )
+	      );
+	    });
+
+	    return _react2.default.createElement(
+	      'table',
+	      { className: 'table table-striped table-hover table-borderless' },
+	      _react2.default.createElement(
+	        'tbody',
+	        null,
+	        levelPacksTemplate
+	      )
+	    );
+	  }
+	});
+
+	function mapStateToProps(state) {
+	  return {
+	    level_pack: state.level_pack
+	  };
+	}
+
+	module.exports = (0, _reactRedux.connect)(mapStateToProps)(LevelPack);
+
+/***/ },
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	exports.default = configureStore;
 
 	var _redux = __webpack_require__(4);
 
-	var _reduxThunk = __webpack_require__(15);
+	var _reduxThunk = __webpack_require__(17);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _reducers = __webpack_require__(16);
+	var _reducers = __webpack_require__(18);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -28745,7 +28916,7 @@
 	}
 
 /***/ },
-/* 15 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function webpackUniversalModuleDefinition(root, factory) {
@@ -28841,7 +29012,7 @@
 	;
 
 /***/ },
-/* 16 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28852,7 +29023,7 @@
 
 	var _redux = __webpack_require__(4);
 
-	var _level_packs = __webpack_require__(17);
+	var _level_packs = __webpack_require__(19);
 
 	var _level_packs2 = _interopRequireDefault(_level_packs);
 
@@ -28863,7 +29034,7 @@
 	});
 
 /***/ },
-/* 17 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28871,11 +29042,17 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	exports.default = level_packs;
 
 	var _action_types = __webpack_require__(13);
 
-	var initialState = [];
+	var initialState = {
+	  all: [],
+	  current: {}
+	};
 
 	function level_packs() {
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
@@ -28883,7 +29060,10 @@
 
 	  switch (action.type) {
 	    case 'SET_LEVEL_PACKS':
-	      return action.payload;
+	      return _extends({}, state, { all: action.payload });
+
+	    case 'SET_LEVEL_PACK':
+	      return _extends({}, state, { current: action.payload });
 
 	    default:
 	      return state;

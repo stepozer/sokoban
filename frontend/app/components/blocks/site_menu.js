@@ -12,7 +12,7 @@ module.exports = React.createClass({
               <li role="presentation" className={active_menu == 'site_index' ? 'active' : ''}>
                 <Link to="/">Home</Link>
               </li>
-              <li role="presentation" className={active_menu == 'game_play_index' ? 'active' : ''}>
+              <li role="presentation" className={active_menu == 'site_play' ? 'active' : ''}>
                 <Link to="/play">Play</Link>
               </li>
               <li role="presentation" className={active_menu == 'site_help' ? 'active' : ''}>
