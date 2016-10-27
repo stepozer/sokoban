@@ -6,14 +6,15 @@ module.exports = {
   entry: "./app/components/router.js",
   output: {
     path: __dirname,
-    filename: "../backend/app/assets/javascripts/bundle.js"
+    filename: "./app/bundle.js"
   },
   resolve: {
     modulesDirectories: ["web_modules", "node_modules", "bower_components"],
     alias: {
       "react":        bower_dir + "/react/react.js",
       "react-dom":    bower_dir + "/react/react-dom.js",
-      "react-router": bower_dir + "/react-router/index.js"
+      "react-router": bower_dir + "/react-router/index.js",
+      "axios":        bower_dir + "/axios/dist/axios.js"
     }
   },
   plugins: [

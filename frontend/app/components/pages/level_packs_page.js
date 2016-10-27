@@ -26,8 +26,9 @@ var LevelPacksPage = React.createClass({
 });
 
 function mapStateToProps(state) {
+  console.log(state.levelPackState)
   return {
-    level_packs: state.level_packs.all
+    level_packs: state.levelPackState.all
   }
 }
 

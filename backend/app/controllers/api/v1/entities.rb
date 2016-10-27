@@ -5,6 +5,14 @@ module API
         format_with(:api_datetime) { |t| t.to_formatted_s(:api_datetime) }
       end
 
+      class Level < Base
+        expose :id
+        expose :name
+        expose :image do |i, o|
+          ActionController::Base.helpers.image_path("levels/#{i.level_pack.slug}/#{i.name}.png")
+        end
+      end
+
       class LevelPack < Base
         expose :id
         expose :name
@@ -14,6 +22,7 @@ module API
         expose :image do |i, o|
           ActionController::Base.helpers.image_path("level_packs/#{i.slug}.jpg")
         end
+        expose :levels, if: { show_levels: true }, using: API::V1::Entities::Level
       end
     end
   end

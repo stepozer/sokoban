@@ -1,3 +1,3 @@
-export const GET_LEVEL_PACKS = 'GET_LEVEL_PACKS';
-export const GET_LEVEL_PACK  = 'GET_LEVEL_PACK';
-export const GET_LEVEL       = 'GET_LEVEL';
+export const ACTION_GET_LEVEL_PACKS = 'ACTION_GET_LEVEL_PACKS';
+export const ACTION_GET_LEVEL_PACK  = 'ACTION_GET_LEVEL_PACK';
+export const ACTION_GET_LEVEL       = 'ACTION_GET_LEVEL';

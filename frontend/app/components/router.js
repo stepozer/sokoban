@@ -17,8 +17,8 @@ document.addEventListener("DOMContentLoaded", function() {
       <Router history={hashHistory}>
         <Route path="/"           component={SiteIndexPage}/>
         <Route path="/help"       component={SiteHelpPage}/>
-        <Route path="/play"       component={LevelPacksPage}/>
         <Route path="/play/:slug" component={LevelPackPage}/>
+        <Route path="/play"       component={LevelPacksPage}/>
         <Route path="*"           component={SiteNotFoundPage} />
       </Router>
     </Provider>

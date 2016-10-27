@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import level_packs from './level_packs'
+import levelPackReducer from './level_pack'
 
 export default combineReducers({
-  level_packs
+  levelPackState: levelPackReducer
 })

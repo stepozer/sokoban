@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router'
-import { connect } from 'react-redux'
 
 var LevelPacks = React.createClass({
   render: function() {
@@ -39,10 +38,4 @@ var LevelPacks = React.createClass({
   }
 });
 
-function mapStateToProps (state) {
-  return  {
-    level_packs: state.level_packs.all
-  }
-}
-
-module.exports = connect(mapStateToProps)(LevelPacks)
+module.exports = LevelPacks

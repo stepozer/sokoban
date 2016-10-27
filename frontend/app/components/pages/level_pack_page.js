@@ -7,15 +7,20 @@ import { fetchLevelPack } from '../../actions/level_pack'
 var LevelPackPage = React.createClass({
   componentDidMount: function() {
     const { dispatch } = this.props;
-    dispatch(fetchLevelPack())
+    dispatch(fetchLevelPack(this.props.routeParams.slug))
   },
   render: function()  {
+    var levelPack = this.props.levelPack
+    if (! levelPack) {
+      return null;
+    }
+
     return (
       <div>
         <SiteMenu active="_play_index" />
         <div className="row">
           <div className="col-lg-12">
-            <h4>{level_pack.name}</h4>
+            <h4>{levelPack.name}</h4>
             <hr/>
           </div>
         </div>
@@ -26,7 +31,7 @@ var LevelPackPage = React.createClass({
 
 function mapStateToProps(state) {
   return {
-    level_pack: state.level_pack
+    levelPack: state.levelPackState.current
   }
 }
 
