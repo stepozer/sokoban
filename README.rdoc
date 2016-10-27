@@ -1,5 +1,0 @@
-== Play Sokoban Puzzles Online
-
-A version of the classical Sokoban game (http://en.wikipedia.org/wiki/Sokoban).
-
-Site located here: http://sokoban.venegrec.com
