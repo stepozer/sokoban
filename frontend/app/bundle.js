@@ -28700,7 +28700,7 @@
 	var _reactRedux = __webpack_require__(3);
 
 	function fetchLevelPack(id) {
-	  var page = arguments.length <= 1 || arguments[1] === undefined ? 1 : arguments[1];
+	  var page = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
 
 	  return function (dispatch) {
 	    $.get('http://localhost:3000/api/v1/level_packs/' + id, function (result) {
@@ -29055,7 +29055,7 @@
 	};
 
 	function level_packs() {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
 	  var action = arguments[1];
 
 	  switch (action.type) {
