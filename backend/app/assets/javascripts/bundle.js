@@ -28592,7 +28592,6 @@
 	});
 
 	function mapStateToProps(state) {
-	  console.log(state.levelPackState);
 	  return {
 	    level_packs: state.levelPackState.all
 	  };
@@ -30482,11 +30481,11 @@
 
 	var _site_menu2 = _interopRequireDefault(_site_menu);
 
-	var _level_pack = __webpack_require__(17);
+	var _levels = __webpack_require__(17);
 
-	var _level_pack2 = _interopRequireDefault(_level_pack);
+	var _levels2 = _interopRequireDefault(_levels);
 
-	var _level_pack3 = __webpack_require__(12);
+	var _level_pack = __webpack_require__(12);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30496,7 +30495,7 @@
 	  componentDidMount: function componentDidMount() {
 	    var dispatch = this.props.dispatch;
 
-	    dispatch((0, _level_pack3.fetchLevelPack)(this.props.routeParams.slug));
+	    dispatch((0, _level_pack.fetchLevelPack)(this.props.routeParams.slug));
 	  },
 	  render: function render() {
 	    var levelPack = this.props.levelPack;
@@ -30507,7 +30506,7 @@
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      _react2.default.createElement(_site_menu2.default, { active: '_play_index' }),
+	      _react2.default.createElement(_site_menu2.default, { active: 'site_play' }),
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'row' },
@@ -30519,7 +30518,8 @@
 	            null,
 	            levelPack.name
 	          ),
-	          _react2.default.createElement('hr', null)
+	          _react2.default.createElement('hr', null),
+	          _react2.default.createElement(_levels2.default, { levels: levelPack.levels })
 	        )
 	      )
 	    );
@@ -30548,44 +30548,65 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var LevelPack = _react2.default.createClass({
-	  displayName: 'LevelPack',
+	var Levels = _react2.default.createClass({
+	  displayName: 'Levels',
 
 	  render: function render() {
-	    if (!this.props.current) {
+	    if (!this.props.levels) {
 	      return null;
 	    }
 
-	    // var levelPacksTemplate = this.props.level_packs.map(function(level_pack, index)  {
-	    //   return (
-	    //     <tr key={index}>
-	    //       <td width="1">
-	    //         <img src={level_pack.image} alt="" />
-	    //       </td>
-	    //       <td>
-	    //         <h4>
-	    //           <Link to={{pathname: '/play/'+level_pack.slug }}>{level_pack.name}</Link>
-	    //         </h4>
-	    //         <p>
-	    //           <strong>{level_pack.levels_count}</strong> puzzle
-	    //         </p>
-	    //         <p>
-	    //           {level_pack.description}
-	    //         </p>
-	    //       </td>
-	    //     </tr>
-	    //   )
-	    // });
+	    console.log('props');
+	    console.log(this.props);
+	    console.log('props');
+
+	    var chunks = this.props.levels;
+	    console.log(chunks);
+
+	    // var levelsTemplate = chunks.map(function(chunk, index) {
+	    var levelsTemplate = chunks.map(function (level, index) {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'row', key: index },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-md-3 level-cell' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'row' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'col-md-7' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'level-image' },
+	                _react2.default.createElement('img', { src: level.image, alt: '' })
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'col-md-5' },
+	              _react2.default.createElement(
+	                'h4',
+	                null,
+	                '#',
+	                level.name
+	              )
+	            )
+	          )
+	        )
+	      );
+	    });
 
 	    return _react2.default.createElement(
-	      'p',
+	      'div',
 	      null,
-	      'Hello varan!'
+	      levelsTemplate
 	    );
 	  }
 	});
 
-	module.exports = LevelPack;
+	module.exports = Levels;
 
 /***/ },
 /* 18 */

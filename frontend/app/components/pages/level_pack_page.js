@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import SiteMenu from '../blocks/site_menu'
-import LevelPack from '../blocks/level_pack'
+import Levels from '../blocks/levels'
 import { fetchLevelPack } from '../../actions/level_pack'
 
 var LevelPackPage = React.createClass({
@@ -17,11 +17,12 @@ var LevelPackPage = React.createClass({
 
     return (
       <div>
-        <SiteMenu active="_play_index" />
+        <SiteMenu active="site_play" />
         <div className="row">
           <div className="col-lg-12">
             <h4>{levelPack.name}</h4>
             <hr/>
+            <Levels levels={levelPack.levels} />
           </div>
         </div>
       </div>
