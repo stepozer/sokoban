@@ -78,7 +78,11 @@
 
 	var _level_pack_page2 = _interopRequireDefault(_level_pack_page);
 
-	var _configure_store = __webpack_require__(18);
+	var _level_page = __webpack_require__(18);
+
+	var _level_page2 = _interopRequireDefault(_level_page);
+
+	var _configure_store = __webpack_require__(20);
 
 	var _configure_store2 = _interopRequireDefault(_configure_store);
 
@@ -97,6 +101,7 @@
 	      _react2.default.createElement(_reactRouter.Route, { path: '/help', component: _site_help_page2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/play/:slug', component: _level_pack_page2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/play', component: _level_packs_page2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/play/:slug/:id', component: _level_page2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '*', component: _site_not_found_page2.default })
 	    )
 	  ), document.getElementById('root'));
@@ -30556,12 +30561,7 @@
 	      return null;
 	    }
 
-	    console.log('props');
-	    console.log(this.props);
-	    console.log('props');
-
 	    var chunks = this.props.levels;
-	    console.log(chunks);
 
 	    // var levelsTemplate = chunks.map(function(chunk, index) {
 	    var levelsTemplate = chunks.map(function (level, index) {
@@ -30580,17 +30580,25 @@
 	              _react2.default.createElement(
 	                'div',
 	                { className: 'level-image' },
-	                _react2.default.createElement('img', { src: level.image, alt: '' })
+	                _react2.default.createElement(
+	                  _reactRouter.Link,
+	                  { to: { pathname: '/play/' + level.level_pack_slug + '/' + level.id } },
+	                  _react2.default.createElement('img', { src: level.image, alt: '' })
+	                )
 	              )
 	            ),
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'col-md-5' },
 	              _react2.default.createElement(
-	                'h4',
-	                null,
-	                '#',
-	                level.name
+	                _reactRouter.Link,
+	                { to: { pathname: '/play/' + level.level_pack_slug + '/' + level.id } },
+	                _react2.default.createElement(
+	                  'h4',
+	                  null,
+	                  '#',
+	                  level.name
+	                )
 	              )
 	            )
 	          )
@@ -30617,15 +30625,114 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(3);
+
+	var _site_menu = __webpack_require__(7);
+
+	var _site_menu2 = _interopRequireDefault(_site_menu);
+
+	var _level = __webpack_require__(19);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var LevelPage = _react2.default.createClass({
+	  displayName: 'LevelPage',
+
+	  componentDidMount: function componentDidMount() {
+	    var dispatch = this.props.dispatch;
+
+	    dispatch((0, _level.fetchLevel)(this.props.routeParams.id));
+	  },
+	  render: function render() {
+	    var level = this.props.level;
+	    if (!level) {
+	      return null;
+	    }
+
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(_site_menu2.default, { active: 'site_play' }),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'row' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-lg-12' },
+	          _react2.default.createElement(
+	            'h4',
+	            null,
+	            level.name
+	          ),
+	          _react2.default.createElement('hr', null)
+	        )
+	      )
+	    );
+	  }
+	});
+
+	function mapStateToProps(state) {
+	  return {
+	    level: state.levelState.current
+	  };
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(LevelPage);
+
+/***/ },
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.fetchLevel = fetchLevel;
+
+	var _action_types = __webpack_require__(13);
+
+	var _reactRedux = __webpack_require__(3);
+
+	var _axios = __webpack_require__(14);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function fetchLevel(id) {
+	  return function (dispatch) {
+	    _axios2.default.get('/api/v1/levels/' + id).then(function (response) {
+	      dispatch({ type: _action_types.ACTION_GET_LEVEL, payload: response.data });
+	    }).catch(function (error) {
+	      console.log(error);
+	    });
+	  };
+	}
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	exports.default = configureStore;
 
 	var _redux = __webpack_require__(4);
 
-	var _reduxThunk = __webpack_require__(19);
+	var _reduxThunk = __webpack_require__(21);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _reducers = __webpack_require__(20);
+	var _reducers = __webpack_require__(22);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -30637,7 +30744,7 @@
 	}
 
 /***/ },
-/* 19 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function webpackUniversalModuleDefinition(root, factory) {
@@ -30733,7 +30840,7 @@
 	;
 
 /***/ },
-/* 20 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30744,18 +30851,23 @@
 
 	var _redux = __webpack_require__(4);
 
-	var _level_pack = __webpack_require__(21);
+	var _level_pack = __webpack_require__(23);
 
 	var _level_pack2 = _interopRequireDefault(_level_pack);
+
+	var _level = __webpack_require__(24);
+
+	var _level2 = _interopRequireDefault(_level);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = (0, _redux.combineReducers)({
-	  levelPackState: _level_pack2.default
+	  levelPackState: _level_pack2.default,
+	  levelState: _level2.default
 	});
 
 /***/ },
-/* 21 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30784,6 +30896,39 @@
 	      return _extends({}, state, { all: action.payload });
 
 	    case _action_types.ACTION_GET_LEVEL_PACK:
+	      return _extends({}, state, { current: action.payload });
+
+	    default:
+	      return state;
+	  }
+	}
+
+/***/ },
+/* 24 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	exports.default = levelReducer;
+
+	var _action_types = __webpack_require__(13);
+
+	var initialState = {
+	  current: {}
+	};
+
+	function levelReducer() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case _action_types.ACTION_GET_LEVEL:
 	      return _extends({}, state, { current: action.payload });
 
 	    default:

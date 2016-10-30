@@ -11,6 +11,9 @@ module API
         expose :image do |i, o|
           ActionController::Base.helpers.image_path("levels/#{i.level_pack.slug}/#{i.name}.png")
         end
+        expose :level_pack_slug do |i, o|
+          i.level_pack.slug
+        end
       end
 
       class LevelPack < Base
