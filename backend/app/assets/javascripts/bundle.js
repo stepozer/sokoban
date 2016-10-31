@@ -78,11 +78,11 @@
 
 	var _level_pack_page2 = _interopRequireDefault(_level_pack_page);
 
-	var _level_page = __webpack_require__(18);
+	var _level_page = __webpack_require__(19);
 
 	var _level_page2 = _interopRequireDefault(_level_page);
 
-	var _configure_store = __webpack_require__(20);
+	var _configure_store = __webpack_require__(22);
 
 	var _configure_store2 = _interopRequireDefault(_configure_store);
 
@@ -30551,65 +30551,71 @@
 
 	var _reactRouter = __webpack_require__(5);
 
+	var _array_helper = __webpack_require__(18);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Levels = _react2.default.createClass({
 	  displayName: 'Levels',
 
-	  render: function render() {
-	    if (!this.props.levels) {
-	      return null;
-	    }
-
-	    var chunks = this.props.levels;
-
-	    // var levelsTemplate = chunks.map(function(chunk, index) {
-	    var levelsTemplate = chunks.map(function (level, index) {
+	  renderLevelChunk: function renderLevelChunk(chunk) {
+	    return chunk.map(function (level, index) {
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'row', key: index },
+	        { className: 'col-md-3 level-cell', key: index },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'col-md-3 level-cell' },
+	          { className: 'row' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'row' },
+	            { className: 'col-md-7' },
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'col-md-7' },
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'level-image' },
-	                _react2.default.createElement(
-	                  _reactRouter.Link,
-	                  { to: { pathname: '/play/' + level.level_pack_slug + '/' + level.id } },
-	                  _react2.default.createElement('img', { src: level.image, alt: '' })
-	                )
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'col-md-5' },
+	              { className: 'level-image' },
 	              _react2.default.createElement(
 	                _reactRouter.Link,
 	                { to: { pathname: '/play/' + level.level_pack_slug + '/' + level.id } },
-	                _react2.default.createElement(
-	                  'h4',
-	                  null,
-	                  '#',
-	                  level.name
-	                )
+	                _react2.default.createElement('img', { src: level.image, alt: '' })
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-md-5' },
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: { pathname: '/play/' + level.level_pack_slug + '/' + level.id } },
+	              _react2.default.createElement(
+	                'h4',
+	                null,
+	                '#',
+	                level.name
 	              )
 	            )
 	          )
 	        )
 	      );
 	    });
-
+	  },
+	  renderLevelChunks: function renderLevelChunks(chunks) {
+	    var renderLevelChunk = this.renderLevelChunk;
+	    return chunks.map(function (chunk, index) {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'row', key: index },
+	        renderLevelChunk(chunk)
+	      );
+	    });
+	  },
+	  render: function render() {
+	    if (!this.props.levels) {
+	      return null;
+	    }
+	    var chunks = (0, _array_helper.arrayChunk)(this.props.levels, 4);
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      levelsTemplate
+	      this.renderLevelChunks(chunks)
 	    );
 	  }
 	});
@@ -30618,6 +30624,23 @@
 
 /***/ },
 /* 18 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.arrayChunk = arrayChunk;
+	function arrayChunk(input, size) {
+	  for (var x, i = 0, c = -1, l = input.length, n = []; i < l; i++) {
+	    (x = i % size) ? n[c][x] = input[i] : n[++c] = [input[i]];
+	  }
+	  return n;
+	}
+
+/***/ },
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30636,7 +30659,11 @@
 
 	var _site_menu2 = _interopRequireDefault(_site_menu);
 
-	var _level = __webpack_require__(19);
+	var _level = __webpack_require__(20);
+
+	var _level2 = _interopRequireDefault(_level);
+
+	var _level3 = __webpack_require__(21);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30646,7 +30673,7 @@
 	  componentDidMount: function componentDidMount() {
 	    var dispatch = this.props.dispatch;
 
-	    dispatch((0, _level.fetchLevel)(this.props.routeParams.id));
+	    dispatch((0, _level3.fetchLevel)(this.props.routeParams.id));
 	  },
 	  render: function render() {
 	    var level = this.props.level;
@@ -30665,11 +30692,27 @@
 	          'div',
 	          { className: 'col-lg-12' },
 	          _react2.default.createElement(
-	            'h4',
-	            null,
-	            level.name
+	            'p',
+	            { className: 'pull-left' },
+	            'Steps: 0'
 	          ),
-	          _react2.default.createElement('hr', null)
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'pull-right' },
+	            _react2.default.createElement(
+	              'button',
+	              { className: 'btn btn-primary', 'data-toggle': 'modal', 'data-target': '#view_controls_modal' },
+	              'View Controls'
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              { className: 'btn btn-danger' },
+	              'Reset Puzzle'
+	            )
+	          ),
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement(_level2.default, { level: level })
 	        )
 	      )
 	    );
@@ -30685,7 +30728,62 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(LevelPage);
 
 /***/ },
-/* 19 */
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Level = _react2.default.createClass({
+	  displayName: "Level",
+
+	  componentDidMount: function componentDidMount() {
+	    window.addEventListener("keydown", this.handleKeyDown);
+	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    window.removeEventListener("keydown", this.handleKeyDown);
+	  },
+	  handleKeyDown: function handleKeyDown(e) {
+	    if (e.keyCode == SokobanKeyboardType.KEY_RIGHT) {
+	      e.preventDefault();
+	      moveHeroRight();
+	    } else if (e.keyCode == SokobanKeyboardType.KEY_LEFT) {
+	      e.preventDefault();
+	      moveHeroLeft();
+	    } else if (e.keyCode == SokobanKeyboardType.KEY_UP) {
+	      e.preventDefault();
+	      moveHeroUp();
+	    } else if (e.keyCode == SokobanKeyboardType.KEY_DOWN) {
+	      e.preventDefault();
+	      moveHeroDown();
+	    } else if (e.keyCode == SokobanKeyboardType.KEY_U) {
+	      e.preventDefault();
+	      heroRollback();
+	    }
+	  },
+	  render: function render() {
+	    var level = this.props.level;
+	    if (!level) {
+	      return null;
+	    }
+
+	    return _react2.default.createElement(
+	      "div",
+	      { id: "sokoban-game-container" },
+	      _react2.default.createElement("canvas", null)
+	    );
+	  }
+	});
+
+	module.exports = Level;
+
+/***/ },
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30716,7 +30814,7 @@
 	}
 
 /***/ },
-/* 20 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30728,11 +30826,11 @@
 
 	var _redux = __webpack_require__(4);
 
-	var _reduxThunk = __webpack_require__(21);
+	var _reduxThunk = __webpack_require__(23);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _reducers = __webpack_require__(22);
+	var _reducers = __webpack_require__(24);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -30744,7 +30842,7 @@
 	}
 
 /***/ },
-/* 21 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function webpackUniversalModuleDefinition(root, factory) {
@@ -30840,7 +30938,7 @@
 	;
 
 /***/ },
-/* 22 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30851,11 +30949,11 @@
 
 	var _redux = __webpack_require__(4);
 
-	var _level_pack = __webpack_require__(23);
+	var _level_pack = __webpack_require__(25);
 
 	var _level_pack2 = _interopRequireDefault(_level_pack);
 
-	var _level = __webpack_require__(24);
+	var _level = __webpack_require__(26);
 
 	var _level2 = _interopRequireDefault(_level);
 
@@ -30867,7 +30965,7 @@
 	});
 
 /***/ },
-/* 23 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30904,7 +31002,7 @@
 	}
 
 /***/ },
-/* 24 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import SiteMenu from '../blocks/site_menu'
+import Level from '../blocks/level'
 import { fetchLevel } from '../../actions/level'
 
 var LevelPage = React.createClass({
@@ -19,8 +20,16 @@ var LevelPage = React.createClass({
         <SiteMenu active="site_play" />
         <div className="row">
           <div className="col-lg-12">
-            <h4>{level.name}</h4>
-            <hr/>
+            <p className="pull-left">
+              Steps: 0
+            </p>
+            <p className="pull-right">
+              <button className="btn btn-primary" data-toggle="modal" data-target="#view_controls_modal">View Controls</button>
+              <button className="btn btn-danger">Reset Puzzle</button>
+            </p>
+            <br/>
+            <br/>
+            <Level level={level} />
           </div>
         </div>
       </div>
