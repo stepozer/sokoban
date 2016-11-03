@@ -82,7 +82,7 @@
 
 	var _level_page2 = _interopRequireDefault(_level_page);
 
-	var _configure_store = __webpack_require__(24);
+	var _configure_store = __webpack_require__(25);
 
 	var _configure_store2 = _interopRequireDefault(_configure_store);
 
@@ -30664,7 +30664,7 @@
 
 	var _level2 = _interopRequireDefault(_level);
 
-	var _level3 = __webpack_require__(23);
+	var _level3 = __webpack_require__(24);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30758,7 +30758,9 @@
 
 	var _game_cell_types = __webpack_require__(22);
 
-	var _level = __webpack_require__(23);
+	var _game_direction_types = __webpack_require__(23);
+
+	var _level = __webpack_require__(24);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30767,22 +30769,20 @@
 	var Level = _react2.default.createClass({
 	  displayName: 'Level',
 
-	  moveHeroRight: function moveHeroRight() {
-	    var dispatch = this.props.dispatch;
-
-	    dispatch((0, _level.gameIncrementSteps)());
-	    this.state.map.cells[0][0] = ' ';
-	    this.state.map.cells[0][1] = '@';
-	    this.canvasRender();
-	  },
-	  moveHeroLeft: function moveHeroLeft() {
-	    var dispatch = this.props.dispatch;
-
-	    dispatch((0, _level.gameIncrementSteps)());
-	    this.state.map.cells[0][0] = '@';
-	    this.state.map.cells[0][1] = ' ';
-	    this.canvasRender();
-	  },
+	  // moveHero: function(dire) {
+	  //   const { dispatch } = this.props;
+	  //   dispatch(gameIncrementSteps());
+	  //   this.state.map.cells[0][0] = ' '
+	  //   this.state.map.cells[0][1] = '@'
+	  //   this.canvasRender();
+	  // },
+	  // moveHeroLeft: function() {
+	  //   const { dispatch } = this.props;
+	  //   dispatch(gameIncrementSteps());
+	  //   this.state.map.cells[0][0] = '@'
+	  //   this.state.map.cells[0][1] = ' '
+	  //   this.canvasRender();
+	  // },
 	  componentDidMount: function componentDidMount() {
 	    window.addEventListener("keydown", this.handleKeyDown);
 	    this.canvasRender();
@@ -30833,33 +30833,104 @@
 	      ctx.fillStyle = 'yellow';
 	      ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
 	    } else if (visibleObject == _game_cell_types.GAME_CELL_BOX_ON_GOAL) {
-	      ctx.fillStyle = 'orrange';
+	      ctx.fillStyle = 'purple';
 	      ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
 	    } else {
 	      ctx.fillStyle = 'white';
 	      ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
 	    }
 	  },
+	  moveHero: function moveHero(direction) {
+	    if (this.state.map.solved) {
+	      return;
+	    }
+	    var x = this.state.map.heroX;
+	    var y = this.state.map.heroY;
+	    var to_x = x;
+	    var to_y = y;
+	    var to_x_next = x;
+	    var to_y_next = y;
+	    if (direction == _game_direction_types.GAME_DIRECTION_RIGHT) {
+	      to_x = x + 1;to_x_next = x + 2;
+	    } else if (direction == _game_direction_types.GAME_DIRECTION_LEFT) {
+	      to_x = x - 1;to_x_next = x - 2;
+	    } else if (direction == _game_direction_types.GAME_DIRECTION_UP) {
+	      to_y = y - 1;to_y_next = y - 2;
+	    } else {
+	      to_y = y + 1;to_y_next = y + 2;
+	    }
+	    if (to_x < 0 || to_y < 0 || typeof this.state.map.cells[to_y] == 'undefined' || typeof this.state.map.cells[to_y][to_x] == 'undefined') {
+	      return;
+	    }
+
+	    if (this.state.map.cells[to_y][to_x] == _game_cell_types.GAME_CELL_GROUND || this.state.map.cells[to_y][to_x] == _game_cell_types.GAME_CELL_GOAL) {
+	      // this.steps += 1;
+	      // this.saveHistory(direction);
+	      if (this.state.map.cells[y][x] == _game_cell_types.GAME_CELL_HERO_ON_GOAL) {
+	        this.state.map.cells[y][x] = _game_cell_types.GAME_CELL_GOAL;
+	      } else {
+	        this.state.map.cells[y][x] = _game_cell_types.GAME_CELL_GROUND;
+	      }
+	      if (this.state.map.cells[to_y][to_x] == _game_cell_types.GAME_CELL_GOAL) {
+	        this.state.map.cells[to_y][to_x] = _game_cell_types.GAME_CELL_HERO_ON_GOAL;
+	      } else {
+	        this.state.map.cells[to_y][to_x] = _game_cell_types.GAME_CELL_HERO;
+	      }
+	      this.state.map.heroX = to_x;
+	      this.state.map.heroY = to_y;
+	      // this.checkSolved();
+	      this.canvasRender();
+	      return;
+	    }
+
+	    if ((this.state.map.cells[to_y][to_x] == _game_cell_types.GAME_CELL_BOX || this.state.map.cells[to_y][to_x] == _game_cell_types.GAME_CELL_BOX_ON_GOAL) && (this.state.map.cells[to_y_next][to_x_next] == _game_cell_types.GAME_CELL_GROUND || this.state.map.cells[to_y_next][to_x_next] == _game_cell_types.GAME_CELL_GOAL)) {
+	      // this.steps += 1;
+	      // this.saveHistory(direction);
+	      if (this.state.map.cells[y][x] == _game_cell_types.GAME_CELL_HERO_ON_GOAL) {
+	        this.state.map.cells[y][x] = _game_cell_types.GAME_CELL_GOAL;
+	      } else {
+	        this.state.map.cells[y][x] = _game_cell_types.GAME_CELL_GROUND;
+	      }
+	      if (this.state.map.cells[to_y][to_x] == _game_cell_types.GAME_CELL_BOX_ON_GOAL) {
+	        this.state.map.cells[to_y][to_x] = _game_cell_types.GAME_CELL_HERO_ON_GOAL;
+	      } else {
+	        this.state.map.cells[to_y][to_x] = _game_cell_types.GAME_CELL_HERO;
+	      }
+	      if (this.state.map.cells[to_y_next][to_x_next] == _game_cell_types.GAME_CELL_GOAL) {
+	        this.state.map.cells[to_y_next][to_x_next] = _game_cell_types.GAME_CELL_BOX_ON_GOAL;
+	      } else {
+	        this.state.map.cells[to_y_next][to_x_next] = _game_cell_types.GAME_CELL_BOX;
+	      }
+
+	      this.state.map.heroX = to_x;
+	      this.state.map.heroY = to_y;
+	      // this.checkSolved();
+	      this.canvasRender();
+	      return;
+	    }
+	  },
 	  handleKeyDown: function handleKeyDown(e) {
 	    if (e.keyCode == _keyboard_types.KEY_RIGHT) {
 	      e.preventDefault();
-	      this.moveHeroRight();
+	      this.moveHero(_game_direction_types.GAME_DIRECTION_RIGHT);
 	    } else if (e.keyCode == _keyboard_types.KEY_LEFT) {
 	      e.preventDefault();
-	      this.moveHeroLeft();
+	      this.moveHero(_game_direction_types.GAME_DIRECTION_LEFT);
 	    } else if (e.keyCode == _keyboard_types.KEY_UP) {
 	      e.preventDefault();
-	      moveHeroUp();
+	      this.moveHero(_game_direction_types.GAME_DIRECTION_UP);
 	    } else if (e.keyCode == _keyboard_types.KEY_DOWN) {
 	      e.preventDefault();
-	      moveHeroDown();
+	      this.moveHero(_game_direction_types.GAME_DIRECTION_DOWN);
 	    } else if (e.keyCode == _keyboard_types.KEY_U) {
 	      e.preventDefault();
 	      moveHeroBack();
 	    }
 	  },
-	  render: function render() {
-	    console.log('RENDER');
+	  setInitialComponentState: function setInitialComponentState() {
+	    var x;
+	    var y;
+
 	    this.state = {
 	      map: {
 	        solved: false,
@@ -30868,6 +30939,18 @@
 	        sizeY: this.props.level.size_y
 	      }
 	    };
+
+	    for (y in this.state.map.cells) {
+	      for (x in this.state.map.cells[y]) {
+	        if (this.state.map.cells[y][x] == _game_cell_types.GAME_CELL_HERO || this.state.map.cells[y][x] == _game_cell_types.GAME_CELL_HERO_ON_GOAL) {
+	          this.state.map.heroX = parseInt(x);
+	          this.state.map.heroY = parseInt(y);
+	        }
+	      }
+	    }
+	  },
+	  render: function render() {
+	    this.setInitialComponentState();
 
 	    return _react2.default.createElement(
 	      'div',
@@ -30913,6 +30996,20 @@
 
 /***/ },
 /* 23 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var GAME_DIRECTION_RIGHT = exports.GAME_DIRECTION_RIGHT = 'RIGHT';
+	var GAME_DIRECTION_LEFT = exports.GAME_DIRECTION_LEFT = 'LEFT';
+	var GAME_DIRECTION_UP = exports.GAME_DIRECTION_UP = 'UP';
+	var GAME_DIRECTION_DOWN = exports.GAME_DIRECTION_DOWN = 'DOWN';
+
+/***/ },
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30948,7 +31045,7 @@
 	}
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30960,11 +31057,11 @@
 
 	var _redux = __webpack_require__(4);
 
-	var _reduxThunk = __webpack_require__(25);
+	var _reduxThunk = __webpack_require__(26);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _reducers = __webpack_require__(26);
+	var _reducers = __webpack_require__(27);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -30976,7 +31073,7 @@
 	}
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function webpackUniversalModuleDefinition(root, factory) {
@@ -31072,7 +31169,7 @@
 	;
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31083,11 +31180,11 @@
 
 	var _redux = __webpack_require__(4);
 
-	var _level_pack = __webpack_require__(27);
+	var _level_pack = __webpack_require__(28);
 
 	var _level_pack2 = _interopRequireDefault(_level_pack);
 
-	var _level = __webpack_require__(28);
+	var _level = __webpack_require__(29);
 
 	var _level2 = _interopRequireDefault(_level);
 
@@ -31099,7 +31196,7 @@
 	});
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31136,7 +31233,7 @@
 	}
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31153,7 +31250,7 @@
 
 	var initialState = {
 	  current: {},
-	  steps: 1
+	  steps: 0
 	};
 
 	function levelReducer() {

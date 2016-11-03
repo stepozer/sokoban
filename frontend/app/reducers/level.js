@@ -5,7 +5,7 @@ import {
 
 const initialState = {
   current: {},
-  steps: 1,
+  steps:   0,
 }
 
 export default function levelReducer(state = initialState, action) {
