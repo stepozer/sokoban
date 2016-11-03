@@ -11,7 +11,9 @@ module API
         expose :image do |i, o|
           ActionController::Base.helpers.image_path("levels/#{i.level_pack.slug}/#{i.name}.png")
         end
-        expose :level
+        expose :level_matrix, as: :level
+        expose :size_x
+        expose :size_y
         expose :level_pack_slug do |i, o|
           i.level_pack.slug
         end

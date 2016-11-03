@@ -9,6 +9,10 @@ var LevelPage = React.createClass({
     const { dispatch } = this.props;
     dispatch(fetchLevel(this.props.routeParams.id))
   },
+  // incrementSteps: function() {
+  //   const { dispatch } = this.props;
+  //   dispatch(gameIncrementSteps());
+  // }
   render: function()  {
     var level = this.props.level
     if (! level) {
@@ -21,7 +25,7 @@ var LevelPage = React.createClass({
         <div className="row">
           <div className="col-lg-12">
             <p className="pull-left">
-              Steps: 0
+              Steps: {this.props.steps}
             </p>
             <p className="pull-right">
               <button className="btn btn-primary" data-toggle="modal" data-target="#view_controls_modal">View Controls</button>
@@ -29,7 +33,7 @@ var LevelPage = React.createClass({
             </p>
             <br/>
             <br/>
-            <Level level={level} />
+            <Level level={level}/>
           </div>
         </div>
       </div>
@@ -39,7 +43,8 @@ var LevelPage = React.createClass({
 
 function mapStateToProps(state) {
   return {
-    level: state.levelState.current
+    level: state.levelState.current,
+    steps: state.levelState.steps,
   }
 }
 

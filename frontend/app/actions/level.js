@@ -1,5 +1,6 @@
 import {
-  ACTION_GET_LEVEL
+  ACTION_GET_LEVEL,
+  ACTION_GAME_INCREMENT_STEPS
 } from '../constants/action_types'
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -14,4 +15,8 @@ export function fetchLevel(id) {
         console.log(error);
       });
   };
+}
+
+export function gameIncrementSteps(id) {
+  return { type: ACTION_GAME_INCREMENT_STEPS };
 }

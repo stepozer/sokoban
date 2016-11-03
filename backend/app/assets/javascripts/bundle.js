@@ -82,7 +82,7 @@
 
 	var _level_page2 = _interopRequireDefault(_level_page);
 
-	var _configure_store = __webpack_require__(22);
+	var _configure_store = __webpack_require__(24);
 
 	var _configure_store2 = _interopRequireDefault(_configure_store);
 
@@ -28736,6 +28736,7 @@
 	var ACTION_GET_LEVEL_PACKS = exports.ACTION_GET_LEVEL_PACKS = 'ACTION_GET_LEVEL_PACKS';
 	var ACTION_GET_LEVEL_PACK = exports.ACTION_GET_LEVEL_PACK = 'ACTION_GET_LEVEL_PACK';
 	var ACTION_GET_LEVEL = exports.ACTION_GET_LEVEL = 'ACTION_GET_LEVEL';
+	var ACTION_GAME_INCREMENT_STEPS = exports.ACTION_GAME_INCREMENT_STEPS = 'ACTION_GAME_INCREMENT_STEPS';
 
 /***/ },
 /* 14 */
@@ -30663,7 +30664,7 @@
 
 	var _level2 = _interopRequireDefault(_level);
 
-	var _level3 = __webpack_require__(21);
+	var _level3 = __webpack_require__(23);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30675,6 +30676,10 @@
 
 	    dispatch((0, _level3.fetchLevel)(this.props.routeParams.id));
 	  },
+	  // incrementSteps: function() {
+	  //   const { dispatch } = this.props;
+	  //   dispatch(gameIncrementSteps());
+	  // }
 	  render: function render() {
 	    var level = this.props.level;
 	    if (!level) {
@@ -30694,7 +30699,8 @@
 	          _react2.default.createElement(
 	            'p',
 	            { className: 'pull-left' },
-	            'Steps: 0'
+	            'Steps: ',
+	            this.props.steps
 	          ),
 	          _react2.default.createElement(
 	            'p',
@@ -30721,7 +30727,8 @@
 
 	function mapStateToProps(state) {
 	  return {
-	    level: state.levelState.current
+	    level: state.levelState.current,
+	    steps: state.levelState.steps
 	  };
 	}
 
@@ -30731,59 +30738,181 @@
 /* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactDom = __webpack_require__(2);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _reactRedux = __webpack_require__(3);
+
+	var _keyboard_types = __webpack_require__(21);
+
+	var _game_cell_types = __webpack_require__(22);
+
+	var _level = __webpack_require__(23);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Level = _react2.default.createClass({
-	  displayName: "Level",
+	var CELL_SIZE = 30;
 
+	var Level = _react2.default.createClass({
+	  displayName: 'Level',
+
+	  moveHeroRight: function moveHeroRight() {
+	    var dispatch = this.props.dispatch;
+
+	    dispatch((0, _level.gameIncrementSteps)());
+	    this.state.map.cells[0][0] = ' ';
+	    this.state.map.cells[0][1] = '@';
+	    this.canvasRender();
+	  },
+	  moveHeroLeft: function moveHeroLeft() {
+	    var dispatch = this.props.dispatch;
+
+	    dispatch((0, _level.gameIncrementSteps)());
+	    this.state.map.cells[0][0] = '@';
+	    this.state.map.cells[0][1] = ' ';
+	    this.canvasRender();
+	  },
 	  componentDidMount: function componentDidMount() {
 	    window.addEventListener("keydown", this.handleKeyDown);
+	    this.canvasRender();
+	  },
+	  componentDidUpdate: function componentDidUpdate() {
+	    this.canvasRender();
 	  },
 	  componentWillUnmount: function componentWillUnmount() {
 	    window.removeEventListener("keydown", this.handleKeyDown);
 	  },
+	  canvasRender: function canvasRender() {
+	    if (this.state.map.solved) {
+	      return;
+	    }
+
+	    var c = _reactDom2.default.findDOMNode(this).getElementsByTagName("canvas")[0];
+	    var ctx = c.getContext("2d");
+	    var x;
+	    var y;
+	    c.width = this.state.map.sizeX * 30;
+	    c.height = this.state.map.sizeY * 30;
+
+	    for (y in this.state.map.cells) {
+	      for (x in this.state.map.cells[y]) {
+	        this.canvasRenderCell(x, y, ctx);
+	      }
+	    }
+	  },
+	  canvasRenderCell: function canvasRenderCell(x, y, ctx) {
+	    if (this.state.map.solved) {
+	      return;
+	    }
+
+	    var visibleObject = this.state.map.cells[y][x];
+	    if (visibleObject == _game_cell_types.GAME_CELL_WALL) {
+	      ctx.fillStyle = 'red';
+	      ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+	    } else if (visibleObject == _game_cell_types.GAME_CELL_GOAL) {
+	      ctx.fillStyle = 'green';
+	      ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+	    } else if (visibleObject == _game_cell_types.GAME_CELL_HERO) {
+	      ctx.fillStyle = 'blue';
+	      ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+	    } else if (visibleObject == _game_cell_types.GAME_CELL_HERO_ON_GOAL) {
+	      ctx.fillStyle = 'gray';
+	      ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+	    } else if (visibleObject == _game_cell_types.GAME_CELL_BOX) {
+	      ctx.fillStyle = 'yellow';
+	      ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+	    } else if (visibleObject == _game_cell_types.GAME_CELL_BOX_ON_GOAL) {
+	      ctx.fillStyle = 'orrange';
+	      ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+	    } else {
+	      ctx.fillStyle = 'white';
+	      ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+	    }
+	  },
 	  handleKeyDown: function handleKeyDown(e) {
-	    if (e.keyCode == SokobanKeyboardType.KEY_RIGHT) {
+	    if (e.keyCode == _keyboard_types.KEY_RIGHT) {
 	      e.preventDefault();
-	      moveHeroRight();
-	    } else if (e.keyCode == SokobanKeyboardType.KEY_LEFT) {
+	      this.moveHeroRight();
+	    } else if (e.keyCode == _keyboard_types.KEY_LEFT) {
 	      e.preventDefault();
-	      moveHeroLeft();
-	    } else if (e.keyCode == SokobanKeyboardType.KEY_UP) {
+	      this.moveHeroLeft();
+	    } else if (e.keyCode == _keyboard_types.KEY_UP) {
 	      e.preventDefault();
 	      moveHeroUp();
-	    } else if (e.keyCode == SokobanKeyboardType.KEY_DOWN) {
+	    } else if (e.keyCode == _keyboard_types.KEY_DOWN) {
 	      e.preventDefault();
 	      moveHeroDown();
-	    } else if (e.keyCode == SokobanKeyboardType.KEY_U) {
+	    } else if (e.keyCode == _keyboard_types.KEY_U) {
 	      e.preventDefault();
-	      heroRollback();
+	      moveHeroBack();
 	    }
 	  },
 	  render: function render() {
-	    var level = this.props.level;
-	    if (!level) {
-	      return null;
-	    }
+	    console.log('RENDER');
+	    this.state = {
+	      map: {
+	        solved: false,
+	        cells: this.props.level.level,
+	        sizeX: this.props.level.size_x,
+	        sizeY: this.props.level.size_y
+	      }
+	    };
 
 	    return _react2.default.createElement(
-	      "div",
-	      { id: "sokoban-game-container" },
-	      _react2.default.createElement("canvas", null)
+	      'div',
+	      { id: 'sokoban-game-container' },
+	      _react2.default.createElement('canvas', null)
 	    );
 	  }
 	});
 
-	module.exports = Level;
+	exports.default = (0, _reactRedux.connect)()(Level);
 
 /***/ },
 /* 21 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var KEY_LEFT = exports.KEY_LEFT = 37;
+	var KEY_RIGHT = exports.KEY_RIGHT = 39;
+	var KEY_UP = exports.KEY_UP = 38;
+	var KEY_DOWN = exports.KEY_DOWN = 40;
+	var KEY_U = exports.KEY_U = 85;
+
+/***/ },
+/* 22 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var GAME_CELL_GROUND = exports.GAME_CELL_GROUND = ' ';
+	var GAME_CELL_WALL = exports.GAME_CELL_WALL = '#';
+	var GAME_CELL_BOX = exports.GAME_CELL_BOX = '$';
+	var GAME_CELL_GOAL = exports.GAME_CELL_GOAL = '.';
+	var GAME_CELL_HERO = exports.GAME_CELL_HERO = '@';
+	var GAME_CELL_HERO_ON_GOAL = exports.GAME_CELL_HERO_ON_GOAL = '+';
+	var GAME_CELL_BOX_ON_GOAL = exports.GAME_CELL_BOX_ON_GOAL = '*';
+
+/***/ },
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30792,6 +30921,7 @@
 	  value: true
 	});
 	exports.fetchLevel = fetchLevel;
+	exports.gameIncrementSteps = gameIncrementSteps;
 
 	var _action_types = __webpack_require__(13);
 
@@ -30813,8 +30943,12 @@
 	  };
 	}
 
+	function gameIncrementSteps(id) {
+	  return { type: _action_types.ACTION_GAME_INCREMENT_STEPS };
+	}
+
 /***/ },
-/* 22 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30826,11 +30960,11 @@
 
 	var _redux = __webpack_require__(4);
 
-	var _reduxThunk = __webpack_require__(23);
+	var _reduxThunk = __webpack_require__(25);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _reducers = __webpack_require__(24);
+	var _reducers = __webpack_require__(26);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -30842,7 +30976,7 @@
 	}
 
 /***/ },
-/* 23 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function webpackUniversalModuleDefinition(root, factory) {
@@ -30938,7 +31072,7 @@
 	;
 
 /***/ },
-/* 24 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30949,11 +31083,11 @@
 
 	var _redux = __webpack_require__(4);
 
-	var _level_pack = __webpack_require__(25);
+	var _level_pack = __webpack_require__(27);
 
 	var _level_pack2 = _interopRequireDefault(_level_pack);
 
-	var _level = __webpack_require__(26);
+	var _level = __webpack_require__(28);
 
 	var _level2 = _interopRequireDefault(_level);
 
@@ -30965,7 +31099,7 @@
 	});
 
 /***/ },
-/* 25 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31002,7 +31136,7 @@
 	}
 
 /***/ },
-/* 26 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31018,7 +31152,8 @@
 	var _action_types = __webpack_require__(13);
 
 	var initialState = {
-	  current: {}
+	  current: {},
+	  steps: 1
 	};
 
 	function levelReducer() {
@@ -31028,6 +31163,9 @@
 	  switch (action.type) {
 	    case _action_types.ACTION_GET_LEVEL:
 	      return _extends({}, state, { current: action.payload });
+
+	    case _action_types.ACTION_GAME_INCREMENT_STEPS:
+	      return _extends({}, state, { steps: state.steps + 1 });
 
 	    default:
 	      return state;
