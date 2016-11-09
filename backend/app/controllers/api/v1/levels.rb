@@ -9,7 +9,7 @@ module API
           get do
             present(
               Level.find(params[:id]),
-              with: API::V1::Entities::Level
+              with: API::V1::Entities::LevelDetailed
             )
           end
         end

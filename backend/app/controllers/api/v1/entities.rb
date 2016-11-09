@@ -8,9 +8,10 @@ module API
       class Level < Base
         expose :id
         expose :name
-        expose :image do |i, o|
-          ActionController::Base.helpers.image_path("levels/#{i.level_pack.slug}/#{i.name}.png")
-        end
+        expose :image_url, as: :image
+      end
+
+      class LevelDetailed < Level
         expose :level_matrix, as: :level
         expose :size_x
         expose :size_y
@@ -25,9 +26,7 @@ module API
         expose :slug
         expose :levels_count
         expose :description
-        expose :image do |i, o|
-          ActionController::Base.helpers.image_path("level_packs/#{i.slug}.jpg")
-        end
+        expose :image_url, as: :image
         expose :levels, if: { show_levels: true }, using: API::V1::Entities::Level
       end
     end

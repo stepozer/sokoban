@@ -8,6 +8,10 @@ class Level < ActiveRecord::Base
     Level.order(id: :asc).first
   end
 
+  def image_url
+    ActionController::Base.helpers.image_path("levels/#{level_pack.slug}/#{name}.png")
+  end
+
   def level_matrix
     unless @level_matrix
       result = []
