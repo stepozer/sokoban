@@ -7,10 +7,8 @@ module API
         route_param :id do
           desc 'Get level by id'
           get do
-            present(
-              Level.find(params[:id]),
-              with: API::V1::Entities::LevelDetailed
-            )
+            level = Level.find(params[:id])
+            present(level, with: API::V1::Entities::LevelDetailed)
           end
         end
       end

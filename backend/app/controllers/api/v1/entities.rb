@@ -18,6 +18,9 @@ module API
         expose :level_pack_slug do |i, o|
           i.level_pack.slug
         end
+        with_options(format_with: :api_datetime) do
+          expose :created_at
+        end
       end
 
       class LevelPack < Base
@@ -27,7 +30,6 @@ module API
         expose :levels_count
         expose :description
         expose :image_url, as: :image
-        expose :levels, if: { show_levels: true }, using: API::V1::Entities::Level
       end
     end
   end

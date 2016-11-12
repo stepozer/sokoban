@@ -10,8 +10,7 @@ var LevelPackPage = React.createClass({
     dispatch(fetchLevelPack(this.props.routeParams.slug))
   },
   render: function()  {
-    var levelPack = this.props.levelPack
-    if (! levelPack) {
+    if (! this.props.levelPack) {
       return null;
     }
 
@@ -20,9 +19,9 @@ var LevelPackPage = React.createClass({
         <SiteMenu active="site_play" />
         <div className="row">
           <div className="col-lg-12">
-            <h4>{levelPack.name}</h4>
+            <h4>{this.props.levelPack.name}</h4>
             <hr/>
-            <Levels levels={levelPack.levels} />
+            <Levels levels={this.props.levels} />
           </div>
         </div>
       </div>
@@ -32,7 +31,8 @@ var LevelPackPage = React.createClass({
 
 function mapStateToProps(state) {
   return {
-    levelPack: state.levelPackState.current
+    levels: state.levelPackState.current.levels,
+    levelPack: state.levelPackState.current.level_pack,
   }
 }
 

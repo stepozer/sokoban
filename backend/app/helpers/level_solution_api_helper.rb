@@ -2,8 +2,8 @@ module LevelSolutionApiHelper
   extend Grape::API::Helpers
 
   params :level_solution_create do
-    requires :level_id
-    requires :solution
+    requires :level_id, type: Integer, desc: 'Unique level id'
+    requires :solution, type: String,  desc: 'Level solution steps'
   end
 
   def level_solution_create_params

@@ -28628,52 +28628,47 @@
 
 	    var levelPacksTemplate = this.props.level_packs.map(function (level_pack, index) {
 	      return _react2.default.createElement(
-	        'tr',
-	        { key: index },
+	        'div',
+	        { className: 'col-md-6', key: index },
 	        _react2.default.createElement(
-	          'td',
-	          { width: '1' },
-	          _react2.default.createElement('img', { src: level_pack.image, alt: '' })
-	        ),
-	        _react2.default.createElement(
-	          'td',
-	          null,
+	          'div',
+	          { className: 'row' },
 	          _react2.default.createElement(
-	            'h4',
-	            null,
-	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: { pathname: '/play/' + level_pack.slug } },
-	              level_pack.name
-	            )
+	            'div',
+	            { className: 'col-md-3' },
+	            _react2.default.createElement('img', { src: level_pack.image, alt: '', className: 'level-pack-img' })
 	          ),
 	          _react2.default.createElement(
-	            'p',
-	            null,
+	            'div',
+	            { className: 'col-md-9' },
 	            _react2.default.createElement(
-	              'strong',
+	              'h4',
 	              null,
-	              level_pack.levels_count
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: { pathname: '/play/' + level_pack.slug } },
+	                level_pack.name
+	              )
 	            ),
-	            ' puzzle'
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            level_pack.description
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              _react2.default.createElement(
+	                'strong',
+	                null,
+	                level_pack.levels_count
+	              ),
+	              ' puzzle'
+	            )
 	          )
 	        )
 	      );
 	    });
 
 	    return _react2.default.createElement(
-	      'table',
-	      { className: 'table table-striped table-hover table-borderless' },
-	      _react2.default.createElement(
-	        'tbody',
-	        null,
-	        levelPacksTemplate
-	      )
+	      'div',
+	      { className: 'row' },
+	      levelPacksTemplate
 	    );
 	  }
 	});
@@ -30504,8 +30499,7 @@
 	    dispatch((0, _level_pack.fetchLevelPack)(this.props.routeParams.slug));
 	  },
 	  render: function render() {
-	    var levelPack = this.props.levelPack;
-	    if (!levelPack) {
+	    if (!this.props.levelPack) {
 	      return null;
 	    }
 
@@ -30522,10 +30516,10 @@
 	          _react2.default.createElement(
 	            'h4',
 	            null,
-	            levelPack.name
+	            this.props.levelPack.name
 	          ),
 	          _react2.default.createElement('hr', null),
-	          _react2.default.createElement(_levels2.default, { levels: levelPack.levels })
+	          _react2.default.createElement(_levels2.default, { levels: this.props.levels })
 	        )
 	      )
 	    );
@@ -30534,7 +30528,8 @@
 
 	function mapStateToProps(state) {
 	  return {
-	    levelPack: state.levelPackState.current
+	    levels: state.levelPackState.current.levels,
+	    levelPack: state.levelPackState.current.level_pack
 	  };
 	}
 
@@ -30769,33 +30764,48 @@
 	var Level = _react2.default.createClass({
 	  displayName: 'Level',
 
-	  // moveHero: function(dire) {
-	  //   const { dispatch } = this.props;
-	  //   dispatch(gameIncrementSteps());
-	  //   this.state.map.cells[0][0] = ' '
-	  //   this.state.map.cells[0][1] = '@'
-	  //   this.canvasRender();
-	  // },
-	  // moveHeroLeft: function() {
-	  //   const { dispatch } = this.props;
-	  //   dispatch(gameIncrementSteps());
-	  //   this.state.map.cells[0][0] = '@'
-	  //   this.state.map.cells[0][1] = ' '
-	  //   this.canvasRender();
-	  // },
 	  componentDidMount: function componentDidMount() {
-	    window.addEventListener("keydown", this.handleKeyDown);
-	    this.canvasRender();
+	    this.imagesLoaded = 0;
+	    this.images = {
+	      // TODO: get it from API
+	      wall: { url: 'http://localhost:3000/game/wall.jpg', obj: null },
+	      goal: { url: 'http://localhost:3000/game/goal.jpg', obj: null },
+	      hero_up: { url: 'http://localhost:3000/game/hero_up.jpg', obj: null },
+	      box: { url: 'http://localhost:3000/game/box.jpg', obj: null },
+	      box_goal: { url: 'http://localhost:3000/game/box_goal.jpg', obj: null }
+	    };
+	    this.loadAllImages();
+	    this.renderCanvas();
+	    window.addEventListener('keydown', this.handleKeyDown);
+	  },
+	  isAllImagesLoaded: function isAllImagesLoaded() {
+	    return this.imagesLoaded >= Object.keys(this.images).length;
+	  },
+	  loadAllImages: function loadAllImages() {
+	    var self = this;
+	    for (var key in this.images) {
+	      this.images[key].obj = new Image();
+	      this.images[key].obj.onload = function () {
+	        self.imagesLoaded += 1;
+	      };
+	      this.images[key].obj.src = this.images[key].url;
+	    }
 	  },
 	  componentDidUpdate: function componentDidUpdate() {
-	    this.canvasRender();
+	    this.renderCanvas();
 	  },
 	  componentWillUnmount: function componentWillUnmount() {
 	    window.removeEventListener("keydown", this.handleKeyDown);
 	  },
-	  canvasRender: function canvasRender() {
+	  renderCanvas: function renderCanvas() {
 	    if (this.state.map.solved) {
 	      return;
+	    }
+	    if (!this.isAllImagesLoaded()) {
+	      var self = this;
+	      setTimeout(function () {
+	        self.renderCanvas();
+	      }, 100);
 	    }
 
 	    var c = _reactDom2.default.findDOMNode(this).getElementsByTagName("canvas")[0];
@@ -30807,34 +30817,30 @@
 
 	    for (y in this.state.map.cells) {
 	      for (x in this.state.map.cells[y]) {
-	        this.canvasRenderCell(x, y, ctx);
+	        this.renderCanvasCell(x, y, ctx);
 	      }
 	    }
 	  },
-	  canvasRenderCell: function canvasRenderCell(x, y, ctx) {
-	    if (this.state.map.solved) {
-	      return;
+	  renderCanvasCell: function renderCanvasCell(x, y, ctx) {
+	    var obj = this.state.map.cells[y][x];
+	    var imgObj = false;
+
+	    if (obj == _game_cell_types.GAME_CELL_WALL) {
+	      imgObj = this.images.wall.obj;
+	    } else if (obj == _game_cell_types.GAME_CELL_GOAL) {
+	      imgObj = this.images.goal.obj;
+	    } else if (obj == _game_cell_types.GAME_CELL_HERO) {
+	      imgObj = this.images.hero_up.obj;
+	    } else if (obj == _game_cell_types.GAME_CELL_HERO_ON_GOAL) {
+	      imgObj = this.images.hero_up.obj;
+	    } else if (obj == _game_cell_types.GAME_CELL_BOX) {
+	      imgObj = this.images.box.obj;
+	    } else if (obj == _game_cell_types.GAME_CELL_BOX_ON_GOAL) {
+	      imgObj = this.images.box_goal.obj;
 	    }
 
-	    var visibleObject = this.state.map.cells[y][x];
-	    if (visibleObject == _game_cell_types.GAME_CELL_WALL) {
-	      ctx.fillStyle = 'red';
-	      ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-	    } else if (visibleObject == _game_cell_types.GAME_CELL_GOAL) {
-	      ctx.fillStyle = 'green';
-	      ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-	    } else if (visibleObject == _game_cell_types.GAME_CELL_HERO) {
-	      ctx.fillStyle = 'blue';
-	      ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-	    } else if (visibleObject == _game_cell_types.GAME_CELL_HERO_ON_GOAL) {
-	      ctx.fillStyle = 'gray';
-	      ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-	    } else if (visibleObject == _game_cell_types.GAME_CELL_BOX) {
-	      ctx.fillStyle = 'yellow';
-	      ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-	    } else if (visibleObject == _game_cell_types.GAME_CELL_BOX_ON_GOAL) {
-	      ctx.fillStyle = 'purple';
-	      ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+	    if (imgObj) {
+	      ctx.drawImage(imgObj, x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
 	    } else {
 	      ctx.fillStyle = 'white';
 	      ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
@@ -30879,7 +30885,7 @@
 	      this.state.map.heroX = to_x;
 	      this.state.map.heroY = to_y;
 	      // this.checkSolved();
-	      this.canvasRender();
+	      this.renderCanvas();
 	      return;
 	    }
 
@@ -30905,7 +30911,7 @@
 	      this.state.map.heroX = to_x;
 	      this.state.map.heroY = to_y;
 	      // this.checkSolved();
-	      this.canvasRender();
+	      this.renderCanvas();
 	      return;
 	    }
 	  },

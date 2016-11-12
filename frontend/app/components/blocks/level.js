@@ -29,18 +29,45 @@ const CELL_SIZE = 30
 
 var Level = React.createClass({
   componentDidMount: function() {
-    window.addEventListener("keydown", this.handleKeyDown);
-    this.canvasRender();
+    this.imagesLoaded = 0;
+    this.images = {
+      // TODO: get it from API
+      wall:     { url: 'http://localhost:3000/game/wall.jpg',     obj: null },
+      goal:     { url: 'http://localhost:3000/game/goal.jpg',     obj: null },
+      hero_up:  { url: 'http://localhost:3000/game/hero_up.jpg',  obj: null },
+      box:      { url: 'http://localhost:3000/game/box.jpg',      obj: null },
+      box_goal: { url: 'http://localhost:3000/game/box_goal.jpg', obj: null },
+    };
+    this.loadAllImages();
+    this.renderCanvas();
+    window.addEventListener('keydown', this.handleKeyDown);
+  },
+  isAllImagesLoaded: function() {
+    return this.imagesLoaded >= Object.keys(this.images).length;
+  },
+  loadAllImages: function() {
+    var self = this;
+    for (var key in this.images) {
+      this.images[key].obj = new Image();
+      this.images[key].obj.onload = function() {
+        self.imagesLoaded += 1;
+      }
+      this.images[key].obj.src = this.images[key].url;
+    }
   },
   componentDidUpdate: function() {
-    this.canvasRender();
+    this.renderCanvas();
   },
   componentWillUnmount: function() {
     window.removeEventListener("keydown", this.handleKeyDown);
   },
-  canvasRender: function() {
+  renderCanvas: function() {
     if (this.state.map.solved) {
       return;
+    }
+    if (!this.isAllImagesLoaded()) {
+      var self = this;
+      setTimeout(function() { self.renderCanvas(); }, 100);
     }
 
     var c    = ReactDOM.findDOMNode(this).getElementsByTagName("canvas")[0]
@@ -52,41 +79,36 @@ var Level = React.createClass({
 
     for (y in this.state.map.cells) {
       for (x in this.state.map.cells[y]) {
-        this.canvasRenderCell(x, y, ctx);
+        this.renderCanvasCell(x, y, ctx);
       }
     }
   },
-  canvasRenderCell: function(x, y, ctx) {
-    if (this.state.map.solved) {
-      return;
+  renderCanvasCell: function(x, y, ctx) {
+    var obj    = this.state.map.cells[y][x];
+    var imgObj = false;
+
+    if (obj == GAME_CELL_WALL) {
+      imgObj = this.images.wall.obj;
+    }
+    else if (obj == GAME_CELL_GOAL) {
+      imgObj = this.images.goal.obj;
+    }
+    else if (obj == GAME_CELL_HERO) {
+      imgObj = this.images.hero_up.obj;
+    }
+    else if (obj == GAME_CELL_HERO_ON_GOAL) {
+      imgObj = this.images.hero_up.obj;
+    }
+    else if (obj == GAME_CELL_BOX) {
+      imgObj = this.images.box.obj;
+    }
+    else if (obj == GAME_CELL_BOX_ON_GOAL) {
+      imgObj = this.images.box_goal.obj;
     }
 
-    var visibleObject = this.state.map.cells[y][x];
-    if (visibleObject == GAME_CELL_WALL) {
-      ctx.fillStyle = 'red';
-      ctx.fillRect(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
-    }
-    else if (visibleObject == GAME_CELL_GOAL) {
-      ctx.fillStyle = 'green';
-      ctx.fillRect(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
-    }
-    else if (visibleObject == GAME_CELL_HERO) {
-      ctx.fillStyle = 'blue';
-      ctx.fillRect(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
-    }
-    else if (visibleObject == GAME_CELL_HERO_ON_GOAL) {
-      ctx.fillStyle = 'gray';
-      ctx.fillRect(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
-    }
-    else if (visibleObject == GAME_CELL_BOX) {
-      ctx.fillStyle = 'yellow';
-      ctx.fillRect(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
-    }
-    else if (visibleObject == GAME_CELL_BOX_ON_GOAL) {
-      ctx.fillStyle = 'purple';
-      ctx.fillRect(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
-    }
-    else  {
+    if (imgObj) {
+      ctx.drawImage(imgObj, x*CELL_SIZE, y*CELL_SIZE, CELL_SIZE, CELL_SIZE);
+    } else {
       ctx.fillStyle = 'white';
       ctx.fillRect(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
     }
@@ -133,7 +155,7 @@ var Level = React.createClass({
       this.state.map.heroX = to_x;
       this.state.map.heroY = to_y;
       // this.checkSolved();
-      this.canvasRender();
+      this.renderCanvas();
       return
     }
 
@@ -164,11 +186,11 @@ var Level = React.createClass({
       } else {
         this.state.map.cells[to_y_next][to_x_next] = GAME_CELL_BOX
       }
-      
+
       this.state.map.heroX = to_x;
       this.state.map.heroY = to_y;
       // this.checkSolved();
-      this.canvasRender();
+      this.renderCanvas();
       return
     }
   },

@@ -30,4 +30,11 @@ class Level < ActiveRecord::Base
   def size_y
     level_matrix.size
   end
+
+  def namesss
+    {
+      k: 'k',
+      b: 'b',
+    }
+  end
 end
