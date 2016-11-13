@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  mount API::Root, at: '/api'
+  mount API::Root, at: '/'
   mount GrapeSwaggerRails::Engine, at: '/api/doc'
 
   root  to: 'pages#single_page_application', via: :all

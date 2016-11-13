@@ -1,0 +1,28 @@
+en:
+  api:
+    # Level packs API
+    # GET /level_packs
+    level_packs:
+      get:
+        desc: Get listing level packs
+      ":slug":
+        get:
+          desc: Get level pack by slug
+
+    # Levels API
+    # GET /levels
+    levels:
+      sprites:
+        get:
+          desc: Get game sprites
+
+    # GET /levels/:id
+      ":id":
+        get:
+          desc: Get level by id
+
+    # Levels solutions API
+    # POST /level_solutions
+    level_solutions:
+      post:
+        desc: Creates new level solution
