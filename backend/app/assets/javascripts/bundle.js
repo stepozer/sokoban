@@ -28701,7 +28701,7 @@
 	  var page = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
 
 	  return function (dispatch) {
-	    _axios2.default.get('/api/v1/level_packs/' + slug).then(function (response) {
+	    _axios2.default.get('/api/level_packs/' + slug).then(function (response) {
 	      dispatch({ type: _action_types.ACTION_GET_LEVEL_PACK, payload: response.data });
 	    }).catch(function (error) {
 	      console.log(error);
@@ -28711,7 +28711,7 @@
 
 	function fetchLevelPacks() {
 	  return function (dispatch) {
-	    _axios2.default.get('/api/v1/level_packs').then(function (response) {
+	    _axios2.default.get('/api/level_packs').then(function (response) {
 	      dispatch({ type: _action_types.ACTION_GET_LEVEL_PACKS, payload: response.data });
 	    }).catch(function (error) {
 	      console.log(error);
@@ -28731,6 +28731,7 @@
 	var ACTION_GET_LEVEL_PACKS = exports.ACTION_GET_LEVEL_PACKS = 'ACTION_GET_LEVEL_PACKS';
 	var ACTION_GET_LEVEL_PACK = exports.ACTION_GET_LEVEL_PACK = 'ACTION_GET_LEVEL_PACK';
 	var ACTION_GET_LEVEL = exports.ACTION_GET_LEVEL = 'ACTION_GET_LEVEL';
+	var ACTION_GET_LEVEL_SPRITES = exports.ACTION_GET_LEVEL_SPRITES = 'ACTION_GET_LEVEL_SPRITES';
 	var ACTION_GAME_INCREMENT_STEPS = exports.ACTION_GAME_INCREMENT_STEPS = 'ACTION_GAME_INCREMENT_STEPS';
 
 /***/ },
@@ -31024,6 +31025,7 @@
 	  value: true
 	});
 	exports.fetchLevel = fetchLevel;
+	exports.fetchLevelSprites = fetchLevelSprites;
 	exports.gameIncrementSteps = gameIncrementSteps;
 
 	var _action_types = __webpack_require__(13);
@@ -31038,8 +31040,18 @@
 
 	function fetchLevel(id) {
 	  return function (dispatch) {
-	    _axios2.default.get('/api/v1/levels/' + id).then(function (response) {
+	    _axios2.default.get('/api/levels/' + id).then(function (response) {
 	      dispatch({ type: _action_types.ACTION_GET_LEVEL, payload: response.data });
+	    }).catch(function (error) {
+	      console.log(error);
+	    });
+	  };
+	}
+
+	function fetchLevelSprites() {
+	  return function (dispatch) {
+	    _axios2.default.get('/api/levels/sprites').then(function (response) {
+	      dispatch({ type: _action_types.ACTION_GET_LEVEL_SPRITES, payload: response.data });
 	    }).catch(function (error) {
 	      console.log(error);
 	    });
