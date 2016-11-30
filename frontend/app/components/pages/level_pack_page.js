@@ -4,12 +4,13 @@ import SiteMenu from '../blocks/site_menu'
 import Levels from '../blocks/levels'
 import { fetchLevelPack } from '../../actions/level_pack'
 
-var LevelPackPage = React.createClass({
-  componentDidMount: function() {
+class LevelPackPage extends React.Component {
+  componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchLevelPack(this.props.routeParams.slug))
-  },
-  render: function()  {
+  }
+
+  render() {
     if (! this.props.levelPack) {
       return null;
     }
@@ -27,7 +28,7 @@ var LevelPackPage = React.createClass({
       </div>
     );
   }
-});
+}
 
 function mapStateToProps(state) {
   return {

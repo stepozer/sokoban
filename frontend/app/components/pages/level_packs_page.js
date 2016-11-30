@@ -4,12 +4,13 @@ import SiteMenu from '../blocks/site_menu'
 import LevelPacks from '../blocks/level_packs'
 import { fetchLevelPacks } from '../../actions/level_pack'
 
-var LevelPacksPage = React.createClass({
-  componentDidMount: function() {
+class LevelPacksPage extends React.Component {
+  componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchLevelPacks())
-  },
-  render: function()  {
+  }
+
+  render() {
     return (
       <div>
         <SiteMenu active="site_play" />
@@ -23,7 +24,7 @@ var LevelPacksPage = React.createClass({
       </div>
     );
   }
-});
+}
 
 function mapStateToProps(state) {
   return {

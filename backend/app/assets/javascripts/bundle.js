@@ -28263,6 +28263,8 @@
 
 	'use strict';
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -28275,102 +28277,121 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(_site_menu2.default, { active: 'site_index' }),
-	      _react2.default.createElement(
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var SiteIndexPage = function (_React$Component) {
+	  _inherits(SiteIndexPage, _React$Component);
+
+	  function SiteIndexPage() {
+	    _classCallCheck(this, SiteIndexPage);
+
+	    return _possibleConstructorReturn(this, (SiteIndexPage.__proto__ || Object.getPrototypeOf(SiteIndexPage)).apply(this, arguments));
+	  }
+
+	  _createClass(SiteIndexPage, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
 	        'div',
-	        { className: 'jumbotron' },
-	        _react2.default.createElement(
-	          'h2',
-	          null,
-	          'Welcome to Sokoban Game World!'
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          { className: 'lead' },
-	          'On this site you can play to the classic puzzle game, Sokoban.'
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/play', className: 'btn btn-lg btn-success' },
-	            'Play Sokoban'
-	          )
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'row' },
+	        null,
+	        _react2.default.createElement(_site_menu2.default, { active: 'site_index' }),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'col-lg-6' },
+	          { className: 'jumbotron' },
 	          _react2.default.createElement(
-	            'h4',
+	            'h2',
 	            null,
-	            'Ready to Play Sokoban Puzzles?'
+	            'Welcome to Sokoban Game World!'
 	          ),
-	          _react2.default.createElement('hr', null),
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'lead' },
+	            'On this site you can play to the classic puzzle game, Sokoban.'
+	          ),
 	          _react2.default.createElement(
 	            'p',
 	            null,
-	            'If you aren\'t a member of Sokoban Online, we recommend that you sign up for an account with us, it\'s free! If you already have an account with us, use the form in the top right-hand corner to login. If you\'re here and you just want to check things out, feel free to play any of the puzzles as a guest. Keep in mind that your scores will not be recorded when playing as a guest.'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'col-lg-6' },
-	          _react2.default.createElement(
-	            'h4',
-	            null,
-	            'I\'m New Here, I Need Help!'
-	          ),
-	          _react2.default.createElement('hr', null),
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            'First time playing Sokoban Online? Don\'t have a clue how the game is played? You\'re in luck! We have two ways for you to learn the game:'
-	          ),
-	          _react2.default.createElement(
-	            'ul',
-	            null,
 	            _react2.default.createElement(
-	              'li',
-	              null,
-	              'Want to jump right in and start playing? Then check out the Tutorial Puzzles.'
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              null,
-	              'Want to read about how the game is played before playing it? Then take a look at the How to Play section.'
+	              _reactRouter.Link,
+	              { to: '/play', className: 'btn btn-lg btn-success' },
+	              'Play Sokoban'
 	            )
 	          )
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'row' },
+	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'col-lg-12' },
+	          { className: 'row' },
 	          _react2.default.createElement(
-	            'h4',
-	            null,
-	            'Newly Added puzzles'
+	            'div',
+	            { className: 'col-lg-6' },
+	            _react2.default.createElement(
+	              'h4',
+	              null,
+	              'Ready to Play Sokoban Puzzles?'
+	            ),
+	            _react2.default.createElement('hr', null),
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              'If you aren\'t a member of Sokoban Online, we recommend that you sign up for an account with us, it\'s free! If you already have an account with us, use the form in the top right-hand corner to login. If you\'re here and you just want to check things out, feel free to play any of the puzzles as a guest. Keep in mind that your scores will not be recorded when playing as a guest.'
+	            )
 	          ),
-	          _react2.default.createElement('hr', null)
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-lg-6' },
+	            _react2.default.createElement(
+	              'h4',
+	              null,
+	              'I\'m New Here, I Need Help!'
+	            ),
+	            _react2.default.createElement('hr', null),
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              'First time playing Sokoban Online? Don\'t have a clue how the game is played? You\'re in luck! We have two ways for you to learn the game:'
+	            ),
+	            _react2.default.createElement(
+	              'ul',
+	              null,
+	              _react2.default.createElement(
+	                'li',
+	                null,
+	                'Want to jump right in and start playing? Then check out the Tutorial Puzzles.'
+	              ),
+	              _react2.default.createElement(
+	                'li',
+	                null,
+	                'Want to read about how the game is played before playing it? Then take a look at the How to Play section.'
+	              )
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-lg-12' },
+	            _react2.default.createElement(
+	              'h4',
+	              null,
+	              'Newly Added puzzles'
+	            ),
+	            _react2.default.createElement('hr', null)
+	          )
 	        )
-	      )
-	    );
-	  }
-	});
+	      );
+	    }
+	  }]);
+
+	  return SiteIndexPage;
+	}(_react2.default.Component);
+
+	module.exports = SiteIndexPage;
 
 /***/ },
 /* 7 */
@@ -28378,6 +28399,8 @@
 
 	'use strict';
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -28386,56 +28409,75 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	  render: function render() {
-	    var active_menu = this.props.active;
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var SiteMenu = function (_React$Component) {
+	  _inherits(SiteMenu, _React$Component);
+
+	  function SiteMenu() {
+	    _classCallCheck(this, SiteMenu);
+
+	    return _possibleConstructorReturn(this, (SiteMenu.__proto__ || Object.getPrototypeOf(SiteMenu)).apply(this, arguments));
+	  }
+
+	  _createClass(SiteMenu, [{
+	    key: 'render',
+	    value: function render() {
+	      var active_menu = this.props.active;
+	      return _react2.default.createElement(
 	        'div',
-	        { className: 'header clearfix' },
+	        null,
 	        _react2.default.createElement(
-	          'nav',
-	          null,
+	          'div',
+	          { className: 'header clearfix' },
 	          _react2.default.createElement(
-	            'ul',
-	            { className: 'nav nav-pills pull-right' },
+	            'nav',
+	            null,
 	            _react2.default.createElement(
-	              'li',
-	              { role: 'presentation', className: active_menu == 'site_index' ? 'active' : '' },
+	              'ul',
+	              { className: 'nav nav-pills pull-right' },
 	              _react2.default.createElement(
-	                _reactRouter.Link,
-	                { to: '/' },
-	                'Home'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              { role: 'presentation', className: active_menu == 'site_play' ? 'active' : '' },
+	                'li',
+	                { role: 'presentation', className: active_menu == 'site_index' ? 'active' : '' },
+	                _react2.default.createElement(
+	                  _reactRouter.Link,
+	                  { to: '/' },
+	                  'Home'
+	                )
+	              ),
 	              _react2.default.createElement(
-	                _reactRouter.Link,
-	                { to: '/play' },
-	                'Play'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              { role: 'presentation', className: active_menu == 'site_help' ? 'active' : '' },
+	                'li',
+	                { role: 'presentation', className: active_menu == 'site_play' ? 'active' : '' },
+	                _react2.default.createElement(
+	                  _reactRouter.Link,
+	                  { to: '/play' },
+	                  'Play'
+	                )
+	              ),
 	              _react2.default.createElement(
-	                _reactRouter.Link,
-	                { to: '/help' },
-	                'Help'
+	                'li',
+	                { role: 'presentation', className: active_menu == 'site_help' ? 'active' : '' },
+	                _react2.default.createElement(
+	                  _reactRouter.Link,
+	                  { to: '/help' },
+	                  'Help'
+	                )
 	              )
 	            )
 	          )
 	        )
-	      )
-	    );
-	  }
-	});
+	      );
+	    }
+	  }]);
+
+	  return SiteMenu;
+	}(_react2.default.Component);
+
+	module.exports = SiteMenu;
 
 /***/ },
 /* 8 */
@@ -28443,6 +28485,8 @@
 
 	'use strict';
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -28453,59 +28497,78 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(_site_menu2.default, { active: 'site_help' }),
-	      _react2.default.createElement(
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var SiteHelpPage = function (_React$Component) {
+	  _inherits(SiteHelpPage, _React$Component);
+
+	  function SiteHelpPage() {
+	    _classCallCheck(this, SiteHelpPage);
+
+	    return _possibleConstructorReturn(this, (SiteHelpPage.__proto__ || Object.getPrototypeOf(SiteHelpPage)).apply(this, arguments));
+	  }
+
+	  _createClass(SiteHelpPage, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
 	        'div',
-	        { className: 'row' },
+	        null,
+	        _react2.default.createElement(_site_menu2.default, { active: 'site_help' }),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'col-lg-12' },
+	          { className: 'row' },
 	          _react2.default.createElement(
-	            'h4',
-	            null,
-	            'Getting Started'
-	          ),
-	          _react2.default.createElement('hr', null),
-	          _react2.default.createElement(
-	            'p',
-	            null,
+	            'div',
+	            { className: 'col-lg-12' },
 	            _react2.default.createElement(
-	              'strong',
+	              'h4',
 	              null,
-	              'Play as a Guest'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            'To start playing puzzles as a guest, simply click on the Play tab and select the puzzle you would like to play.'
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            null,
+	              'Getting Started'
+	            ),
+	            _react2.default.createElement('hr', null),
 	            _react2.default.createElement(
-	              'strong',
+	              'p',
 	              null,
-	              'Sign Up for an Account'
+	              _react2.default.createElement(
+	                'strong',
+	                null,
+	                'Play as a Guest'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              'To start playing puzzles as a guest, simply click on the Play tab and select the puzzle you would like to play.'
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              _react2.default.createElement(
+	                'strong',
+	                null,
+	                'Sign Up for an Account'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              'Signing up for an account at Sokoban Online is free and easy. Simply follow this link to begin the sign up process. Signing up will give you a Sokoban Online Basic account. To learn more about the Basic account, please refer to the Types of Members section in the Help tab.'
 	            )
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            'Signing up for an account at Sokoban Online is free and easy. Simply follow this link to begin the sign up process. Signing up will give you a Sokoban Online Basic account. To learn more about the Basic account, please refer to the Types of Members section in the Help tab.'
 	          )
 	        )
-	      )
-	    );
-	  }
-	});
+	      );
+	    }
+	  }]);
+
+	  return SiteHelpPage;
+	}(_react2.default.Component);
+
+	module.exports = SiteHelpPage;
 
 /***/ },
 /* 9 */
@@ -28513,6 +28576,8 @@
 
 	'use strict';
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -28523,18 +28588,37 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	module.exports = _react2.default.createClass({
-	  displayName: 'exports',
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(_site_menu2.default, { active: 'site_index' }),
-	      'Not found'
-	    );
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var SiteNotFoundPage = function (_React$Component) {
+	  _inherits(SiteNotFoundPage, _React$Component);
+
+	  function SiteNotFoundPage() {
+	    _classCallCheck(this, SiteNotFoundPage);
+
+	    return _possibleConstructorReturn(this, (SiteNotFoundPage.__proto__ || Object.getPrototypeOf(SiteNotFoundPage)).apply(this, arguments));
 	  }
-	});
+
+	  _createClass(SiteNotFoundPage, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_site_menu2.default, { active: 'site_index' }),
+	        'Not found'
+	      );
+	    }
+	  }]);
+
+	  return SiteNotFoundPage;
+	}(_react2.default.Component);
+
+	module.exports = SiteNotFoundPage;
 
 /***/ },
 /* 10 */
@@ -28545,6 +28629,8 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
 
@@ -28564,37 +28650,56 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var LevelPacksPage = _react2.default.createClass({
-	  displayName: 'LevelPacksPage',
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	  componentDidMount: function componentDidMount() {
-	    var dispatch = this.props.dispatch;
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-	    dispatch((0, _level_pack.fetchLevelPacks)());
-	  },
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(_site_menu2.default, { active: 'site_play' }),
-	      _react2.default.createElement(
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var LevelPacksPage = function (_React$Component) {
+	  _inherits(LevelPacksPage, _React$Component);
+
+	  function LevelPacksPage() {
+	    _classCallCheck(this, LevelPacksPage);
+
+	    return _possibleConstructorReturn(this, (LevelPacksPage.__proto__ || Object.getPrototypeOf(LevelPacksPage)).apply(this, arguments));
+	  }
+
+	  _createClass(LevelPacksPage, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var dispatch = this.props.dispatch;
+
+	      dispatch((0, _level_pack.fetchLevelPacks)());
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
 	        'div',
-	        { className: 'row' },
+	        null,
+	        _react2.default.createElement(_site_menu2.default, { active: 'site_play' }),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'col-lg-12' },
+	          { className: 'row' },
 	          _react2.default.createElement(
-	            'h4',
-	            null,
-	            'Official Puzzle Packs'
-	          ),
-	          _react2.default.createElement('hr', null),
-	          _react2.default.createElement(_level_packs2.default, { level_packs: this.props.level_packs })
+	            'div',
+	            { className: 'col-lg-12' },
+	            _react2.default.createElement(
+	              'h4',
+	              null,
+	              'Official Puzzle Packs'
+	            ),
+	            _react2.default.createElement('hr', null),
+	            _react2.default.createElement(_level_packs2.default, { level_packs: this.props.level_packs })
+	          )
 	        )
-	      )
-	    );
-	  }
-	});
+	      );
+	    }
+	  }]);
+
+	  return LevelPacksPage;
+	}(_react2.default.Component);
 
 	function mapStateToProps(state) {
 	  return {
@@ -28610,6 +28715,8 @@
 
 	'use strict';
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -28618,60 +28725,77 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var LevelPacks = _react2.default.createClass({
-	  displayName: 'LevelPacks',
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	  render: function render() {
-	    if (!this.props.level_packs) {
-	      return null;
-	    }
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-	    var levelPacksTemplate = this.props.level_packs.map(function (level_pack, index) {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'col-md-6', key: index },
-	        _react2.default.createElement(
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var LevelPacks = function (_React$Component) {
+	  _inherits(LevelPacks, _React$Component);
+
+	  function LevelPacks() {
+	    _classCallCheck(this, LevelPacks);
+
+	    return _possibleConstructorReturn(this, (LevelPacks.__proto__ || Object.getPrototypeOf(LevelPacks)).apply(this, arguments));
+	  }
+
+	  _createClass(LevelPacks, [{
+	    key: 'render',
+	    value: function render() {
+	      if (!this.props.level_packs) {
+	        return null;
+	      }
+
+	      var levelPacksTemplate = this.props.level_packs.map(function (level_pack, index) {
+	        return _react2.default.createElement(
 	          'div',
-	          { className: 'row' },
+	          { className: 'col-md-6', key: index },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'col-md-3' },
-	            _react2.default.createElement('img', { src: level_pack.image, alt: '', className: 'level-pack-img' })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'col-md-9' },
+	            { className: 'row' },
 	            _react2.default.createElement(
-	              'h4',
-	              null,
-	              _react2.default.createElement(
-	                _reactRouter.Link,
-	                { to: { pathname: '/play/' + level_pack.slug } },
-	                level_pack.name
-	              )
+	              'div',
+	              { className: 'col-md-3' },
+	              _react2.default.createElement('img', { src: level_pack.image, alt: '', className: 'level-pack-img' })
 	            ),
 	            _react2.default.createElement(
-	              'p',
-	              null,
+	              'div',
+	              { className: 'col-md-9' },
 	              _react2.default.createElement(
-	                'strong',
+	                'h4',
 	                null,
-	                level_pack.levels_count
+	                _react2.default.createElement(
+	                  _reactRouter.Link,
+	                  { to: { pathname: '/play/' + level_pack.slug } },
+	                  level_pack.name
+	                )
 	              ),
-	              ' puzzle'
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                _react2.default.createElement(
+	                  'strong',
+	                  null,
+	                  level_pack.levels_count
+	                ),
+	                ' puzzle'
+	              )
 	            )
 	          )
-	        )
-	      );
-	    });
+	        );
+	      });
 
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'row' },
-	      levelPacksTemplate
-	    );
-	  }
-	});
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'row' },
+	        levelPacksTemplate
+	      );
+	    }
+	  }]);
+
+	  return LevelPacks;
+	}(_react2.default.Component);
 
 	module.exports = LevelPacks;
 
@@ -30473,6 +30597,8 @@
 	  value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -30491,41 +30617,60 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var LevelPackPage = _react2.default.createClass({
-	  displayName: 'LevelPackPage',
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	  componentDidMount: function componentDidMount() {
-	    var dispatch = this.props.dispatch;
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-	    dispatch((0, _level_pack.fetchLevelPack)(this.props.routeParams.slug));
-	  },
-	  render: function render() {
-	    if (!this.props.levelPack) {
-	      return null;
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var LevelPackPage = function (_React$Component) {
+	  _inherits(LevelPackPage, _React$Component);
+
+	  function LevelPackPage() {
+	    _classCallCheck(this, LevelPackPage);
+
+	    return _possibleConstructorReturn(this, (LevelPackPage.__proto__ || Object.getPrototypeOf(LevelPackPage)).apply(this, arguments));
+	  }
+
+	  _createClass(LevelPackPage, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var dispatch = this.props.dispatch;
+
+	      dispatch((0, _level_pack.fetchLevelPack)(this.props.routeParams.slug));
 	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      if (!this.props.levelPack) {
+	        return null;
+	      }
 
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(_site_menu2.default, { active: 'site_play' }),
-	      _react2.default.createElement(
+	      return _react2.default.createElement(
 	        'div',
-	        { className: 'row' },
+	        null,
+	        _react2.default.createElement(_site_menu2.default, { active: 'site_play' }),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'col-lg-12' },
+	          { className: 'row' },
 	          _react2.default.createElement(
-	            'h4',
-	            null,
-	            this.props.levelPack.name
-	          ),
-	          _react2.default.createElement('hr', null),
-	          _react2.default.createElement(_levels2.default, { levels: this.props.levels })
+	            'div',
+	            { className: 'col-lg-12' },
+	            _react2.default.createElement(
+	              'h4',
+	              null,
+	              this.props.levelPack.name
+	            ),
+	            _react2.default.createElement('hr', null),
+	            _react2.default.createElement(_levels2.default, { levels: this.props.levels })
+	          )
 	        )
-	      )
-	    );
-	  }
-	});
+	      );
+	    }
+	  }]);
+
+	  return LevelPackPage;
+	}(_react2.default.Component);
 
 	function mapStateToProps(state) {
 	  return {
@@ -30542,6 +30687,8 @@
 
 	'use strict';
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -30552,70 +30699,91 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Levels = _react2.default.createClass({
-	  displayName: 'Levels',
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	  renderLevelChunk: function renderLevelChunk(chunk) {
-	    return chunk.map(function (level, index) {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'col-md-3 level-cell', key: index },
-	        _react2.default.createElement(
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Levels = function (_React$Component) {
+	  _inherits(Levels, _React$Component);
+
+	  function Levels() {
+	    _classCallCheck(this, Levels);
+
+	    return _possibleConstructorReturn(this, (Levels.__proto__ || Object.getPrototypeOf(Levels)).apply(this, arguments));
+	  }
+
+	  _createClass(Levels, [{
+	    key: 'renderLevelChunk',
+	    value: function renderLevelChunk(chunk) {
+	      return chunk.map(function (level, index) {
+	        return _react2.default.createElement(
 	          'div',
-	          { className: 'row' },
+	          { className: 'col-md-3 level-cell', key: index },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'col-md-7' },
+	            { className: 'row' },
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'level-image' },
+	              { className: 'col-md-7' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'level-image' },
+	                _react2.default.createElement(
+	                  _reactRouter.Link,
+	                  { to: { pathname: '/play/' + level.level_pack_slug + '/' + level.id } },
+	                  _react2.default.createElement('img', { src: level.image, alt: '' })
+	                )
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'col-md-5' },
 	              _react2.default.createElement(
 	                _reactRouter.Link,
 	                { to: { pathname: '/play/' + level.level_pack_slug + '/' + level.id } },
-	                _react2.default.createElement('img', { src: level.image, alt: '' })
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'col-md-5' },
-	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: { pathname: '/play/' + level.level_pack_slug + '/' + level.id } },
-	              _react2.default.createElement(
-	                'h4',
-	                null,
-	                '#',
-	                level.name
+	                _react2.default.createElement(
+	                  'h4',
+	                  null,
+	                  '#',
+	                  level.name
+	                )
 	              )
 	            )
 	          )
-	        )
-	      );
-	    });
-	  },
-	  renderLevelChunks: function renderLevelChunks(chunks) {
-	    var renderLevelChunk = this.renderLevelChunk;
-	    return chunks.map(function (chunk, index) {
+	        );
+	      });
+	    }
+	  }, {
+	    key: 'renderLevelChunks',
+	    value: function renderLevelChunks(chunks) {
+	      var renderLevelChunk = this.renderLevelChunk;
+	      return chunks.map(function (chunk, index) {
+	        return _react2.default.createElement(
+	          'div',
+	          { className: 'row', key: index },
+	          renderLevelChunk(chunk)
+	        );
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      if (!this.props.levels) {
+	        return null;
+	      }
+	      var chunks = (0, _array_helper.arrayChunk)(this.props.levels, 4);
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'row', key: index },
-	        renderLevelChunk(chunk)
+	        null,
+	        this.renderLevelChunks(chunks)
 	      );
-	    });
-	  },
-	  render: function render() {
-	    if (!this.props.levels) {
-	      return null;
 	    }
-	    var chunks = (0, _array_helper.arrayChunk)(this.props.levels, 4);
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      this.renderLevelChunks(chunks)
-	    );
-	  }
-	});
+	  }]);
+
+	  return Levels;
+	}(_react2.default.Component);
 
 	module.exports = Levels;
 
@@ -30646,6 +30814,8 @@
 	  value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -30664,62 +30834,83 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var LevelPage = _react2.default.createClass({
-	  displayName: 'LevelPage',
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	  componentDidMount: function componentDidMount() {
-	    var dispatch = this.props.dispatch;
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-	    dispatch((0, _level3.fetchLevel)(this.props.routeParams.id));
-	  },
-	  // incrementSteps: function() {
-	  //   const { dispatch } = this.props;
-	  //   dispatch(gameIncrementSteps());
-	  // }
-	  render: function render() {
-	    var level = this.props.level;
-	    if (!level) {
-	      return null;
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var LevelPage = function (_React$Component) {
+	  _inherits(LevelPage, _React$Component);
+
+	  function LevelPage() {
+	    _classCallCheck(this, LevelPage);
+
+	    return _possibleConstructorReturn(this, (LevelPage.__proto__ || Object.getPrototypeOf(LevelPage)).apply(this, arguments));
+	  }
+
+	  _createClass(LevelPage, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var dispatch = this.props.dispatch;
+
+	      dispatch((0, _level3.fetchLevel)(this.props.routeParams.id));
 	    }
 
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(_site_menu2.default, { active: 'site_play' }),
-	      _react2.default.createElement(
+	    // incrementSteps() {
+	    //   const { dispatch } = this.props;
+	    //   dispatch(gameIncrementSteps());
+	    // }
+
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var level = this.props.level;
+	      if (!level) {
+	        return null;
+	      }
+
+	      return _react2.default.createElement(
 	        'div',
-	        { className: 'row' },
+	        null,
+	        _react2.default.createElement(_site_menu2.default, { active: 'site_play' }),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'col-lg-12' },
+	          { className: 'row' },
 	          _react2.default.createElement(
-	            'p',
-	            { className: 'pull-left' },
-	            'Steps: ',
-	            this.props.steps
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            { className: 'pull-right' },
+	            'div',
+	            { className: 'col-lg-12' },
 	            _react2.default.createElement(
-	              'button',
-	              { className: 'btn btn-primary', 'data-toggle': 'modal', 'data-target': '#view_controls_modal' },
-	              'View Controls'
+	              'p',
+	              { className: 'pull-left' },
+	              'Steps: ',
+	              this.props.steps
 	            ),
 	            _react2.default.createElement(
-	              'button',
-	              { className: 'btn btn-danger' },
-	              'Reset Puzzle'
-	            )
-	          ),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement(_level2.default, { level: level })
+	              'p',
+	              { className: 'pull-right' },
+	              _react2.default.createElement(
+	                'button',
+	                { className: 'btn btn-primary', 'data-toggle': 'modal', 'data-target': '#view_controls_modal' },
+	                'View Controls'
+	              ),
+	              _react2.default.createElement(
+	                'button',
+	                { className: 'btn btn-danger' },
+	                'Reset Puzzle'
+	              )
+	            ),
+	            _react2.default.createElement('br', null),
+	            _react2.default.createElement('br', null),
+	            _react2.default.createElement(_level2.default, { level: level })
+	          )
 	        )
-	      )
-	    );
-	  }
-	});
+	      );
+	    }
+	  }]);
+
+	  return LevelPage;
+	}(_react2.default.Component);
 
 	function mapStateToProps(state) {
 	  return {
@@ -30739,6 +30930,8 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
 
@@ -30760,212 +30953,252 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 	var CELL_SIZE = 30;
 
-	var Level = _react2.default.createClass({
-	  displayName: 'Level',
+	var Level = function (_React$Component) {
+	  _inherits(Level, _React$Component);
 
-	  componentDidMount: function componentDidMount() {
-	    this.imagesLoaded = 0;
-	    this.images = {
-	      // TODO: get it from API
-	      wall: { url: 'http://localhost:3000/game/wall.jpg', obj: null },
-	      goal: { url: 'http://localhost:3000/game/goal.jpg', obj: null },
-	      hero_up: { url: 'http://localhost:3000/game/hero_up.jpg', obj: null },
-	      box: { url: 'http://localhost:3000/game/box.jpg', obj: null },
-	      box_goal: { url: 'http://localhost:3000/game/box_goal.jpg', obj: null }
-	    };
-	    this.loadAllImages();
-	    this.renderCanvas();
-	    window.addEventListener('keydown', this.handleKeyDown);
-	  },
-	  isAllImagesLoaded: function isAllImagesLoaded() {
-	    return this.imagesLoaded >= Object.keys(this.images).length;
-	  },
-	  loadAllImages: function loadAllImages() {
-	    var self = this;
-	    for (var key in this.images) {
-	      this.images[key].obj = new Image();
-	      this.images[key].obj.onload = function () {
-	        self.imagesLoaded += 1;
+	  function Level() {
+	    _classCallCheck(this, Level);
+
+	    return _possibleConstructorReturn(this, (Level.__proto__ || Object.getPrototypeOf(Level)).apply(this, arguments));
+	  }
+
+	  _createClass(Level, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.imagesLoaded = 0;
+	      this.images = {
+	        // TODO: get it from API
+	        wall: { url: 'http://localhost:3000/game/wall.jpg', obj: null },
+	        goal: { url: 'http://localhost:3000/game/goal.jpg', obj: null },
+	        hero_up: { url: 'http://localhost:3000/game/hero_up.jpg', obj: null },
+	        box: { url: 'http://localhost:3000/game/box.jpg', obj: null },
+	        box_goal: { url: 'http://localhost:3000/game/box_goal.jpg', obj: null }
 	      };
-	      this.images[key].obj.src = this.images[key].url;
+	      this.loadAllImages();
+	      this.renderCanvas();
+	      self = this;
+	      window.addEventListener('keydown', function (e) {
+	        self.handleKeyDown(e);
+	      });
 	    }
-	  },
-	  componentDidUpdate: function componentDidUpdate() {
-	    this.renderCanvas();
-	  },
-	  componentWillUnmount: function componentWillUnmount() {
-	    window.removeEventListener("keydown", this.handleKeyDown);
-	  },
-	  renderCanvas: function renderCanvas() {
-	    if (this.state.map.solved) {
-	      return;
+	  }, {
+	    key: 'isAllImagesLoaded',
+	    value: function isAllImagesLoaded() {
+	      return this.imagesLoaded >= Object.keys(this.images).length;
 	    }
-	    if (!this.isAllImagesLoaded()) {
+	  }, {
+	    key: 'loadAllImages',
+	    value: function loadAllImages() {
 	      var self = this;
-	      setTimeout(function () {
-	        self.renderCanvas();
-	      }, 100);
-	    }
-
-	    var c = _reactDom2.default.findDOMNode(this).getElementsByTagName("canvas")[0];
-	    var ctx = c.getContext("2d");
-	    var x;
-	    var y;
-	    c.width = this.state.map.sizeX * 30;
-	    c.height = this.state.map.sizeY * 30;
-
-	    for (y in this.state.map.cells) {
-	      for (x in this.state.map.cells[y]) {
-	        this.renderCanvasCell(x, y, ctx);
+	      for (var key in this.images) {
+	        this.images[key].obj = new Image();
+	        this.images[key].obj.onload = function () {
+	          self.imagesLoaded += 1;
+	        };
+	        this.images[key].obj.src = this.images[key].url;
 	      }
 	    }
-	  },
-	  renderCanvasCell: function renderCanvasCell(x, y, ctx) {
-	    var obj = this.state.map.cells[y][x];
-	    var imgObj = false;
-
-	    if (obj == _game_cell_types.GAME_CELL_WALL) {
-	      imgObj = this.images.wall.obj;
-	    } else if (obj == _game_cell_types.GAME_CELL_GOAL) {
-	      imgObj = this.images.goal.obj;
-	    } else if (obj == _game_cell_types.GAME_CELL_HERO) {
-	      imgObj = this.images.hero_up.obj;
-	    } else if (obj == _game_cell_types.GAME_CELL_HERO_ON_GOAL) {
-	      imgObj = this.images.hero_up.obj;
-	    } else if (obj == _game_cell_types.GAME_CELL_BOX) {
-	      imgObj = this.images.box.obj;
-	    } else if (obj == _game_cell_types.GAME_CELL_BOX_ON_GOAL) {
-	      imgObj = this.images.box_goal.obj;
-	    }
-
-	    if (imgObj) {
-	      ctx.drawImage(imgObj, x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-	    } else {
-	      ctx.fillStyle = 'white';
-	      ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-	    }
-	  },
-	  moveHero: function moveHero(direction) {
-	    if (this.state.map.solved) {
-	      return;
-	    }
-	    var x = this.state.map.heroX;
-	    var y = this.state.map.heroY;
-	    var to_x = x;
-	    var to_y = y;
-	    var to_x_next = x;
-	    var to_y_next = y;
-	    if (direction == _game_direction_types.GAME_DIRECTION_RIGHT) {
-	      to_x = x + 1;to_x_next = x + 2;
-	    } else if (direction == _game_direction_types.GAME_DIRECTION_LEFT) {
-	      to_x = x - 1;to_x_next = x - 2;
-	    } else if (direction == _game_direction_types.GAME_DIRECTION_UP) {
-	      to_y = y - 1;to_y_next = y - 2;
-	    } else {
-	      to_y = y + 1;to_y_next = y + 2;
-	    }
-	    if (to_x < 0 || to_y < 0 || typeof this.state.map.cells[to_y] == 'undefined' || typeof this.state.map.cells[to_y][to_x] == 'undefined') {
-	      return;
-	    }
-
-	    if (this.state.map.cells[to_y][to_x] == _game_cell_types.GAME_CELL_GROUND || this.state.map.cells[to_y][to_x] == _game_cell_types.GAME_CELL_GOAL) {
-	      // this.steps += 1;
-	      // this.saveHistory(direction);
-	      if (this.state.map.cells[y][x] == _game_cell_types.GAME_CELL_HERO_ON_GOAL) {
-	        this.state.map.cells[y][x] = _game_cell_types.GAME_CELL_GOAL;
-	      } else {
-	        this.state.map.cells[y][x] = _game_cell_types.GAME_CELL_GROUND;
-	      }
-	      if (this.state.map.cells[to_y][to_x] == _game_cell_types.GAME_CELL_GOAL) {
-	        this.state.map.cells[to_y][to_x] = _game_cell_types.GAME_CELL_HERO_ON_GOAL;
-	      } else {
-	        this.state.map.cells[to_y][to_x] = _game_cell_types.GAME_CELL_HERO;
-	      }
-	      this.state.map.heroX = to_x;
-	      this.state.map.heroY = to_y;
-	      // this.checkSolved();
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
 	      this.renderCanvas();
-	      return;
 	    }
-
-	    if ((this.state.map.cells[to_y][to_x] == _game_cell_types.GAME_CELL_BOX || this.state.map.cells[to_y][to_x] == _game_cell_types.GAME_CELL_BOX_ON_GOAL) && (this.state.map.cells[to_y_next][to_x_next] == _game_cell_types.GAME_CELL_GROUND || this.state.map.cells[to_y_next][to_x_next] == _game_cell_types.GAME_CELL_GOAL)) {
-	      // this.steps += 1;
-	      // this.saveHistory(direction);
-	      if (this.state.map.cells[y][x] == _game_cell_types.GAME_CELL_HERO_ON_GOAL) {
-	        this.state.map.cells[y][x] = _game_cell_types.GAME_CELL_GOAL;
-	      } else {
-	        this.state.map.cells[y][x] = _game_cell_types.GAME_CELL_GROUND;
-	      }
-	      if (this.state.map.cells[to_y][to_x] == _game_cell_types.GAME_CELL_BOX_ON_GOAL) {
-	        this.state.map.cells[to_y][to_x] = _game_cell_types.GAME_CELL_HERO_ON_GOAL;
-	      } else {
-	        this.state.map.cells[to_y][to_x] = _game_cell_types.GAME_CELL_HERO;
-	      }
-	      if (this.state.map.cells[to_y_next][to_x_next] == _game_cell_types.GAME_CELL_GOAL) {
-	        this.state.map.cells[to_y_next][to_x_next] = _game_cell_types.GAME_CELL_BOX_ON_GOAL;
-	      } else {
-	        this.state.map.cells[to_y_next][to_x_next] = _game_cell_types.GAME_CELL_BOX;
-	      }
-
-	      this.state.map.heroX = to_x;
-	      this.state.map.heroY = to_y;
-	      // this.checkSolved();
-	      this.renderCanvas();
-	      return;
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      window.removeEventListener("keydown", this.handleKeyDown);
 	    }
-	  },
-	  handleKeyDown: function handleKeyDown(e) {
-	    if (e.keyCode == _keyboard_types.KEY_RIGHT) {
-	      e.preventDefault();
-	      this.moveHero(_game_direction_types.GAME_DIRECTION_RIGHT);
-	    } else if (e.keyCode == _keyboard_types.KEY_LEFT) {
-	      e.preventDefault();
-	      this.moveHero(_game_direction_types.GAME_DIRECTION_LEFT);
-	    } else if (e.keyCode == _keyboard_types.KEY_UP) {
-	      e.preventDefault();
-	      this.moveHero(_game_direction_types.GAME_DIRECTION_UP);
-	    } else if (e.keyCode == _keyboard_types.KEY_DOWN) {
-	      e.preventDefault();
-	      this.moveHero(_game_direction_types.GAME_DIRECTION_DOWN);
-	    } else if (e.keyCode == _keyboard_types.KEY_U) {
-	      e.preventDefault();
-	      moveHeroBack();
-	    }
-	  },
-	  setInitialComponentState: function setInitialComponentState() {
-	    var x;
-	    var y;
-
-	    this.state = {
-	      map: {
-	        solved: false,
-	        cells: this.props.level.level,
-	        sizeX: this.props.level.size_x,
-	        sizeY: this.props.level.size_y
+	  }, {
+	    key: 'renderCanvas',
+	    value: function renderCanvas() {
+	      if (this.state.map.solved) {
+	        return;
 	      }
-	    };
+	      if (!this.isAllImagesLoaded()) {
+	        var self = this;
+	        setTimeout(function () {
+	          self.renderCanvas();
+	        }, 100);
+	      }
 
-	    for (y in this.state.map.cells) {
-	      for (x in this.state.map.cells[y]) {
-	        if (this.state.map.cells[y][x] == _game_cell_types.GAME_CELL_HERO || this.state.map.cells[y][x] == _game_cell_types.GAME_CELL_HERO_ON_GOAL) {
-	          this.state.map.heroX = parseInt(x);
-	          this.state.map.heroY = parseInt(y);
+	      var c = _reactDom2.default.findDOMNode(this).getElementsByTagName("canvas")[0];
+	      var ctx = c.getContext("2d");
+	      var x;
+	      var y;
+	      c.width = this.state.map.sizeX * 30;
+	      c.height = this.state.map.sizeY * 30;
+
+	      for (y in this.state.map.cells) {
+	        for (x in this.state.map.cells[y]) {
+	          this.renderCanvasCell(x, y, ctx);
 	        }
 	      }
 	    }
-	  },
-	  render: function render() {
-	    this.setInitialComponentState();
+	  }, {
+	    key: 'renderCanvasCell',
+	    value: function renderCanvasCell(x, y, ctx) {
+	      var obj = this.state.map.cells[y][x];
+	      var imgObj = false;
 
-	    return _react2.default.createElement(
-	      'div',
-	      { id: 'sokoban-game-container' },
-	      _react2.default.createElement('canvas', null)
-	    );
-	  }
-	});
+	      if (obj == _game_cell_types.GAME_CELL_WALL) {
+	        imgObj = this.images.wall.obj;
+	      } else if (obj == _game_cell_types.GAME_CELL_GOAL) {
+	        imgObj = this.images.goal.obj;
+	      } else if (obj == _game_cell_types.GAME_CELL_HERO) {
+	        imgObj = this.images.hero_up.obj;
+	      } else if (obj == _game_cell_types.GAME_CELL_HERO_ON_GOAL) {
+	        imgObj = this.images.hero_up.obj;
+	      } else if (obj == _game_cell_types.GAME_CELL_BOX) {
+	        imgObj = this.images.box.obj;
+	      } else if (obj == _game_cell_types.GAME_CELL_BOX_ON_GOAL) {
+	        imgObj = this.images.box_goal.obj;
+	      }
+
+	      if (imgObj) {
+	        ctx.drawImage(imgObj, x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+	      } else {
+	        ctx.fillStyle = 'white';
+	        ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+	      }
+	    }
+	  }, {
+	    key: 'moveHero',
+	    value: function moveHero(direction) {
+	      if (this.state.map.solved) {
+	        return;
+	      }
+	      var x = this.state.map.heroX;
+	      var y = this.state.map.heroY;
+	      var to_x = x;
+	      var to_y = y;
+	      var to_x_next = x;
+	      var to_y_next = y;
+	      if (direction == _game_direction_types.GAME_DIRECTION_RIGHT) {
+	        to_x = x + 1;to_x_next = x + 2;
+	      } else if (direction == _game_direction_types.GAME_DIRECTION_LEFT) {
+	        to_x = x - 1;to_x_next = x - 2;
+	      } else if (direction == _game_direction_types.GAME_DIRECTION_UP) {
+	        to_y = y - 1;to_y_next = y - 2;
+	      } else {
+	        to_y = y + 1;to_y_next = y + 2;
+	      }
+	      if (to_x < 0 || to_y < 0 || typeof this.state.map.cells[to_y] == 'undefined' || typeof this.state.map.cells[to_y][to_x] == 'undefined') {
+	        return;
+	      }
+
+	      if (this.state.map.cells[to_y][to_x] == _game_cell_types.GAME_CELL_GROUND || this.state.map.cells[to_y][to_x] == _game_cell_types.GAME_CELL_GOAL) {
+	        // this.steps += 1;
+	        // this.saveHistory(direction);
+	        if (this.state.map.cells[y][x] == _game_cell_types.GAME_CELL_HERO_ON_GOAL) {
+	          this.state.map.cells[y][x] = _game_cell_types.GAME_CELL_GOAL;
+	        } else {
+	          this.state.map.cells[y][x] = _game_cell_types.GAME_CELL_GROUND;
+	        }
+	        if (this.state.map.cells[to_y][to_x] == _game_cell_types.GAME_CELL_GOAL) {
+	          this.state.map.cells[to_y][to_x] = _game_cell_types.GAME_CELL_HERO_ON_GOAL;
+	        } else {
+	          this.state.map.cells[to_y][to_x] = _game_cell_types.GAME_CELL_HERO;
+	        }
+	        this.state.map.heroX = to_x;
+	        this.state.map.heroY = to_y;
+	        // this.checkSolved();
+	        this.renderCanvas();
+	        return;
+	      }
+
+	      if ((this.state.map.cells[to_y][to_x] == _game_cell_types.GAME_CELL_BOX || this.state.map.cells[to_y][to_x] == _game_cell_types.GAME_CELL_BOX_ON_GOAL) && (this.state.map.cells[to_y_next][to_x_next] == _game_cell_types.GAME_CELL_GROUND || this.state.map.cells[to_y_next][to_x_next] == _game_cell_types.GAME_CELL_GOAL)) {
+	        // this.steps += 1;
+	        // this.saveHistory(direction);
+	        if (this.state.map.cells[y][x] == _game_cell_types.GAME_CELL_HERO_ON_GOAL) {
+	          this.state.map.cells[y][x] = _game_cell_types.GAME_CELL_GOAL;
+	        } else {
+	          this.state.map.cells[y][x] = _game_cell_types.GAME_CELL_GROUND;
+	        }
+	        if (this.state.map.cells[to_y][to_x] == _game_cell_types.GAME_CELL_BOX_ON_GOAL) {
+	          this.state.map.cells[to_y][to_x] = _game_cell_types.GAME_CELL_HERO_ON_GOAL;
+	        } else {
+	          this.state.map.cells[to_y][to_x] = _game_cell_types.GAME_CELL_HERO;
+	        }
+	        if (this.state.map.cells[to_y_next][to_x_next] == _game_cell_types.GAME_CELL_GOAL) {
+	          this.state.map.cells[to_y_next][to_x_next] = _game_cell_types.GAME_CELL_BOX_ON_GOAL;
+	        } else {
+	          this.state.map.cells[to_y_next][to_x_next] = _game_cell_types.GAME_CELL_BOX;
+	        }
+
+	        this.state.map.heroX = to_x;
+	        this.state.map.heroY = to_y;
+	        // this.checkSolved();
+	        this.renderCanvas();
+	        return;
+	      }
+	    }
+	  }, {
+	    key: 'handleKeyDown',
+	    value: function handleKeyDown(e) {
+	      if (e.keyCode == _keyboard_types.KEY_RIGHT) {
+	        e.preventDefault();
+	        this.moveHero(_game_direction_types.GAME_DIRECTION_RIGHT);
+	      } else if (e.keyCode == _keyboard_types.KEY_LEFT) {
+	        e.preventDefault();
+	        this.moveHero(_game_direction_types.GAME_DIRECTION_LEFT);
+	      } else if (e.keyCode == _keyboard_types.KEY_UP) {
+	        e.preventDefault();
+	        this.moveHero(_game_direction_types.GAME_DIRECTION_UP);
+	      } else if (e.keyCode == _keyboard_types.KEY_DOWN) {
+	        e.preventDefault();
+	        this.moveHero(_game_direction_types.GAME_DIRECTION_DOWN);
+	      } else if (e.keyCode == _keyboard_types.KEY_U) {
+	        e.preventDefault();
+	        moveHeroBack();
+	      }
+	    }
+	  }, {
+	    key: 'setInitialComponentState',
+	    value: function setInitialComponentState() {
+	      var x;
+	      var y;
+
+	      this.state = {
+	        map: {
+	          solved: false,
+	          cells: this.props.level.level,
+	          sizeX: this.props.level.size_x,
+	          sizeY: this.props.level.size_y
+	        }
+	      };
+
+	      for (y in this.state.map.cells) {
+	        for (x in this.state.map.cells[y]) {
+	          if (this.state.map.cells[y][x] == _game_cell_types.GAME_CELL_HERO || this.state.map.cells[y][x] == _game_cell_types.GAME_CELL_HERO_ON_GOAL) {
+	            this.state.map.heroX = parseInt(x);
+	            this.state.map.heroY = parseInt(y);
+	          }
+	        }
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      this.setInitialComponentState();
+
+	      return _react2.default.createElement(
+	        'div',
+	        { id: 'sokoban-game-container' },
+	        _react2.default.createElement('canvas', null)
+	      );
+	    }
+	  }]);
+
+	  return Level;
+	}(_react2.default.Component);
 
 	exports.default = (0, _reactRedux.connect)()(Level);
 

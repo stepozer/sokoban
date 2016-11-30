@@ -1,8 +1,8 @@
 import React from 'react'
 import SiteMenu from '../blocks/site_menu'
 
-module.exports = React.createClass({
-  render: function()  {
+class SiteHelpPage extends React.Component {
+  render() {
     return (
       <div>
         <SiteMenu active="site_help" />
@@ -31,4 +31,6 @@ module.exports = React.createClass({
       </div>
     );
   }
-});
+}
+
+module.exports = SiteHelpPage

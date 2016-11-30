@@ -4,16 +4,18 @@ import SiteMenu from '../blocks/site_menu'
 import Level from '../blocks/level'
 import { fetchLevel } from '../../actions/level'
 
-var LevelPage = React.createClass({
-  componentDidMount: function() {
+class LevelPage extends React.Component {
+  componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchLevel(this.props.routeParams.id))
-  },
-  // incrementSteps: function() {
+  }
+
+  // incrementSteps() {
   //   const { dispatch } = this.props;
   //   dispatch(gameIncrementSteps());
   // }
-  render: function()  {
+
+  render() {
     var level = this.props.level
     if (! level) {
       return null;
@@ -39,7 +41,7 @@ var LevelPage = React.createClass({
       </div>
     );
   }
-});
+}
 
 function mapStateToProps(state) {
   return {

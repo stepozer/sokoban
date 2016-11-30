@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-var LevelPacks = React.createClass({
-  render: function() {
+class LevelPacks extends React.Component {
+  render() {
     if (! this.props.level_packs) {
       return null;
     }
@@ -33,6 +33,6 @@ var LevelPacks = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = LevelPacks

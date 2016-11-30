@@ -27,8 +27,8 @@ import { gameIncrementSteps } from '../../actions/level'
 
 const CELL_SIZE = 30
 
-var Level = React.createClass({
-  componentDidMount: function() {
+class Level extends React.Component {
+  componentDidMount() {
     this.imagesLoaded = 0;
     this.images = {
       // TODO: get it from API
@@ -40,12 +40,17 @@ var Level = React.createClass({
     };
     this.loadAllImages();
     this.renderCanvas();
-    window.addEventListener('keydown', this.handleKeyDown);
-  },
-  isAllImagesLoaded: function() {
+    self = this;
+    window.addEventListener('keydown', function(e) {
+      self.handleKeyDown(e)
+    });
+  }
+
+  isAllImagesLoaded() {
     return this.imagesLoaded >= Object.keys(this.images).length;
-  },
-  loadAllImages: function() {
+  }
+
+  loadAllImages() {
     var self = this;
     for (var key in this.images) {
       this.images[key].obj = new Image();
@@ -54,14 +59,17 @@ var Level = React.createClass({
       }
       this.images[key].obj.src = this.images[key].url;
     }
-  },
-  componentDidUpdate: function() {
+  }
+
+  componentDidUpdate() {
     this.renderCanvas();
-  },
-  componentWillUnmount: function() {
+  }
+
+  componentWillUnmount() {
     window.removeEventListener("keydown", this.handleKeyDown);
-  },
-  renderCanvas: function() {
+  }
+
+  renderCanvas() {
     if (this.state.map.solved) {
       return;
     }
@@ -82,8 +90,9 @@ var Level = React.createClass({
         this.renderCanvasCell(x, y, ctx);
       }
     }
-  },
-  renderCanvasCell: function(x, y, ctx) {
+  }
+
+  renderCanvasCell(x, y, ctx) {
     var obj    = this.state.map.cells[y][x];
     var imgObj = false;
 
@@ -112,8 +121,9 @@ var Level = React.createClass({
       ctx.fillStyle = 'white';
       ctx.fillRect(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
     }
-  },
-  moveHero: function(direction) {
+  }
+
+  moveHero(direction) {
     if (this.state.map.solved) {
       return;
     }
@@ -193,8 +203,9 @@ var Level = React.createClass({
       this.renderCanvas();
       return
     }
-  },
-  handleKeyDown: function(e) {
+  }
+
+  handleKeyDown(e) {
     if (e.keyCode == KEY_RIGHT) {
       e.preventDefault();
       this.moveHero(GAME_DIRECTION_RIGHT);
@@ -211,8 +222,9 @@ var Level = React.createClass({
       e.preventDefault();
       moveHeroBack();
     }
-  },
-  setInitialComponentState: function() {
+  }
+
+  setInitialComponentState() {
     var x;
     var y;
 
@@ -235,8 +247,9 @@ var Level = React.createClass({
         }
       }
     }
-  },
-  render: function() {
+  }
+
+  render() {
     this.setInitialComponentState();
 
     return (
@@ -245,6 +258,6 @@ var Level = React.createClass({
       </div>
     );
   }
-});
+}
 
 export default connect()(Level)

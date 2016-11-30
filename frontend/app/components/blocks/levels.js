@@ -2,8 +2,8 @@ import React from 'react'
 import { Link } from 'react-router'
 import { arrayChunk } from '../../helpers/array_helper'
 
-var Levels = React.createClass({
-  renderLevelChunk: function(chunk) {
+class Levels extends React.Component {
+  renderLevelChunk(chunk) {
     return chunk.map(function(level, index) {
       return (
         <div className="col-md-3 level-cell" key={index}>
@@ -24,8 +24,9 @@ var Levels = React.createClass({
         </div>
       )
     });
-  },
-  renderLevelChunks: function(chunks) {
+  }
+
+  renderLevelChunks(chunks) {
     var renderLevelChunk = this.renderLevelChunk;
     return chunks.map(function(chunk, index) {
       return (
@@ -34,8 +35,9 @@ var Levels = React.createClass({
         </div>
       )
     });
-  },
-  render: function() {
+  }
+
+  render() {
     if (! this.props.levels) {
       return null;
     }
@@ -46,6 +48,6 @@ var Levels = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = Levels
