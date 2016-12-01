@@ -11,10 +11,10 @@ const initialState = {
 export default function levelReducer(state = initialState, action) {
   switch (action.type) {
     case ACTION_GET_LEVEL:
-      return {  ...state, current: action.payload };
+      return Object.assign({}, state, { current: action.payload });
 
     case ACTION_GAME_INCREMENT_STEPS:
-      return {  ...state, steps: state.steps + 1 };
+      return Object.assign({}, state, { steps: state.steps + 1 });
 
     default:
       return state;

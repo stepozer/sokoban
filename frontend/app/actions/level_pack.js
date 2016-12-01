@@ -7,7 +7,7 @@ import axios from 'axios';
 
 export function fetchLevelPack(slug, page = 1) {
   return (dispatch) => {
-    axios.get('/api/level_packs/'+slug)
+    axios.get('http://localhost:3000/api/level_packs/'+slug)
       .then(function (response) {
         dispatch({ type: ACTION_GET_LEVEL_PACK, payload: response.data });
       })
@@ -19,7 +19,7 @@ export function fetchLevelPack(slug, page = 1) {
 
 export function fetchLevelPacks() {
   return (dispatch) => {
-    axios.get('/api/level_packs')
+    axios.get('http://localhost:3000/api/level_packs')
       .then(function (response) {
         dispatch({ type: ACTION_GET_LEVEL_PACKS, payload: response.data });
       })

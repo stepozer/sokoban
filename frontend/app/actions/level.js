@@ -8,7 +8,7 @@ import axios from 'axios';
 
 export function fetchLevel(id) {
   return (dispatch) => {
-    axios.get('/api/levels/'+id)
+    axios.get('http://localhost:3000/api/levels/'+id)
       .then(function (response) {
         dispatch({ type: ACTION_GET_LEVEL, payload: response.data });
       })
@@ -20,7 +20,7 @@ export function fetchLevel(id) {
 
 export function fetchLevelSprites() {
   return (dispatch) => {
-    axios.get('/api/levels/sprites')
+    axios.get('http://localhost:3000/api/levels/sprites')
       .then(function (response) {
         dispatch({ type: ACTION_GET_LEVEL_SPRITES, payload: response.data });
       })

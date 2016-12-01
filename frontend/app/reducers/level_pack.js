@@ -11,10 +11,10 @@ const initialState = {
 export default function levelPackReducer(state = initialState, action) {
   switch (action.type) {
     case ACTION_GET_LEVEL_PACKS:
-      return {  ...state, all: action.payload };
+      return Object.assign({}, state, { all: action.payload });
 
     case ACTION_GET_LEVEL_PACK:
-      return {  ...state, current: action.payload };
+      return Object.assign({}, state, { current: action.payload });
 
     default:
       return state;
