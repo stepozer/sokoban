@@ -26,7 +26,20 @@ app.all('*', function(req, res, next) {
       <body>
         <div class="container">
           <div class="content">
-            <div id="react-root">${componentHtml}</div>
+            <div id="react-root">
+              <!--
+                This div needed for react server rendering:
+
+                http://stackoverflow.com/questions/33521047/warning-react-attempted-to-reuse-markup-in-a-container-but-the-checksum-was-inv
+
+                Why does this work? On the client, React has a propensity to wrap its rendering of your root component
+                with a superfluous div. ReactDOMServer.render doesn't seem to behave in this manner, thus when one renders
+                into the same container isomorphically, the Adler-32 checksum of your DOM differs.
+              -->
+              <div>
+                ${componentHtml}
+              </div>
+            </div>
           </div>
         </div>
       </body>
