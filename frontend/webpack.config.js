@@ -9,13 +9,7 @@ module.exports = {
     filename: './app/webroot/bundle.js'
   },
   resolve: {
-    modulesDirectories: ["web_modules", "node_modules", "bower_components"],
-    alias: {
-      "react":        bower_dir + "/react/react.js",
-      "react-dom":    bower_dir + "/react/react-dom.js",
-      "react-router": bower_dir + "/react-router/index.js",
-      "axios":        bower_dir + "/axios/dist/axios.js"
-    }
+    modulesDirectories: ["web_modules", "node_modules"]
   },
   plugins: [
     new webpack.ResolverPlugin(
