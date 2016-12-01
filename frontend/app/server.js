@@ -4,14 +4,40 @@ var app            = express();
 var React          = require('react');
 var ReactDOMServer = require('react-dom/server');
 var Router         = require('react-router');
-var routes         = require('./components/router.js');
+var routes         = require('./components/routes.js');
 var routerContext  = require('./components/router_context.js');
 
+app.use(express.static('webroot'));
+
 app.all('*', function(req, res, next) {
+  function renderView(renderProps) {
+    var factory       = React.createFactory(routerContext)
+    var componentHtml = ReactDOMServer.renderToString(factory(renderProps));
+    var resultHtml    =
+    `<!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <title>Sokoban Game</title>
+        <link rel="stylesheet" media="all" href="/bootstrap.min.css" />
+        <link rel="stylesheet" media="all" href="/site.css" />
+        <script src="/bundle.js"></script>
+      </head>
+      <body>
+        <div class="container">
+          <div class="content">
+            <div id="react-root">${componentHtml}</div>
+          </div>
+        </div>
+      </body>
+    </html>
+    `;
+
+    return resultHtml;
+  }
+
   Router.match({routes: routes, location: req.originalUrl}, function(err, redirectLocation, renderProps) {
-    var factory = React.createFactory(routerContext)
-    var markup  = ReactDOMServer.renderToString(factory(renderProps));
-    res.send(markup);
+    res.send(renderView(renderProps));
   })
 });
 

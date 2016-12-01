@@ -13,6 +13,8 @@ class LevelPacks extends React.Component {
           <div className="row">
             <div className="col-md-3">
               <img src={level_pack.image} alt="" className="level-pack-img" />
+              <br/>
+              <br/>
             </div>
             <div className="col-md-9">
               <h4>

@@ -32,11 +32,11 @@ class Level extends React.Component {
     this.imagesLoaded = 0;
     this.images = {
       // TODO: get it from API
-      wall:     { url: 'http://localhost:3000/game/wall.jpg',     obj: null },
-      goal:     { url: 'http://localhost:3000/game/goal.jpg',     obj: null },
-      hero_up:  { url: 'http://localhost:3000/game/hero_up.jpg',  obj: null },
-      box:      { url: 'http://localhost:3000/game/box.jpg',      obj: null },
-      box_goal: { url: 'http://localhost:3000/game/box_goal.jpg', obj: null },
+      wall:     { url: '/game/wall.jpg',     obj: null },
+      goal:     { url: '/game/goal.jpg',     obj: null },
+      hero_up:  { url: '/game/hero_up.jpg',  obj: null },
+      box:      { url: '/game/box.jpg',      obj: null },
+      box_goal: { url: '/game/box_goal.jpg', obj: null },
     };
     this.loadAllImages();
     this.renderCanvas();

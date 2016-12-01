@@ -13,6 +13,7 @@ gem 'grape-swagger'
 gem 'grape-swagger-rails'
 gem 'devise'
 gem 'kaminari'
+gem 'rack-cors'
 
 group :development, :test do
   gem 'selenium-webdriver'

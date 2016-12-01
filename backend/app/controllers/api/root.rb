@@ -1,5 +1,14 @@
+require 'rack/cors'
+
 module API
   class Root < Grape::API
+    use Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', headers: :any, methods: :get
+      end
+    end
+
     mount API::Resources::Levels
     mount API::Resources::LevelPacks
     mount API::Resources::LevelSolutions

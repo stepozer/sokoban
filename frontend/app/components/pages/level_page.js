@@ -26,16 +26,21 @@ class LevelPage extends React.Component {
         <SiteMenu active="site_play" />
         <div className="row">
           <div className="col-lg-12">
+            <br/>
             <p className="pull-left">
               Steps: {this.props.steps}
             </p>
             <p className="pull-right">
               <button className="btn btn-primary" data-toggle="modal" data-target="#view_controls_modal">View Controls</button>
+              &nbsp;
+              &nbsp;
               <button className="btn btn-danger">Reset Puzzle</button>
             </p>
             <br/>
             <br/>
-            <Level level={level}/>
+            <div>
+              <Level level={level}/>
+            </div>
           </div>
         </div>
       </div>
