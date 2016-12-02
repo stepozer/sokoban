@@ -30552,7 +30552,7 @@
 	        }
 	        this.state.map.heroX = to_x;
 	        this.state.map.heroY = to_y;
-	        // this.checkSolved();
+	        this.checkSolved();
 	        this.renderCanvas();
 	        return;
 	      }
@@ -30578,8 +30578,8 @@
 
 	        this.state.map.heroX = to_x;
 	        this.state.map.heroY = to_y;
-	        // this.checkSolved();
 	        this.renderCanvas();
+	        this.checkSolved();
 	        return;
 	      }
 	    }
@@ -30601,6 +30601,24 @@
 	      } else if (e.keyCode == _keyboard_types.KEY_U) {
 	        e.preventDefault();
 	        moveHeroBack();
+	      }
+	    }
+	  }, {
+	    key: 'checkSolved',
+	    value: function checkSolved() {
+	      this.state.map.solved = true;
+	      for (var y in this.state.map.cells) {
+	        for (var x in this.state.map.cells[y]) {
+	          if (this.state.map.cells[y][x] == _game_cell_types.GAME_CELL_BOX) {
+	            this.state.map.solved = false;
+	            break;
+	          }
+	        }
+	      }
+
+	      if (this.state.map.solved) {
+	        // TODO: add action here
+	        // saveSolution
 	      }
 	    }
 	  }, {
@@ -30632,11 +30650,33 @@
 	    value: function render() {
 	      this.setInitialComponentState();
 
-	      return _react2.default.createElement(
-	        'div',
-	        { id: 'sokoban-game-container' },
-	        _react2.default.createElement('canvas', null)
-	      );
+	      if (this.state.map.solved) {
+	        return _react2.default.createElement(
+	          'div',
+	          { className: 'sokoban-solved' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'alert alert-info' },
+	            'Congratulations! Puzzle Solved!'
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            'Would you like to login or sign up?'
+	          ),
+	          _react2.default.createElement(
+	            'a',
+	            { className: 'btn btn-primary', href: '#' },
+	            'Play Next Puzzle'
+	          )
+	        );
+	      } else {
+	        return _react2.default.createElement(
+	          'div',
+	          { className: 'sokoban-map' },
+	          _react2.default.createElement('canvas', null)
+	        );
+	      }
 	    }
 	  }]);
 

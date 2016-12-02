@@ -164,7 +164,7 @@ class Level extends React.Component {
       }
       this.state.map.heroX = to_x;
       this.state.map.heroY = to_y;
-      // this.checkSolved();
+      this.checkSolved();
       this.renderCanvas();
       return
     }
@@ -199,8 +199,8 @@ class Level extends React.Component {
 
       this.state.map.heroX = to_x;
       this.state.map.heroY = to_y;
-      // this.checkSolved();
       this.renderCanvas();
+      this.checkSolved();
       return
     }
   }
@@ -221,6 +221,23 @@ class Level extends React.Component {
     } else if (e.keyCode == KEY_U) {
       e.preventDefault();
       moveHeroBack();
+    }
+  }
+
+  checkSolved() {
+    this.state.map.solved = true;
+    for (var y in this.state.map.cells) {
+      for (var x in this.state.map.cells[y]) {
+        if (this.state.map.cells[y][x] == GAME_CELL_BOX) {
+          this.state.map.solved = false;
+          break;
+        }
+      }
+    }
+
+    if (this.state.map.solved) {
+      // TODO: add action here
+      // saveSolution
     }
   }
 
@@ -252,11 +269,23 @@ class Level extends React.Component {
   render() {
     this.setInitialComponentState();
 
-    return (
-      <div id="sokoban-game-container">
-        <canvas></canvas>
-      </div>
-    );
+    if (this.state.map.solved) {
+      return (
+        <div className="sokoban-solved">
+          <div className="alert alert-info">
+            Congratulations! Puzzle Solved!
+          </div>
+          <p>Would you like to login or sign up?</p>
+          <a className="btn btn-primary" href="#">Play Next Puzzle</a>
+        </div>
+      );
+    } else {
+      return (
+        <div className="sokoban-map">
+          <canvas></canvas>
+        </div>
+      );
+    }
   }
 }
 

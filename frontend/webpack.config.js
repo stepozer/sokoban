@@ -1,6 +1,5 @@
 var path      = require("path");
 var webpack   = require("webpack");
-var bower_dir = __dirname + '/bower_components'
 
 module.exports = {
   entry: "./app/components/router.js",
@@ -20,7 +19,7 @@ module.exports = {
     loaders: [
       {
         test: /\.js?$/,
-        exclude: [/bower_components/, /node_modules/],
+        exclude: [/node_modules/],
         loader: 'babel',
         query: {
           cacheDirectory: true,
