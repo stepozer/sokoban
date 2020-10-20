@@ -1,0 +1,14 @@
+FROM node:14.4.0
+
+WORKDIR /application
+
+RUN apt-get update && apt-get install -y \
+  wget \
+  sudo \
+  git \
+  unzip
+
+RUN echo n | npm install -g --silent @angular/cli@10.1.2
+
+COPY ./localenv/entrypoint.sh /tmp/entrypoint.sh
+ENTRYPOINT sh /tmp/entrypoint.sh

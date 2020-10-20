@@ -1,0 +1,31 @@
+
+---
+
+version: '3'
+
+services:
+  sokoban-pg:
+    build:
+      context: .
+      dockerfile: ./localenv/Dockerfile.pg
+    restart: always
+    environment:
+      POSTGRES_USER: pg
+      POSTGRES_PASSWORD: pg
+    ports:
+      - 9002:5432
+    volumes:
+      - volume-sokoban-pg:/var/lib/postgresql/data
+  
+  sokoban-lms:
+    build:
+      context: .
+      dockerfile: ./localenv/Dockerfile.node
+    volumes:
+      - ./fronted:/application
+    ports:
+      - 9008:4200
+    tty: true    
+
+volumes:
+  volume-sokoban-pg:

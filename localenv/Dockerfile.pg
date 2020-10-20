@@ -1,0 +1,4 @@
+FROM postgres:12.3
+
+RUN mkdir -p /docker-entrypoint-initdb.d
+COPY ./localenv/initdb.sh /docker-entrypoint-initdb.d/initdb.sh
