@@ -1,1 +1,0 @@
-Rails.application.routes.default_url_options[:host]= ENV['ROUTES_HOST']
