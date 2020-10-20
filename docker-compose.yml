@@ -17,12 +17,12 @@ services:
     volumes:
       - volume-sokoban-pg:/var/lib/postgresql/data
   
-  sokoban-lms:
+  sokoban-frontend:
     build:
       context: .
       dockerfile: ./localenv/Dockerfile.node
     volumes:
-      - ./fronted:/application
+      - ./frontend:/application
     ports:
       - 9201:4200
     tty: true    
