@@ -13,7 +13,7 @@ services:
       POSTGRES_USER: pg
       POSTGRES_PASSWORD: pg
     ports:
-      - 9002:5432
+      - 9200:5432
     volumes:
       - volume-sokoban-pg:/var/lib/postgresql/data
   
@@ -24,8 +24,14 @@ services:
     volumes:
       - ./fronted:/application
     ports:
-      - 9008:4200
+      - 9201:4200
     tty: true    
+
+  sokoban-adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 9202:8080
 
 volumes:
   volume-sokoban-pg:
