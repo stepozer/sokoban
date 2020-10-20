@@ -4,23 +4,23 @@ using DataAccess.Entities;
 
 namespace DataAccess.Repositories
 {
-    public class LevelPackRepository
+    public class LevelRepository
     {
         private readonly AppDbContext _dbContext;
 
-        public LevelPackRepository(AppDbContext dbContext)
+        public LevelRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }
         
-        public List<LevelPack> All()
+        public List<Level> All()
         {
-            return _dbContext.LevelPacks.ToList();
+            return _dbContext.Levels.ToList();
         }
         
-        public LevelPack GetById(int id)
+        public Level GetById(int id)
         {
-            return _dbContext.LevelPacks.Find(id);
+            return _dbContext.Levels.Find(id);
         }
     }
 }
