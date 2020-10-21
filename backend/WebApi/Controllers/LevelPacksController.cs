@@ -7,7 +7,7 @@ using WebApi.Models;
 namespace WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("level_packs")]
     public class LevelPacksController : ControllerBase
     {
         private readonly LevelPackRepository _levelPackRepository;

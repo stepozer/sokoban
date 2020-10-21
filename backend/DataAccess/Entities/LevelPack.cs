@@ -10,6 +10,6 @@ namespace DataAccess.Entities
         public string Description { get; set; }
         public int Position { get; set; }
         public int LevelsCount { get; set; }
-        public List<Level> Levels { get; set; }
+        public virtual ICollection<Level> Levels { get; set; }
     }
 }

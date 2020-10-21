@@ -22,5 +22,11 @@ namespace DataAccess.Repositories
         {
             return _dbContext.LevelPacks.Find(id);
         }
+        
+        public void Add(LevelPack levelPack)
+        {
+            _dbContext.LevelPacks.Add(levelPack);
+            _dbContext.SaveChanges();
+        }
     }
 }

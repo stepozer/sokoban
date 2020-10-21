@@ -15,7 +15,7 @@ namespace DataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("server=localhost;port=3306;user=root;password=ms;database=gdsparser;Allow User Variables=True");
+            optionsBuilder.UseNpgsql("Host=localhost;Port=9200;Database=sokoban_dev;Username=pg;Password=pg");
         }
 
         private void OnModelCreatingPartial(ModelBuilder modelBuilder)

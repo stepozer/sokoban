@@ -1,3 +1,7 @@
+using AutoMapper;
+using DataAccess;
+using DataAccess.Repositories;
+using DataAccess.Seeds;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +22,13 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<DbDevSeed>();
+            services.AddTransient<AppDbContext>();
+            services.AddTransient<LevelPackRepository>();
+            services.AddTransient<LevelRepository>();
+            services.AddAutoMapper(
+                typeof(MapperProfiles.LevelPackModelProfile)
+            );
             services.AddControllers();
         }
 
